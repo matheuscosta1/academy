@@ -1,0 +1,22 @@
+# depslib dependency file v1.0
+1530511457 source:c:\users\user-pc\desktop\arvres\exerc\arvore_binaria_busca\main.c
+	<stdio.h>
+	<stdlib.h>
+	"ABB.h"
+
+1530511934 source:c:\users\user-pc\desktop\arvres\exerc\arvore_binaria_busca\abb.c
+	"ABB.h"
+	"Registro.h"
+	<stdio.h>
+	<stdlib.h>
+
+1530512012 c:\users\user-pc\desktop\arvres\exerc\arvore_binaria_busca\abb.h
+	"Registro.h"
+
+1530484025 c:\users\user-pc\desktop\arvres\exerc\arvore_binaria_busca\registro.h
+
+1530512075 source:c:\users\user-pc\desktop\arvres\exerc\arvore_binaria_busca\registro.c
+	"Registro.h"
+	<stdio.h>
+	<stdlib.h>
+

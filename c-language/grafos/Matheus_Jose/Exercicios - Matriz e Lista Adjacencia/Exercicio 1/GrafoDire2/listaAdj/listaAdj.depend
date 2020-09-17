@@ -1,0 +1,20 @@
+# depslib dependency file v1.0
+1525400645 source:c:\users\user-pc\desktop\grafos\grafo2\listaadj\main.c
+	<stdio.h>
+	<stdlib.h>
+	"grafo.h"
+
+1525399515 c:\users\user-pc\desktop\grafos\grafo2\listaadj\grafo.h
+
+1525400680 source:c:\users\user-pc\desktop\grafos\exercicios - matriz e lista adjacencia\exercicio 1\grafodire2\listaadj\grafo.c
+	<stdio.h>
+	<stdlib.h>
+	"grafo.h"
+
+1525399515 c:\users\user-pc\desktop\grafos\exercicios - matriz e lista adjacencia\exercicio 1\grafodire2\listaadj\grafo.h
+
+1525400645 source:c:\users\user-pc\desktop\grafos\exercicios - matriz e lista adjacencia\exercicio 1\grafodire2\listaadj\main.c
+	<stdio.h>
+	<stdlib.h>
+	"grafo.h"
+

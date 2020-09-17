@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1526000665 source:c:\projetos\aed2\listas\grafos\algoritimos_busca\busca_profundidade\grafo_listaadjacencias_naodirecionado_buscaprofundidade\grafo_lista_naodirecionado.c
+	<stdio.h>
+	<stdlib.h>
+	"Grafo_lista_Naodirecionado.h"
+	"Pilha.h"
+
+1526000665 c:\projetos\aed2\listas\grafos\algoritimos_busca\busca_profundidade\grafo_listaadjacencias_naodirecionado_buscaprofundidade\grafo_lista_naodirecionado.h
+
+1526000665 c:\projetos\aed2\listas\grafos\algoritimos_busca\busca_profundidade\grafo_listaadjacencias_naodirecionado_buscaprofundidade\pilha.h
+

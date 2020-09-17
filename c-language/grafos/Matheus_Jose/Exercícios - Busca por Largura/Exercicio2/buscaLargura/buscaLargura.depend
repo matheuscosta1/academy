@@ -1,0 +1,45 @@
+# depslib dependency file v1.0
+1526191791 source:c:\users\user-pc\desktop\grafos\exercícios - busca por largura\buscalargura\main.c
+	<stdio.h>
+	<stdlib.h>
+	"buscaLargura.h"
+	"fila.h"
+
+1526099285 c:\users\user-pc\desktop\grafos\exercícios - busca por largura\buscalargura\buscalargura.h
+	"fila.h"
+
+1526133148 source:c:\users\user-pc\desktop\grafos\exercícios - busca por largura\buscalargura\fila.c
+	<stdio.h>
+	<stdlib.h>
+	"fila.h"
+
+1526097161 c:\users\user-pc\desktop\grafos\exercícios - busca por largura\buscalargura\fila.h
+
+1526132953 source:c:\users\user-pc\desktop\grafos\exercícios - busca por largura\buscalargura\buscalargura.c
+	<stdio.h>
+	<stdlib.h>
+	"buscaLargura.h"
+	"fila.h"
+
+1526232396 source:c:\users\user-pc\desktop\grafos\exercícios - busca por largura\exercicio2\buscalargura\buscalargura.c
+	<stdio.h>
+	<stdlib.h>
+	"buscaLargura.h"
+	"fila.h"
+
+1526099285 c:\users\user-pc\desktop\grafos\exercícios - busca por largura\exercicio2\buscalargura\buscalargura.h
+	"fila.h"
+
+1526228672 c:\users\user-pc\desktop\grafos\exercícios - busca por largura\exercicio2\buscalargura\fila.h
+
+1526232344 source:c:\users\user-pc\desktop\grafos\exercícios - busca por largura\exercicio2\buscalargura\main.c
+	<stdio.h>
+	<stdlib.h>
+	"buscaLargura.h"
+	"fila.h"
+
+1526232692 source:c:\users\user-pc\desktop\grafos\exercícios - busca por largura\exercicio2\buscalargura\fila.c
+	<stdio.h>
+	<stdlib.h>
+	"fila.h"
+

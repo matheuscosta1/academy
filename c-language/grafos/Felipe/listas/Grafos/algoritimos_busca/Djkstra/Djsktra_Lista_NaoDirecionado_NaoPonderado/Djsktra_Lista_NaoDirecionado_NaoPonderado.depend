@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1525998253 source:c:\projetos\aed2\listas\grafos\djkstra\djsktra_lista_naodirecionado_naoponderado\grafo_listaadjacencias.c
+	<stdio.h>
+	<stdlib.h>
+	"Grafo_listaadjacencias.h"
+	"limits.h"
+
+1525998215 c:\projetos\aed2\listas\grafos\djkstra\djsktra_lista_naodirecionado_naoponderado\grafo_listaadjacencias.h
+

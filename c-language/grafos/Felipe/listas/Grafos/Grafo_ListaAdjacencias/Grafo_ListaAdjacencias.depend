@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1524940545 source:c:\projetos\aed2\listas\grafos\grafo_listaadjacencias\grafos_listaadjacencias.c
+	<stdio.h>
+	<stdlib.h>
+	"Grafos_Listaadjacencias.h"
+
+1524937492 c:\projetos\aed2\listas\grafos\grafo_listaadjacencias\grafos_listaadjacencias.h
+
+1524940563 source:c:\projetos\aed2\listas\grafos\grafo_listaadjacencias\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Grafos_Listaadjacencias.h"
+

@@ -1,0 +1,74 @@
+# depslib dependency file v1.0
+1526345422 source:c:\users\user-pc\desktop\nova pasta (7)\trabalho grafos\trabalho\trabalho\constroi_grafo.c
+	<stdio.h>
+	<stdlib.h>
+	"constroi_grafo.h"
+
+1525822494 c:\users\user-pc\desktop\nova pasta (7)\trabalho grafos\trabalho\trabalho\constroi_grafo.h
+	"grafo.h"
+
+1526347254 c:\users\user-pc\desktop\nova pasta (7)\trabalho grafos\trabalho\trabalho\grafo.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<limits.h>
+	"utils.h"
+	"lista.h"
+
+1525832954 c:\users\user-pc\desktop\nova pasta (7)\trabalho grafos\trabalho\trabalho\utils.h
+	<string.h>
+	<stdio.h>
+	<math.h>
+	<stdlib.h>
+
+1526339700 c:\users\user-pc\desktop\nova pasta (7)\trabalho grafos\trabalho\trabalho\lista.h
+
+1526348128 source:c:\users\user-pc\desktop\nova pasta (7)\trabalho grafos\trabalho\trabalho\grafo.c
+	"grafo.h"
+
+1526339848 source:c:\users\user-pc\desktop\nova pasta (7)\trabalho grafos\trabalho\trabalho\lista.c
+	<stdio.h>
+	<stdlib.h>
+	"lista.h"
+
+1526345480 source:c:\users\user-pc\desktop\nova pasta (7)\trabalho grafos\trabalho\trabalho\main.c
+	"constroi_grafo.h"
+	"utils.h"
+
+1525832948 source:c:\users\user-pc\desktop\nova pasta (7)\trabalho grafos\trabalho\trabalho\utils.c
+	"utils.h"
+
+1526348128 source:c:\users\user-pc\desktop\trabalho final de aed - definitivo\trabalho grafos\trabalho\trabalho\grafo.c
+	"grafo.h"
+
+1526347254 c:\users\user-pc\desktop\trabalho final de aed - definitivo\trabalho grafos\trabalho\trabalho\grafo.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<limits.h>
+	"utils.h"
+	"lista.h"
+
+1525832954 c:\users\user-pc\desktop\trabalho final de aed - definitivo\trabalho grafos\trabalho\trabalho\utils.h
+	<string.h>
+	<stdio.h>
+	<math.h>
+	<stdlib.h>
+
+1526339700 c:\users\user-pc\desktop\trabalho final de aed - definitivo\trabalho grafos\trabalho\trabalho\lista.h
+
+1526339848 source:c:\users\user-pc\desktop\trabalho final de aed - definitivo\trabalho grafos\trabalho\trabalho\lista.c
+	<stdio.h>
+	<stdlib.h>
+	"lista.h"
+
+1526345480 source:c:\users\user-pc\desktop\trabalho final de aed - definitivo\trabalho grafos\trabalho\trabalho\main.c
+	"constroi_grafo.h"
+	"utils.h"
+
+1525822494 c:\users\user-pc\desktop\trabalho final de aed - definitivo\trabalho grafos\trabalho\trabalho\constroi_grafo.h
+	"grafo.h"
+
+1525832948 source:c:\users\user-pc\desktop\trabalho final de aed - definitivo\trabalho grafos\trabalho\trabalho\utils.c
+	"utils.h"
+

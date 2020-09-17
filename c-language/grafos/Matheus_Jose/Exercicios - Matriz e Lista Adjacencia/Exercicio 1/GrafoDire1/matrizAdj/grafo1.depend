@@ -1,0 +1,20 @@
+# depslib dependency file v1.0
+1525189045 source:c:\users\user-pc\desktop\grafos\grafo1\main.c
+	<stdio.h>
+	<stdlib.h>
+	"grafo.h"
+
+1525400520 source:c:\users\user-pc\desktop\grafos\grafo1\grafo.c
+	<stdio.h>
+	<stdlib.h>
+	"grafo.h"
+
+1525400589 c:\users\user-pc\desktop\grafos\grafo1\grafo.h
+
+1525189045 source:c:\users\user-pc\desktop\grafos\exercicios - matriz e lista adjacencia\exercicio 1\grafodire1\main.c
+	<stdio.h>
+	<stdlib.h>
+	"grafo.h"
+
+1525400589 c:\users\user-pc\desktop\grafos\exercicios - matriz e lista adjacencia\exercicio 1\grafodire1\grafo.h
+

@@ -1,0 +1,27 @@
+# depslib dependency file v1.0
+1525994779 source:c:\projetos\aed2\listas\grafos\djkstra_listadeadjacencias_digrafo\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Grafo_listaadjacencias.h"
+
+1525994647 source:c:\projetos\aed2\listas\grafos\djkstra_listadeadjacencias_digrafo\grafo_listaadjacencias.c
+	<stdio.h>
+	<stdlib.h>
+	"Grafo_listaadjacencias.h"
+	"limits.h"
+
+1525973884 c:\projetos\aed2\listas\grafos\djkstra_listadeadjacencias_digrafo\grafo_listaadjacencias.h
+
+1525994647 source:c:\projetos\aed2\listas\grafos\djkstra\djkstra_listadeadjacencias_digrafo\grafo_listaadjacencias.c
+	<stdio.h>
+	<stdlib.h>
+	"Grafo_listaadjacencias.h"
+	"limits.h"
+
+1525997340 c:\projetos\aed2\listas\grafos\djkstra\djkstra_listadeadjacencias_digrafo\grafo_listaadjacencias.h
+
+1525994884 source:c:\projetos\aed2\listas\grafos\djkstra\djkstra_listadeadjacencias_digrafo\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Grafo_listaadjacencias.h"
+

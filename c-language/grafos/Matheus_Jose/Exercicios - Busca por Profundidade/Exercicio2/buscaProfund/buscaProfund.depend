@@ -1,0 +1,25 @@
+# depslib dependency file v1.0
+1526179496 source:c:\users\user-pc\desktop\grafos\exercicios - busca por profundidade\exercicio2\buscaprofund\main.c
+	<stdio.h>
+	<stdlib.h>
+	"buscaProfun.h"
+
+1525809057 c:\users\user-pc\desktop\grafos\exercicios - busca por profundidade\exercicio2\buscaprofund\buscaprofun.h
+
+1526181474 source:c:\users\user-pc\desktop\grafos\exercicios - busca por profundidade\exercicio2\buscaprofund\buscaprofund.c
+	<stdio.h>
+	<stdlib.h>
+	"buscaProfun.h"
+
+1525810024 source:c:\users\user-pc\desktop\grafos\buscaporprofundidade\exercicio2\buscaprofund\main.c
+	<stdio.h>
+	<stdlib.h>
+	"buscaProfun.h"
+
+1525809057 c:\users\user-pc\desktop\grafos\buscaporprofundidade\exercicio2\buscaprofund\buscaprofun.h
+
+1525811414 source:c:\users\user-pc\desktop\grafos\buscaporprofundidade\exercicio2\buscaprofund\buscaprofund.c
+	<stdio.h>
+	<stdlib.h>
+	"buscaProfun.h"
+

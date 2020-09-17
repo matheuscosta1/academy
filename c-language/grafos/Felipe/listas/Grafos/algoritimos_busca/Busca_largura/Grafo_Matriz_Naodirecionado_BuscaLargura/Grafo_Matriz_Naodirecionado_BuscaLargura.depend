@@ -1,0 +1,21 @@
+# depslib dependency file v1.0
+1525999842 source:c:\projetos\aed2\listas\grafos\algoritimos_busca\busca_largura\grafo_matriz_naodirecionado_buscalargura\fila.c
+	<stdio.h>
+	<stdlib.h>
+	"fila.h"
+
+1525999842 c:\projetos\aed2\listas\grafos\algoritimos_busca\busca_largura\grafo_matriz_naodirecionado_buscalargura\fila.h
+
+1525999899 source:c:\projetos\aed2\listas\grafos\algoritimos_busca\busca_largura\grafo_matriz_naodirecionado_buscalargura\grafo_matriz_naodirecionado.c
+	<stdio.h>
+	<stdlib.h>
+	"Grafo_Matriz_Naodirecionado.h"
+	"fila.h"
+
+1525999899 c:\projetos\aed2\listas\grafos\algoritimos_busca\busca_largura\grafo_matriz_naodirecionado_buscalargura\grafo_matriz_naodirecionado.h
+
+1525999842 source:c:\projetos\aed2\listas\grafos\algoritimos_busca\busca_largura\grafo_matriz_naodirecionado_buscalargura\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Grafo_Matriz_Naodirecionado.h"
+

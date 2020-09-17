@@ -1,0 +1,29 @@
+# depslib dependency file v1.0
+1525376848 source:c:\projetos\aed2\listas\grafos\grafo_matriz_naodirecionado\grafo_matriz_naodirecionado.c
+	<stdio.h>
+	<stdlib.h>
+	"Grafo_Matriz_Naodirecionado.h"
+	"pilha.h"
+	"fila.h"
+
+1525376569 c:\projetos\aed2\listas\grafos\grafo_matriz_naodirecionado\grafo_matriz_naodirecionado.h
+
+1525376675 source:c:\projetos\aed2\listas\grafos\grafo_matriz_naodirecionado\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Grafo_Matriz_Naodirecionado.h"
+
+1525131514 source:c:\projetos\aed2\listas\grafos\grafo_matriz_naodirecionado\pilha.c
+	<stdio.h>
+	<stdlib.h>
+	"pilha.h"
+
+1525131500 c:\projetos\aed2\listas\grafos\grafo_matriz_naodirecionado\pilha.h
+
+1525290108 source:c:\projetos\aed2\listas\grafos\grafo_matriz_naodirecionado\fila.c
+	<stdio.h>
+	<stdlib.h>
+	"fila.h"
+
+1525287834 c:\projetos\aed2\listas\grafos\grafo_matriz_naodirecionado\fila.h
+

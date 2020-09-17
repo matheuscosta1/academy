@@ -1,0 +1,31 @@
+# depslib dependency file v1.0
+1525111286 source:c:\projetos\aed2\listas\grafos\grafo_listaadjacencias_naodirecionado\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Grafo_lista_Naodirecionado.h"
+	"Busca_profundidade.h"
+
+1525109340 c:\projetos\aed2\listas\grafos\grafo_listaadjacencias_naodirecionado\grafo_lista_naodirecionado.h
+
+1525113251 source:c:\projetos\aed2\listas\grafos\grafo_listaadjacencias_naodirecionado\grafo_lista_naodirecionado.c
+	<stdio.h>
+	<stdlib.h>
+	"Grafo_lista_Naodirecionado.h"
+	"Pilha.h"
+
+1525020455 source:c:\projetos\aed2\listas\grafos\grafo_listaadjacencias_naodirecionado\busca_profundidade.c
+	"Busca_profundidade.h"
+	<stdio.h>
+	<stdlib.h>
+
+1525108610 c:\projetos\aed2\listas\grafos\grafo_listaadjacencias_naodirecionado\busca_profundidade.h
+	"Grafo_lista_Naodirecionado.h"
+	"Pilha.h"
+
+1525110716 c:\projetos\aed2\listas\grafos\grafo_listaadjacencias_naodirecionado\pilha.h
+
+1525113476 source:c:\projetos\aed2\listas\grafos\grafo_listaadjacencias_naodirecionado\pilha.c
+	<stdio.h>
+	<stdlib.h>
+	"Pilha.h"
+

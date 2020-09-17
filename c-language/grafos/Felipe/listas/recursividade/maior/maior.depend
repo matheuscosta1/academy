@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1522283562 source:c:\projetos\aed2\listas\recursividade\maior\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+

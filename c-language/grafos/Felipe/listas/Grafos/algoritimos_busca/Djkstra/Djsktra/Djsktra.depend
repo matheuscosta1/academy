@@ -1,0 +1,22 @@
+# depslib dependency file v1.0
+1525884134 source:c:\projetos\aed2\listas\grafos\djsktra\fila.c
+	<stdio.h>
+	<stdlib.h>
+	"fila.h"
+
+1525884134 c:\projetos\aed2\listas\grafos\djsktra\fila.h
+
+1525972162 source:c:\projetos\aed2\listas\grafos\djsktra\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Grafo_Matriz.h"
+
+1525972131 c:\projetos\aed2\listas\grafos\djsktra\grafo_matriz.h
+
+1525972131 source:c:\projetos\aed2\listas\grafos\djsktra\grafo_matriz.c
+	<stdio.h>
+	<stdlib.h>
+	"Grafo_Matriz.h"
+	"fila.h"
+	<limits.h>
+

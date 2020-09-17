@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1525999009 source:c:\projetos\aed2\listas\grafos\djkstra\grafo_matriz_naodirecionado_buscaprofundidade\grafo_matriz_naodirecionado.c
+	<stdio.h>
+	<stdlib.h>
+	"Grafo_Matriz_Naodirecionado.h"
+	"pilha.h"
+
+1525999009 c:\projetos\aed2\listas\grafos\djkstra\grafo_matriz_naodirecionado_buscaprofundidade\grafo_matriz_naodirecionado.h
+
+1525998822 c:\projetos\aed2\listas\grafos\djkstra\grafo_matriz_naodirecionado_buscaprofundidade\pilha.h
+
+1525998822 source:c:\projetos\aed2\listas\grafos\djkstra\grafo_matriz_naodirecionado_buscaprofundidade\pilha.c
+	<stdio.h>
+	<stdlib.h>
+	"pilha.h"
+

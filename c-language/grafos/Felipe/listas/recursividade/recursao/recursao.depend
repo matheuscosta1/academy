@@ -1,0 +1,17 @@
+# depslib dependency file v1.0
+1522277413 source:c:\projetos\aed2\listas\recursividade\recursao\fibonaccirecursivo.c
+	"fibonaccirecursivo.h"
+
+1522277413 c:\projetos\aed2\listas\recursividade\recursao\fibonaccirecursivo.h
+
+1522281742 source:c:\projetos\aed2\listas\recursividade\recursao\main.c
+	<stdio.h>
+	<time.h>
+	"fibonacciiterativo.h"
+	"fibonaccirecursivo.h"
+
+1522280254 c:\projetos\aed2\listas\recursividade\recursao\fibonacciiterativo.h
+
+1522281828 source:c:\projetos\aed2\listas\recursividade\recursao\fibonacciiterativo.c
+	"fibonacciiterativo.h"
+

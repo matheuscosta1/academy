@@ -1,0 +1,46 @@
+# depslib dependency file v1.0
+1528948573 source:c:\users\user-pc\desktop\arvres\arvore\main.c
+	<stdio.h>
+	<stdlib.h>
+	"arvore.h"
+
+1528948641 source:c:\users\user-pc\desktop\arvres\arvore\arvore.c
+	<stdio.h>
+	<stdlib.h>
+	"arvore.h"
+
+1528948663 c:\users\user-pc\desktop\arvres\arvore\arvore.h
+
+1528948641 c:\users\user-pc\desktop\arvres\arvore\arvore.c
+	<stdio.h>
+	<stdlib.h>
+	"arvore.h"
+
+1529591717 source:c:\users\user-pc\desktop\arvres\arvore_binaria\main.c
+	<stdio.h>
+	<stdlib.h>
+	"arvore.h"
+
+1529591627 c:\users\user-pc\desktop\arvres\arvore_binaria\arvore.h
+	<stdio.h>
+	<stdlib.h>
+
+1529591762 source:c:\users\user-pc\desktop\arvres\arvore_binaria\arvore.c
+	<stdio.h>
+	<stdlib.h>
+	"arvore.h"
+
+1530565762 source:c:\users\user-pc\desktop\arvres\exerc\arvore_binaria\main.c
+	<stdio.h>
+	<stdlib.h>
+	"arvore.h"
+
+1530565543 c:\users\user-pc\desktop\arvres\exerc\arvore_binaria\arvore.h
+	<stdio.h>
+	<stdlib.h>
+
+1530565613 source:c:\users\user-pc\desktop\arvres\exerc\arvore_binaria\arvore.c
+	<stdio.h>
+	<stdlib.h>
+	"arvore.h"
+

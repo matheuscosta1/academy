@@ -1,0 +1,79 @@
+# depslib dependency file v1.0
+1523819424 source:c:\users\felip\documents\aed2\listas\algoritimos_de_ordenacao\algoritimos_ordenacao\bublesort.c
+	"BubleSort.h"
+	<time.h>
+
+1523819424 c:\users\felip\documents\aed2\listas\algoritimos_de_ordenacao\algoritimos_ordenacao\bublesort.h
+	<time.h>
+
+1523826742 source:c:\users\felip\documents\aed2\listas\algoritimos_de_ordenacao\algoritimos_ordenacao\insertsort.c
+	"InsertSort.h"
+
+1523819424 c:\users\felip\documents\aed2\listas\algoritimos_de_ordenacao\algoritimos_ordenacao\insertsort.h
+
+1523825635 source:c:\users\felip\documents\aed2\listas\algoritimos_de_ordenacao\algoritimos_ordenacao\main.c
+	<stdio.h>
+	<stdlib.h>
+	"BubleSort.h"
+	"selectSort.h"
+	"InsertSort.h"
+	"QuickSort.h"
+	"time.h"
+
+1523819424 c:\users\felip\documents\aed2\listas\algoritimos_de_ordenacao\algoritimos_ordenacao\selectsort.h
+
+1523819424 c:\users\felip\documents\aed2\listas\algoritimos_de_ordenacao\algoritimos_ordenacao\quicksort.h
+
+1523819424 source:c:\users\felip\documents\aed2\listas\algoritimos_de_ordenacao\algoritimos_ordenacao\mergesort.c
+	"MergeSort.h"
+	<stdio.h>
+	<stdlib.h>
+
+1523819424 c:\users\felip\documents\aed2\listas\algoritimos_de_ordenacao\algoritimos_ordenacao\mergesort.h
+
+1523826075 source:c:\users\felip\documents\aed2\listas\algoritimos_de_ordenacao\algoritimos_ordenacao\quicksort.c
+	"QuickSort.h"
+	<time.h>
+
+1523819424 source:c:\users\felip\documents\aed2\listas\algoritimos_de_ordenacao\algoritimos_ordenacao\selectsort.c
+	"selectSort.h"
+
+1523819424 source:c:\projetos\aed2\listas\algoritimos_de_ordenacao\algoritimos_ordenacao\bublesort.c
+	"BubleSort.h"
+	<time.h>
+
+1523819424 c:\projetos\aed2\listas\algoritimos_de_ordenacao\algoritimos_ordenacao\bublesort.h
+	<time.h>
+
+1523827930 source:c:\projetos\aed2\listas\algoritimos_de_ordenacao\algoritimos_ordenacao\main.c
+	<stdio.h>
+	<stdlib.h>
+	"BubleSort.h"
+	"selectSort.h"
+	"InsertSort.h"
+	"QuickSort.h"
+	"time.h"
+
+1523819424 c:\projetos\aed2\listas\algoritimos_de_ordenacao\algoritimos_ordenacao\selectsort.h
+
+1523827708 c:\projetos\aed2\listas\algoritimos_de_ordenacao\algoritimos_ordenacao\insertsort.h
+
+1523819424 c:\projetos\aed2\listas\algoritimos_de_ordenacao\algoritimos_ordenacao\quicksort.h
+
+1523819424 source:c:\projetos\aed2\listas\algoritimos_de_ordenacao\algoritimos_ordenacao\mergesort.c
+	"MergeSort.h"
+	<stdio.h>
+	<stdlib.h>
+
+1523819424 c:\projetos\aed2\listas\algoritimos_de_ordenacao\algoritimos_ordenacao\mergesort.h
+
+1523826075 source:c:\projetos\aed2\listas\algoritimos_de_ordenacao\algoritimos_ordenacao\quicksort.c
+	"QuickSort.h"
+	<time.h>
+
+1523819424 source:c:\projetos\aed2\listas\algoritimos_de_ordenacao\algoritimos_ordenacao\selectsort.c
+	"selectSort.h"
+
+1523828042 source:c:\projetos\aed2\listas\algoritimos_de_ordenacao\algoritimos_ordenacao\insertsort.c
+	"InsertSort.h"
+

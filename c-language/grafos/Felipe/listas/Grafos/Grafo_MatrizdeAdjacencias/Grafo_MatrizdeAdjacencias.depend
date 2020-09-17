@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1525129332 source:c:\projetos\aed2\listas\grafos\grafo_matrizdeadjacencias\grafo_matriz.c
+	<stdio.h>
+	<stdlib.h>
+	"Grafo_Matriz.h"
+
+1525129256 source:c:\projetos\aed2\listas\grafos\grafo_matrizdeadjacencias\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Grafo_Matriz.h"
+
+1525129256 c:\projetos\aed2\listas\grafos\grafo_matrizdeadjacencias\grafo_matriz.h
+

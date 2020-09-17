@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1525013868 source:c:\projetos\aed2\listas\grafos\grafo_lista2\grafo_lista2.c
+	<stdio.h>
+	<stdlib.h>
+	"Grafo_Lista2.h"
+
+1524955920 c:\projetos\aed2\listas\grafos\grafo_lista2\grafo_lista2.h
+

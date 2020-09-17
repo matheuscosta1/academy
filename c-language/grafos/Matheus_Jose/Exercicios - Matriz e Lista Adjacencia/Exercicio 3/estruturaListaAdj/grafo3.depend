@@ -1,0 +1,37 @@
+# depslib dependency file v1.0
+1525696720 source:c:\users\user-pc\desktop\grafos\exercicios - matriz e lista adjacencia\exercicio 3\grafo3\grafo3\exerc_3.c
+	<stdio.h>
+	<stdlib.h>
+	"exerc_3.h"
+
+1525629120 c:\users\user-pc\desktop\grafos\exercicios - matriz e lista adjacencia\exercicio 3\grafo3\grafo3\exerc_3.h
+
+1525696409 source:c:\users\user-pc\desktop\grafos\exercicios - matriz e lista adjacencia\exercicio 3\grafo3\grafo3\main.c
+	<stdio.h>
+	<stdlib.h>
+	"exerc_3.h"
+
+1525696409 source:c:\users\user-pc\desktop\grafos\matrizelistaadjacencia\exercicio3\grafo3\grafo3\main.c
+	<stdio.h>
+	<stdlib.h>
+	"exerc_3.h"
+
+1525629120 c:\users\user-pc\desktop\grafos\matrizelistaadjacencia\exercicio3\grafo3\grafo3\exerc_3.h
+
+1525696720 source:c:\users\user-pc\desktop\grafos\matrizelistaadjacencia\exercicio3\grafo3\grafo3\exerc_3.c
+	<stdio.h>
+	<stdlib.h>
+	"exerc_3.h"
+
+1525696720 source:c:\users\user-pc\desktop\grafos\exercicios - matriz e lista adjacencia\exercicio 3\grafo3\exerc_3.c
+	<stdio.h>
+	<stdlib.h>
+	"exerc_3.h"
+
+1525629120 c:\users\user-pc\desktop\grafos\exercicios - matriz e lista adjacencia\exercicio 3\grafo3\exerc_3.h
+
+1525696409 source:c:\users\user-pc\desktop\grafos\exercicios - matriz e lista adjacencia\exercicio 3\grafo3\main.c
+	<stdio.h>
+	<stdlib.h>
+	"exerc_3.h"
+

@@ -1,0 +1,180 @@
+
+::::::::LOG:::::::
+Esse arquivo contém informações acerca do processo de resolução do labirinto
+
+Tamanho : 8x8
+
+Forma:
+
+ 🐀 •  •  #  •  •  •  •
+ •  #  •  •  •  #  •  #
+ •  •  #  •  #  •  •  •
+ •  #  •  #  •  #  #  •
+ •  •  •  •  •  #  •  •
+ #  •  #  •  #  #  # [ ]
+ •  •  •  #  #  #  #  #
+ #  •  #  #  #  #  #  #
+
+::::::Inicio do Processo de Resolucao::::::
+
+-----------------
+Tentando: [0][0]
+Quantidade de zeros ao redor: 2
+Proximo: [0][1]
+
+-----------------
+Tentando: [0][1]
+Quantidade de zeros ao redor: 2
+Tipo: COMUM
+Proximo: [0][2]
+
+-----------------
+Tentando: [0][2]
+Quantidade de zeros ao redor: 2
+Tipo: COMUM
+Proximo: [1][2]
+
+-----------------
+Tentando: [1][2]
+Quantidade de zeros ao redor: 2
+Tipo: COMUM
+Proximo: [1][3]
+
+-----------------
+Tentando: [1][3]
+Quantidade de zeros ao redor: 3
+Tipo: NÓ
+Proximo: [1][4]
+
+-----------------
+Tentando: [1][4]
+Quantidade de zeros ao redor: 2
+Tipo: COMUM
+Proximo: [0][4]
+
+-----------------
+Tentando: [0][4]
+Quantidade de zeros ao redor: 2
+Tipo: COMUM
+Proximo: [0][5]
+
+-----------------
+Tentando: [0][5]
+Quantidade de zeros ao redor: 2
+Tipo: COMUM
+Proximo: [0][6]
+
+-----------------
+Tentando: [0][6]
+Quantidade de zeros ao redor: 3
+Tipo: NÓ
+Proximo: [0][7]
+
+-----------------
+Tentando: [0][7]
+Quantidade de zeros ao redor: 1
+Tipo: Beco sem saida...Voltando ao nó:[0][6]
+Proximo: [1][6]
+
+-----------------
+Tentando: [1][6]
+Quantidade de zeros ao redor: 2
+Tipo: COMUM
+Proximo: [2][6]
+
+-----------------
+Tentando: [2][6]
+Quantidade de zeros ao redor: 3
+Tipo: NÓ
+Proximo: [2][5]
+
+-----------------
+Tentando: [2][5]
+Quantidade de zeros ao redor: 1
+Tipo: Beco sem saida...Voltando ao nó:[2][6]
+Proximo: [2][7]
+
+-----------------
+Tentando: [2][7]
+Quantidade de zeros ao redor: 2
+Tipo: COMUM
+Proximo: [3][7]
+
+-----------------
+Tentando: [3][7]
+Quantidade de zeros ao redor: 2
+Tipo: COMUM
+Proximo: [4][7]
+
+-----------------
+Tentando: [4][7]
+
+::Saída encontrada::
+
+:::::::::::::::::::::::::::::::::::
+Completo depois de 15 tentativas
+:::::::::::::::::::::::::::::::::::
+-----------
+Posição: [4][7]
+isNode: 2
+-----------
+Posição: [3][7]
+isNode: 0
+-----------
+Posição: [2][7]
+isNode: 0
+-----------
+Posição: [2][6]
+isNode: 1
+-----------
+Posição: [1][6]
+isNode: 0
+-----------
+Posição: [0][6]
+isNode: 1
+-----------
+Posição: [0][5]
+isNode: 0
+-----------
+Posição: [0][4]
+isNode: 0
+-----------
+Posição: [1][4]
+isNode: 0
+-----------
+Posição: [1][3]
+isNode: 1
+-----------
+Posição: [1][2]
+isNode: 0
+-----------
+Posição: [0][2]
+isNode: 0
+-----------
+Posição: [0][1]
+isNode: 0
+-----------
+Posição: [0][0]
+isNode: 1
+::::::::::::::::::::::::::
+::Lista com elementos nao acessaveis::
+[1][3]	[0][6]	[0][7]	[2][6]	[2][5]
+::Labirinto::
+ 🐀 •  •  #  •  •  •  •
+ •  #  •  •  •  #  •  #
+ •  •  #  •  #  •  •  •
+ •  #  •  #  •  #  #  •
+ •  •  •  •  •  #  •  •
+ #  •  #  •  #  #  # [ ]
+ •  •  •  #  #  #  #  #
+ #  •  #  #  #  #  #  #
+
+::Resolucao::
+ 🐀 🐀 🐀 #  🐀 🐀 🐀 •
+ •  #  🐀 🐀 🐀 #  🐀 #
+ •  •  #  •  #  •  🐀 🐀
+ •  #  •  #  •  #  #  🐀
+ •  •  •  •  •  #  •  🐀
+ #  •  #  •  #  #  # [ ]
+ •  •  •  #  #  #  #  #
+ #  •  #  #  #  #  #  # 

@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1526001544 source:c:\projetos\aed2\listas\grafos\algoritimos_busca\busca_profundidade\busca_em_grafos\fila.c
+	<stdio.h>
+	<stdlib.h>
+	"fila.h"
+
+1526001544 c:\projetos\aed2\listas\grafos\algoritimos_busca\busca_profundidade\busca_em_grafos\fila.h
+
+1526001570 source:c:\projetos\aed2\listas\grafos\algoritimos_busca\busca_profundidade\busca_em_grafos\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Grafo_Matriz_Naodirecionada.h"
+
+1526001644 c:\projetos\aed2\listas\grafos\algoritimos_busca\busca_profundidade\busca_em_grafos\grafo_matriz_naodirecionada.h
+

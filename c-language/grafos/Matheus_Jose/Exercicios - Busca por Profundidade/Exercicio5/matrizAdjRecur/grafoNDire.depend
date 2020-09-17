@@ -1,0 +1,27 @@
+# depslib dependency file v1.0
+1525543094 source:c:\users\user-pc\desktop\grafos\grafondire1\grafondire\main.c
+	<stdio.h>
+	<stdlib.h>
+	"grafoNdire.h"
+
+1525543040 c:\users\user-pc\desktop\grafos\grafondire1\grafondire\grafondire.h
+
+1525543094 source:c:\users\user-pc\desktop\grafos\exercicios - matriz e lista adjacencia\exercicio 2\grafondire1\grafondire1\main.c
+	<stdio.h>
+	<stdlib.h>
+	"grafoNdire.h"
+
+1525543040 c:\users\user-pc\desktop\grafos\exercicios - matriz e lista adjacencia\exercicio 2\grafondire1\grafondire1\grafondire.h
+
+1526191381 source:c:\users\user-pc\desktop\grafos\exercicios - busca por profundidade\exercicio5\matrizadj\main.c
+	<stdio.h>
+	<stdlib.h>
+	"grafoNdire.h"
+
+1526190945 c:\users\user-pc\desktop\grafos\exercicios - busca por profundidade\exercicio5\matrizadj\grafondire.h
+
+1526191406 source:c:\users\user-pc\desktop\grafos\exercicios - busca por profundidade\exercicio5\matrizadj\grafondire.c
+	<stdio.h>
+	<stdlib.h>
+	"grafoNdire.h"
+

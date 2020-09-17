@@ -1,0 +1,18 @@
+# depslib dependency file v1.0
+1526173858 source:c:\users\user-pc\desktop\grafos\exercicios - dijkstra\algdijkstra\algdijkstra.c
+	<stdio.h>
+	<stdlib.h>
+	"algDijkstra.h"
+	<limits.h>
+
+1526172306 c:\users\user-pc\desktop\grafos\exercicios - dijkstra\algdijkstra\algdijkstra.h
+	"fila.h"
+
+1526097161 c:\users\user-pc\desktop\grafos\exercicios - dijkstra\algdijkstra\fila.h
+
+1526172480 source:c:\users\user-pc\desktop\grafos\exercicios - dijkstra\algdijkstra\main.c
+	<stdio.h>
+	<stdlib.h>
+	"algDijkstra.h"
+	"fila.h"
+

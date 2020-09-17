@@ -1,0 +1,49 @@
+# depslib dependency file v1.0
+1530064176 source:c:\users\user-pc\desktop\arvres\arvore_generica\main.c
+	<stdio.h>
+	<stdlib.h>
+	"arvore_generica.h"
+
+1529729510 source:c:\users\user-pc\desktop\arvres\arvore_generica\arvore_generica.c
+	"arvore_generica.h"
+	<stdlib.h>
+	<stdio.h>
+
+1529887867 c:\users\user-pc\desktop\arvres\arvore_generica\arvore_generica.h
+	<stdio.h>
+	<stdlib.h>
+
+1526133148 source:c:\users\user-pc\desktop\arvres\exerc\arvore_generica\fila.c
+	<stdio.h>
+	<stdlib.h>
+	"fila.h"
+
+1530484846 c:\users\user-pc\desktop\arvres\exerc\arvore_generica\fila.h
+
+1530513893 source:c:\users\user-pc\desktop\arvres\exerc\arvore_generica\arvore_generica.c
+	"arvore_generica.h"
+	<stdlib.h>
+	<stdio.h>
+	"fila.h"
+
+1530499159 c:\users\user-pc\desktop\arvres\exerc\arvore_generica\arvore_generica.h
+	<stdio.h>
+	<stdlib.h>
+	"fila.h"
+
+1530512570 source:c:\users\user-pc\desktop\arvres\exerc\arvore_generica\utils.c
+	"utils.h"
+
+1530512581 c:\users\user-pc\desktop\arvres\exerc\arvore_generica\utils.h
+	<string.h>
+	<stdio.h>
+	<math.h>
+	<stdlib.h>
+
+1530515310 source:c:\users\user-pc\desktop\arvres\exerc\arvore_generica\main.c
+	<stdio.h>
+	<stdlib.h>
+	"arvore_generica.h"
+	"fila.h"
+	"utils.h"
+
