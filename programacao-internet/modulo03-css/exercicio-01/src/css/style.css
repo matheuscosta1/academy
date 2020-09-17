@@ -1,0 +1,59 @@
+body{
+    color: black;
+    font-size: 10;
+    background-image: url("../images/background.jpg");
+}
+
+main{
+    border: 3px;
+    border-radius: 10px 10px;
+    background-color: whitesmoke;
+    border-color:black;
+    margin: auto;
+    padding:10px;
+    width: 900px; 
+    height: 660px; 
+    border: 2px solid gray;
+}
+
+.titulo-inicial{
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+}
+
+.fieldset-top-width{
+    border-top-width: 3px;
+    border-top-style: solid;
+    border-top-color: grey;
+}
+
+.fieldset-bottom-width{
+    border-bottom-width: 3px;
+    border-bottom-style: solid;
+    border-bottom-color: grey;
+}
+
+.fieldset-right-width{
+    border-right-width: 3px;
+    border-right-style: solid;
+    border-right-color: grey;
+}
+
+.fieldset-left-width{
+    border-left-width: 3px;
+    border-left-style: solid;
+    border-left-color: grey;
+}
+
+.align-text-description{
+    border: 3px;
+    border-radius: 35px;
+    background-color: white;
+    border-color:black;
+    margin: auto;
+    border: 2px solid gray;
+
+    margin: 20px auto;
+    padding: 20px 40px;
+    overflow: hidden;
+}

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <main class="align-text-description">
+        <form action="">
+            <h1 class="titulo-inicial"> Cadastro de Imóvel</h1>
+            <fieldset class="fieldset-top-width fieldset-bottom-width fieldset-right-width fieldset-left-width">
+                <legend> Informações Gerais:</legend>
+                <table>
+                    <div>
+                        Tipo de Imóvel:
+                        <select name="Casa" id="casa">
+                            <option value="0">Selecione</option>
+                            <option value="1">Casa</option>
+                            <option value="2">Apartamento</option>
+                        </select>       
+                    </div><br>
+                    <div>
+                        Data de Construção: <input id="date" type="date"><br>
+                    </div><br>
+                    <div>
+                        <input type="radio" name="imovel-novo" value="imovel-novo"> Imóvel Novo
+                        <input type="radio" name="imovel-usado" value="imovel-usado"> Imóvel Usado
+                    </div><br>
+                    <div>
+                        Endereço:<br><input id="endereco" type="text"><br>
+                    </div><br>
+                    <div>
+                        Descrição: <br>
+                        <textarea name="Descricao" id="" cols="50" rows="5"></textarea>
+                    </div><br>
+                </table>
+            </fieldset>
+            <br>
+            <fieldset class="fieldset-top-width fieldset-bottom-width fieldset-right-width fieldset-left-width">
+                <legend>Outras Caracteristicas:</legend>
+                <table>
+                    <div>
+                        <tr>
+                            <td><input type="checkbox" name="Piscina" id="piscina">Piscina</td>
+                            <td><input type="checkbox" name="Lavabo" id="lavabo">Lavabo</td>       
+                        </tr>
+                    </div>
+                    <div>
+                        <tr>
+                            <td><input type="checkbox" name="Churrasqueira" id="churrasqueira">Churrasqueira</td>
+                            <td><input type="checkbox" name="armarios" id="armarios">Armários</td>
+                        </tr>
+                    </div>
+                    <div>
+                        <tr>
+                            <td><input type="checkbox" name="Aquecedor Solar" id="aquecedor-solar">Aquecedor Solar</td>
+                            <td><input type="checkbox" name="Elevador" id="elevador">Elevador</td>
+                        </tr>
+                    </div>
+                </table>
+            </fieldset><br>
+            <input type="submit" value="Cadastrar">
+            <input type="reset" value="Limpar">
+        </form>
+    </main>
+</body>
+</html>

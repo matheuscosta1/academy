@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head><title>Restringindo Campos de Formulários com Atributos HTML</title>
+	
+<form name="form1" action="login.php" method="post">
+
+Cógigo: <input type="codigo" name="codigo" value="100" disabled> <br><br>
+Usuário: <input type="text" name="usuario" required> <br><br>
+Senha: <input type="password" name="senha" required> <br><br>
+Email: <input type="email" name="email" required> <br><br>
+Idade: <input type="number" name="idade" min="18" max="60" required> <br><br>
+Estado: <input type="text" name="estado" pattern="[A-Za-z]{2}"> <br><br>
+	
+<input type="submit" value="Enviar">	
+
+<div id='fake_textarea' contenteditable> texto editavel </div>
+
+
+</form>
+</body>
+</html>

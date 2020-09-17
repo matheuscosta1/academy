@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Teste</title>
+</head>
+<body>
+
+<input type="radio" name="gender" value="male"> Homem<br>
+<input type="radio" name="gender" value="female"> Mulher<br>
+<input type="text" value="" id="altura">
+<input type="button" value="Click on Me" onClick="calculoIMC()">
+
+<script>
+
+    function getSelectedRadios(){
+        var radios = document.getElementsByName("gender");
+
+        for(var iterator = 0, length = radios.length; iterator < length; iterator++){
+            if(radios[iterator].checked){
+                return radios[iterator].value;
+            }
+        }
+    }
+
+    function calculoIMC() {
+        var altura = document.getElementById("altura").value;
+        var sexo = getSelectedRadios();
+
+        if (sexo == "male"){
+            var peso = (72.7*altura)-58
+        }
+
+        else if(sexo == "female"){
+            var peso = (62.1*altura)-44.7
+        }
+        console.log(peso)
+    }
+
+
+</script>
+</body>
+</html>

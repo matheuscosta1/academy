@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>	
+<head><title>CSS e JavaScript</title></head>
+<body>
+
+<h2>Alterando Estilos CSS com JavaScript</h2>
+<div id="divTexto" onClick="colorir()">Clique aqui para mudar o estilo deste texto!</div>
+
+<script>
+
+	function colorir() {
+        var elementoDiv = document.getElementById("divTexto");
+        elementoDiv.style.backgroundColor = '#AA0000';
+        elementoDiv.style.color = 'white';
+        elementoDiv.style.textAlign = 'center';
+        elementoDiv.style.padding = '200px';
+
+        elementoDiv.innerHTML = 'Obrigado!';
+	}
+    
+</script>
+
+</body>
+</html>

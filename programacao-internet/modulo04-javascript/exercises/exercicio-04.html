@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<input type="button" value="Click on Me" onClick="calcularDiscriminante(this, this, this)">
+<h1 id="resultado-iscriminante"> O resultado do discriminante sairá nesse campo ao clicar em Calcular:<h1>
+
+
+<script>
+
+    function calculaDiscriminante(coeficiente_a, coeficiente_b, coeficiente_c){
+        return ((coeficiente_b*coeficiente_b) - 4*(coeficiente_a*coeficiente_c));
+    }
+
+    function testeDiscriminante(){
+        var coeficiente_1 = prompt("Entre com o primeiro coeficiente: "); var coeficiente_1_int = parseInt(coeficiente_1);
+        var coeficiente_2 = prompt("Entre com o segundo coeficiente: "); var coeficiente_2_int = parseInt(coeficiente_2);
+        var coeficiente_3 = prompt("Entre com o terceiro coeficiente: "); var coeficiente_3_int = parseInt(coeficiente_3);
+        return [coeficiente_1_int, coeficiente_2_int, coeficiente_3_int];
+    }
+
+    function calcularDiscriminante() {
+        var values = testeDiscriminante();
+        console.log(calculaDiscriminante(values[0], values[1], values[2]));
+    }
+
+</script>
+</body>
+</html>

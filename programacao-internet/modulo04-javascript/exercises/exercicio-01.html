@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+    <h1 id="h1text" onClick="colorTitle()" > Title changed to blue color when mouse click</h1>
+    <p id="paragraphElement" onClick="onClick()" onmouseover="moveIn(this)" onmouseout="moveOut(this)"> Bold paragraph on mouse move </p>
+
+    <script>
+
+        function colorTitle() {
+            var h1Element = document.getElementById("h1text");
+            h1Element.style.color = 'blue';
+            h1Element.style.textAlign = 'left';
+        }
+
+        function onClick(){
+            var paragraphElement = document.getElementById("paragraphElement");
+            paragraphElement.style.textAlign = 'left';
+            paragraphElement.innerHTML = 'Obrigado!';
+        }
+
+        function moveIn(obj){
+            obj.style.fontWeight = 'bold';
+        }
+
+        function moveOut(obj){
+            obj.style.fontWeight = 'normal';
+        }
+     </script>
+</body>
+</html>

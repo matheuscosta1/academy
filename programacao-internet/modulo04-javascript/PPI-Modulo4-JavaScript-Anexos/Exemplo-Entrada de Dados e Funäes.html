@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>	
+	<head>
+	<meta charset="UTF-8">
+	<title>Definindo Funções em JavaScript - Exemplo</title>
+	<script>
+
+		function fatorial(n) {
+		    var total = 1;
+		    for (var i = 2; i <= n; i++) {				
+			total = total * i;
+		    }
+		    
+		    return total;
+		}
+			
+		function testeFatorial() {
+  		    var num = prompt("Informe um numero inteiro positivo: ");
+		    var numInt = parseInt(num); // converte a string em inteiro
+		    var fat = fatorial(numInt);
+		    document.write('O fatorial eh: ' + fat);
+		}
+
+	</script>
+	</head>
+	
+<body>
+
+   <input type="button" onclick="testeFatorial()" value="Clique para calcular o fatorial">
+
+</body>
+</html>

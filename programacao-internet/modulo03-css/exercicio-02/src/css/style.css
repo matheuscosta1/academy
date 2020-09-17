@@ -1,0 +1,57 @@
+body{
+    background-image: url("../images/background.jpg");
+}
+
+main{
+    border: 3px;
+    border-radius: 35px;
+    background-color: white;
+    border-color:black;
+    margin: auto;
+    padding:10px;
+    width: 600px; 
+    height: 150px; 
+    border: 2px solid gray;
+}
+
+.main-text{
+    font-family: 'Courier New', Courier, monospace;
+    color: rgb(112, 25, 25);
+    font-size: 30px;
+}
+
+.align-text-description{
+    border: 3px;
+    border-radius: 35px;
+    background-color: white;
+    border-color:black;
+    margin: auto;
+    border: 2px solid gray;
+    width: 600px;
+    height: 150px;
+    margin: 20px auto;
+    padding: 20px 40px;
+    overflow: hidden;
+}
+
+.align-text-houses{
+    border: 3px;
+    border-radius: 35px;
+    background-color: white;
+    border-color:black;
+    margin: auto;
+    border: 2px solid gray;
+    width: 600px;
+    height: 250px;
+    margin: 20px auto;
+    padding: 20px 40px;
+    overflow: hidden;
+}
+
+.border-photo{
+    height: 80px;
+    width: 120px;
+    border-radius: 10px;
+    border: 3px;
+    border-color:black;
+}

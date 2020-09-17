@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<form>
+
+    Marcas
+    <select id="marcas">
+        <option>Audi</option>
+        <option>BMW</option>
+        <option>Tesla</option>
+    </select>
+
+    <br><br>
+    Nova marca: <input type="text" name="novaMarca">
+    
+    <input type="button" value="Adicionar" onclick="adicionaOpcao()">
+    
+</form>
+
+<script>
+
+    function adicionaOpcao() {
+        var option = document.createElement("option");
+        option.innerText = document.forms[0]["novaMarca"].value;
+
+        var selectMarcas = document.getElementById("marcas");
+        selectMarcas.appendChild(option);  // também seria possível utilizar o método 'add' desse objeto
+    }
+    
+</script>
+
+</body>
+</html>

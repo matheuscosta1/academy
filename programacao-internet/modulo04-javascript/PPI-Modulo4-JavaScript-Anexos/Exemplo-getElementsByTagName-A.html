@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head><title>Teste JavaScript</title></head>
+<body>
+
+Acessando campos de formulário com o método getElementsByTagName (Primeira forma)
+
+<p>Base: <input type="text" id="base" size="10"></p>
+<p>Expoente: <input type="text" id="expoente" size="10"></p>
+
+<button onClick="calcularPotencia()">Calcular!</button>
+<p id="pResultado">O resultado aparecera neste paragrafo!</p>
+
+<script>
+    
+    function calcularPotencia() {	        
+        var inputBase = document.getElementsByTagName("input")[0];  // getElementsByTagName retorna um vetor contendo todos os elementos
+        var inputExpo = document.getElementsByTagName("input")[1];  // do tipo 'input'. O índice entre colchetes acessa um elemento específico.
+
+        var base = parseInt(inputBase.value);
+        var expo = parseInt(inputExpo.value);
+                    
+        var res = 1;
+        for (var i=0; i < expo; i++) {
+            res = res * base;
+        }
+
+        document.getElementById('pResultado').innerHTML = res;  
+}
+</script>
+</body>
+</html>

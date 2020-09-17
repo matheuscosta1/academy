@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head><title>Validando Formulários com JavaScript</title>
+
+<script>
+
+    function validaForm() {
+
+        var usuario = document.forms["form1"]["usuario"].value;
+        if (usuario == "") {
+            alert("O campo usuario deve ser preenchido");
+            return false;
+        }	
+        
+        var senha = document.forms["form1"]["senha"].value;
+        if (senha == "") {
+            alert("O campo senha deve ser preenchido");
+            return false;
+        }
+            
+        return true;
+    }
+
+</script>		
+</head>
+
+<body>
+
+<form name="form1" action="login.php" onSubmit="return validaForm()" method="post">
+
+    Usuário: <br> <input type="text" name="usuario"> <br>
+    Senha: <br> <input type="password" name="senha"> <br><br>
+
+    <input type="submit" value="Enviar">	
+	
+</form>
+
+</body>
+</html>

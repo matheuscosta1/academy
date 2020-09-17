@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head><title>Escopo de Variaveis</title></head>
+<body>
+
+<script>
+
+    var opcaoAtiva = 1;  // Esta é uma variável global
+        
+    function avancaOpcao() {
+        opcaoAtiva++;
+    }
+
+    function retornaOpcao() {
+        opcaoAtiva--;
+    }
+
+</script>
+	
+<body>
+
+   <input type="button" onclick="avancaOpcao();" value="Incrementar">
+   <input type="button" onclick="retornaOpcao();" value="Decrementar">
+   <input type="button" onclick="alert('Valor da var. global: ' + window.opcaoAtiva)" value="Ver variável">
+
+</body>
+</html>

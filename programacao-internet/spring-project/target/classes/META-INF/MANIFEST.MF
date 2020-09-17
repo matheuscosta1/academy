@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: Exemplo Spring Boot Restful WS
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: matheuscosta
+Implementation-Vendor-Id: ppi
+Build-Jdk: 1.8.0_222
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/spring2
+Created-By: Maven Integration for Eclipse
+

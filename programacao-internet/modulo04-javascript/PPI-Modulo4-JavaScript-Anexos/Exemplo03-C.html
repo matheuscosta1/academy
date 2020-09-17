@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1 onmouseover="mOver(this)" onmouseout="mOut(this)">Passe o mouse aqui</h1>
+
+<div onmouseover="mOver(this)" onmouseout="mOut(this)" style="background-color:red; width:140px; height:20px; padding:40px;">Passe o mouse aqui</div>
+
+<script>
+
+    function mOver(obj) {
+        obj.innerHTML = "Obrigado! :-)";
+        obj.style.backgroundColor = 'lightgreen';
+    }
+
+    function mOut(obj) {
+        obj.innerHTML = "Passe o mouse aqui";
+        obj.style.backgroundColor = 'red';
+    }
+
+</script>
+
+</body>
+</html> 

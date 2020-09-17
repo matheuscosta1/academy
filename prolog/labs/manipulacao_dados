@@ -1,0 +1,31 @@
+Aula Prática - Manipulação de Base de Dados
+
+Suponha que começamos com um banco de dados vazio. Nós então damos o comando:
+
+   assert(q(a,b)),  assertz(q(1,2)),  asserta(q(foo,blug)).
+
+O que o banco de dados contém agora?
+
+Agora o banco de dados contém as seguintes declarações:
+
+q(a,b).
+q(1,2).
+q(foo,blug).
+
+Nós então damos o comando:
+
+   retract(q(1,2)),  assertz(  (p(X)  :-    h(X))  ).
+
+O que o banco de dados contém agora?
+
+q(a,b).
+q(foo,blug).
+p(X) :- h(X).
+
+Nós então damos o comando:
+
+   retractall(q(_,_)).
+
+O que o banco de dados contém agora?
+
+Base de dados zerada
