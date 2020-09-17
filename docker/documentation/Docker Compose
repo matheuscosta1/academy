@@ -1,0 +1,60 @@
+O docker-compose possibilita a criação e execução de vários containers. É utilizado um arquivo .yml para definiri o ambiente a ser utilizado.
+O Dockerfile é necessário para definir o ambiente para a aplicação.
+O .yml é um docker-compose no qual é listado quais serviços são essenciais para a aplicação e quais são as relações entre elas.
+O docker-compose up é para setar as configurações e criar o ambiente.
+
+Bom para desenvolvimento, testes e homologação. Fluxo de integracao continua tambem.
+
+Build: especifica que nao tenho uma imagem pronta, mas que criarei ela antes da execucacao
+
+Ex.: 
+
+version: '2'
+services:
+  web:
+    build: .
+      context: ./dir
+      dockerfile: Dockerfile-alternate
+      args:
+        versao: 1
+  ports:
+     - "5000:5000"
+redis:
+  image: redis
+
+Version: especifica versao do docker-compose.yml
+services: define o bloco de comandos que serão definidos
+web: nome do primeiro serviço; tudo abaixo definido será parte desse serviço
+build: definicao do primeiro serviço, o web. Ele indica que nao tenho uma imagem protna, e criarei uma antes do início da execucao
+context: parametrização do build. Ele informa qual contexto de arquivos será necessário para construir a imagem em questão. Apenas arquivos dentro dessa pasta serão utilizados na construção da imagem. No caso, foi utilizado o /.dir
+dockerfile: indica o nome do arquivo que será utilizado para a construção da imagem. caso não tivesse essa parametrização do service, o sistema procuraria por alguma Dockerfile dentro da pasta informada no Context
+args: define os argumentos que serão utilizados pelo Dockerfile
+versao 1: especifica a versão que será passada para o Dockerfile. Se ele não receber esse valor 1, então o Dockerfile irá se perder na construção da imagem
+ports: equivalente ao docker container run -p. No caso, será a porta 5000 do container com a porta 5000 do Docker host. Esse comando define qual porta do container será exposta no Docker host.
+redis: novo serviço
+image redis: especifica qual imagem será utilizada para iniciar o container. Imagem pullshada do docker hub
+
+COMMAND LINE REFERENCE: https://docs.docker.com/compose/reference/
+
+
+
+
+
+
+
+
+
+
+
+Wordpress:
+
+curl https://wordpress.org/latest.tar.gz | tar -xvzf –
+
+
+GRAFANA	 
+
+^
+|
+
+CONTABILIZAR E MOSTRAR VISUALMENTE
+

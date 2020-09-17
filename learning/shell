@@ -1,0 +1,599 @@
+Aula 1:
+
+* O shell é uma interface do usuário que fornece interação com o SO
+* Ambiente de execução de outros programas. Variáveis de ambiente que 
+estão configuradas na memória.
+* Os shells oferecem linguagens de programação. As linguagens do shell.
+* Shell e Kernel são coisas distintas. Shells podem ser diferentes.
+* O usuário digita um comando e o shell realiza aquele comando
+* Um shell executa outro shell. De um o tipo ou tipos diferentes.
+
+Shells: sh bash ksh zsh csh tcsh 
+
+sudo apt-get install nome_shell Ex.: csh, ksh
+--------------------------------------------------------------------------------------------------
+Aula 2:
+
+Variáveis de ambiente globais
+
+PATH - lista diretórios de programas executáveis
+USERNAME - nome do user logado
+TERM - tipo de terminal ou janela do terminal em uso 
+HOME - diretório home do usuário atual
+UID - UID do usuário atual
+RANDOM - gera um número aleatório
+LANG - idioma, especificado como locale
+
+Os comandos env e printenv mostram as VARIÁVEIS DE AMBIENTE no terminal
+
+- env | less
+
+Para criar uma variável global, cria uma local e depois exporte-a com o
+comando export. 
+
+Variáveis do SHELL: são como variáveis locais pois sao especificas do shell atual
+Outros programas e shells nao as herdam
+Ex.: SECONDS: numero de segundos desde que o shell foi iniciado
+
+echo $SECONDS
+
+Podemos criar uma variável nova digitando um par NOME= valor no terminal
+
+teste = valor; e podemos ver o seu valor usando o comando: echo $teste
+
+Podemos disponibilizar a variável criada para outros shells ou programas utilizando export
+
+export teste
+
+E podemos remover uma variável de ambiente com o comando unset
+
+unset teste
+
+um SHELL pode chamar outro SHELL posso ir pro bash
+
+EXERCÍCIO:
+
+teste='teste'
+echo $teste
+bash - crio novo shell
+ps
+echo $teste (vai dar que a var teste nao existe)
+exit
+export teste
+env | less (acharei a minha variável exportada)
+bash
+ps
+echo $teste (agora acharei a minha variavel porque a exportei) 
+unset teste (excluo a minha variável)
+--------------------------------------------------------------------------------------------------
+Aula 3:
+
+Arrays de ambiente:
+
+testearray=(laranja morango acerola abacaxi)
+
+echo ${testearray[indice]}
+
+* Para mostrar todo o conteúdo: echo ${testearray[*]}
+* Para atribuir um novo valor a uma variável: testarray[indice]=variavel
+* Remover indices individuais: unset testearray[indice]
+* Remover o array todo: unset testarray[*]
+* Acrescentar um item a um array já criado (array dinamico)
+
+meuarray=(a b c)
+echo ${meuarray[*]}
+meuarray[3]=d
+echo ${meuarray[*]}
+
+SERA UTIL PARA PROGRAMACAO MAIS AVANÇADA UTILIZANDO BASH
+--------------------------------------------------------------------------------------------------
+Aula 4:
+
+Aliases e Funções no Bash
+
+É possível definir um alias para um comando ou sequencia de comando que sao usados com frequencia
+
+Exemplo: alias mo='more'
+	 alias lshome='cd /home;ls'
+
+Também posso modificar o comportamento padrão de um comando
+ 
+	 alias lsl='ls -l'
+
+
+Apagar um alias: unalias nome_alias
+
+Funções para rodar no bash, um nome para substituir uma sequência. É um pequeno programa com uma lógica apropriada
+
+Sintaxe:
+
+nome_funcao(){comandos}
+
+Exemplo: 
+
+palavra(){
+>cd /home/matheus/
+>echo 'Linha acrescentada' >> test_func ; obs: >> anexa o conteúdo à função test_func
+>}
+
+typeset -f: mostra as funcoes no bash
+
+Para executar eu escrevo o nome da função. Será criado o arquivo no bash
+
+Quanto mais executo o método, mais crio coisas lá dentro.
+
+Existem aliases em diversos programas com uma programação mais complexas.Tudo para facilitar o uso do terminal.
+--------------------------------------------------------------------------------------------------
+Aula 5:
+
+Arquivos de configuração
+
+Variáveis de ambiente, funções e aliases podem ser configurados automaticamente pelo bash com o uso de alguns arquivos de configuração, de modo a definir o ambiente operacional ao iniciar o sistema.
+
+Cada arquivo de configuração tem um escopo e momento de uso definidos, e o arquivo usado depende do método usado para iniciar o bash. Há três formas de se iniciar o bash:
+
+- Como um shell de login padrão na inicialização;
+- Como um shell interativo
+- Como um shell não interativo para rodar um script
+
+ Arquivo: 
+/etc/profile é executado durante o login e válido para todo o sistema
+/etc/bashrc ou /etc/bash.bashrc arquivo de inicialização, válido para todo o sistema
+~/.bash_profile executado para qualquer usuario que se loga
+~/.bash_login cadaa usuario tem um diferente porque eles podem ser editados
+~/.profile se o bash profile nem o bash login forem executados, esse aqui executa
+~/.bashrc quando o bash é executado interativamente (terminal)
+~/.inputrc variáveis de configuração do teclado
+~/.bash_logout executado quando logout do sistema pelo usuário
+
+Shell de Login
+
+Quando logamos no Linux o Shell é iniciado num shell de login. Ele procura 4 arquivos de configuração 
+
+/etc/profile
+~/.bash_profile
+~/.bash_login
+~/.profile
+
+
+Shell Interativo (quando o usuário abre um Shell bash)
+
+Cada usuário tem o seu .bashrc. Se eu modifico um alias num user, ele não valerá para ouro user
+
+Shell não interativo (usado para quando eu executo um script)
+
+Alimenta o meu script com algumas informações
+
+BASH_ENV 
+
+RESUMO:
+
+Quando eu me logo no Linux, o shell bash acessa o arquivo de inicialização /etc/profile, e também os arquivos de inicialização locais do usuário -- cd /etc/profile.d --, presentes no diretório home:
+
+~/.bash_login, ~/.profile e ~/.bash_profile
+
+Esses arquivos locais são todos opcionais e podem ser personalizados pelo usuário para incluir variáveis de ambiente e scripts de inicialização
+--------------------------------------------------------------------------------------------------
+Aula 6:
+
+Comandos podem ser executados em sequência através de ponto-vírgulas
+
+Arquivo de Script
+
+Para criar um arquivo de script, usaremos algum editor de texto (gedit, vi, emacs, nano)
+
+Especificar qual shell será utilizado na primeira linha do arquivo
+
+ex: #!/bin/bash
+
+O símbolo representa uma linha de comentário, exceto na primeira linha, onde a combinação #! indica o shell que rodará o script.
+
+Depois os comandos que serão executados
+
+O shell processará os comandos na ordem em que aparecem no arquivo.
+Criei um arquivo gedit, os comandos no meu arquivo do script. Preciso dar permissão para o meu arquivo com chmod (a+x = 755 no sistema octal)
+Não está em nenhum path o meu arquivo que criei (o nome dele não é encontrado)
+
+./ o ponto é o diretório atual e barra é (está dentro do diretório atual). Isso simplifica toda a escrita do caminho até o arquivo
+
+echo exibe mensagens para o usuário
+echo -n exibe a mensagem numa linha qualquer e executa o próximo comando na mesma linha
+
+Adendo sobre vi:
+
+Para entrar no modo de inserção (ou seja, para escrever no script) é necessário apertar a tecla 'i' e quando terminar apertar a tecla ESC. Caso erre aperte a tecla DELETE para apagar os caracteres e para sair novamente a tecla ESC, se ficarem algumas linhas em branco aperte as teclas "DW" para excluí-las. E finalmente para salvar o script aperte :wq﻿
+--------------------------------------------------------------------------------------------------
+Aula 7:
+
+Usando variáveis de ambiente
+
+#!/bin/bash
+#Informações de usuário:
+echo "Usuário: $USER"
+echo "Diretório home: $HOME"
+echo "UID do USER: $UID"
+
+Usando variáveis de usuário
+
+* Posso criar as minhas variáveis dentro de um script (até 20 caracteres)
+* O Shell determina automaticamente o tipo das variáveis criadas
+* As variáveis criadas pelo usuário são desalocadas quando termina a execução do script
+
+#!/bin/bash
+#Teste de variáveis
+idade = 25
+nome="Monica"
+echo "A $nome tem $idade anos de idade"
+
+#!/bin/bash
+#Teste de variaveis de usuário:
+echo "Teste de variaveis de usuario"
+echo "----------------------------------"
+echo "|                                |"
+nome="Matheus"
+echo "| O usuário $nome tem o UID $UID |"
+echo "----------------------------------"
+--------------------------------------------------------------------------------------------------
+Aula 8:
+
+Como redirecionar a saída de um comando com uma variável "com a crase"
+As crases permitem atribuir a saída de um comando do shell a uma variável.
+O comando todo deve estar entre craes:
+
+Usando crases(backtick `)
+dia=`date`
+echo "A data é $dia"
+
+#!/bin/bash
+arq=`date +%T`
+ls -la /home/matheus > log.$arq
+--------------------------------------------------------------------------------------------------
+Aula 9:
+
+Redirecionamento de Entrada e Saída
+
+Redirecionamento de saída
+
+Enviando saida de um comando para um arquivo: comando > arq_saida
+
+Acrescentar a saída e um comando a um arquivo em vez de sobrescrevê-lo: comando >> arq_saida
+
+ls > arq.txt (>) sobrescreve arquivo
+cat arq.txt
+date >> arq.txt (>>) acrescenta ao arquivo
+
+Redirecionamento de entrada
+
+comando < arq_entrada
+
+Ex.: wc < arq.txt Redireciono o conteúdo de um arquivo para um comando (wc pega o numero de linhas, numero de palavras e de bytes)
+
+Redirecionamento de Entrada Inline
+
+wc << EOF (end of file)
+>linha
+>linha2
+EOF
+--------------------------------------------------------------------------------------------------
+Aula 10:
+
+Calculos matematicos
+
+var1=$[2+6]
+echo $var1
+var2=$[$var1*2]
+echo $var2
+
+O $ serve para fazer uma operacao. Obter o resultado dela, diria.
+
+#!/bin/bash
+
+var1=10
+var2=5
+var3=2
+var4=$[$var1*($var2-$var3)]
+echo "O resultado do calculo é $var4"
+
+var5=9
+var6=2
+var7=$[$var5/$var6]
+echo "O resultado do calculo é $var7"
+--------------------------------------------------------------------------------------------------
+Usando a calculadora do bash:
+
+Permite fazer ponto flutuante; funcoes; if-then; loops; comentarios (/* *\); arrays
+
+
+bc 
+	(ambiente_calculadora)
+	
+quit
+
+variavel scale permite fazer calculos com ponto flutuante 
+scale = configurar_numero_casasdecimais
+
+Usar bc em um script: uso a crase (backtick `) para rodar o comando e atribuir seu valor a uma variável.
+
+variavel=echo`echo"variaveis;expressao"|bc`
+var1=`echo "scale=2;2/5"|bc`
+echo "Resultado: $var1"
+
+Ex.:
+
+#!/bin/bash
+var1=100
+var2=30
+var3=`echo "scale=4;$var1 / $var2"|bc`
+echo "Resultado: $var3"
+
+#!/bin/bash
+var1=6
+var2=5
+var3=4
+var4=`bc << EOF
+scale=4
+a1=($var1*$var2)
+b1=($var3+$var1)
+a1+b1
+EOF
+`
+echo "Resultado: $var4"
+--------------------------------------------------------------------------------------------------
+Aula 12:
+
+Status de Saída de Comandos
+
+Cada comando que roda no shell usa um valor de status de saída para indicar ao shell que o processamento terminou. 
+O satatus de saída é um inteiro entre 0 e 255
+
+Código:   				Mean:
+0					Comando completado com sucesso
+1					Erro geral desconhecido
+126					O comando não pode ser executado (permissões)
+127					Comando não encontrado
+130 					Comando finalizado com CTRL+C
+
+Status de um comando: 	echo $?
+
+Comando exit
+
+Especifica o status de saída quando script finaliza
+--------------------------------------------------------------------------------------------------
+AUla 13:
+
+Condicionais
+
+if comando		ou	if comando; then	
+then					comandos
+    comandos			fi
+
+fi	
+
+#!/bin/bash
+if ls /home/matheus.costa/teste
+then 
+    echo "Diretorio encontrado"
+else 
+    echo "Diretorio nao encontrado"
+fi				
+
+--------------------------------------------------------------------------------------------------
+Aula 14:
+
+Condicional if aninhado
+
+#!/bin/bash
+var1="/home/matheus.costa"
+var2="jose"
+
+if ls /$var1
+then 
+	echo "Diretório do usuário $var1 encontrado!"
+elif ls /$var2
+then
+	echo "Diretório do usuário $var2 é que foi encontrado"
+else "Nenhum dos dois diretórios foram encontrados!"
+fi
+--------------------------------------------------------------------------------------------------
+Aula 15:
+
+O comando test
+
+A declaração if-then não consegue avaliar nenhuma condicao que nao seja codigo de status de saída de um comando.
+
+if test condicao
+then
+comandos
+fi
+
+ou
+
+if [ condicao ]
+then
+comandos
+fi
+===========================================================================
+Comparacoes numericas:
+
+n1 -eq n2	verifica se n1 é igual a n2
+n1 -ge n2	verifica se n1 é maior ou igual a n2
+n1 -gt n2	verifica se n1 é maior do que n2
+n1 -le n2	verifica se n1 é menor ou igual a n2
+n1 -lt n2	vefifica se n1 é menor do que n2
+n1 -ne n2	vefifica se n1 é diferente de n2
+
+Ex.:
+
+#!/bin/bash
+var1=10
+var2=15
+
+if [ $var1 -gt 8 ]
+then
+	echo "A variavel de valor $var1 é maior que 8"
+fi
+if [ $var1 -eq $var2 ]
+then
+	echo "Os valores $var1 e $var2 são iguais"
+else 
+	echo "Os valores $var1 e $var2 são diferentes"
+fi
+===========================================================================
+Comparações de string com test:
+
+Comparação 	Descrição
+
+str1 = str2	
+str1 != str2
+str1 < str2
+str1 > str2
+-n str1		verifica se str1 tem comprimento maior que zero
+-z str1		verifica se str1 tem comprimento zero
+
+#!/bin/bash
+nome=matheus.costa
+if [ $USER = $nome ]
+then 
+	echo "Olá $nome"
+fi
+
+var1=abacate
+var2=''
+if [ -n $var1 ]
+then 
+	echo "Variavel $var1 nao esta vazia"
+else 
+	echo "Variavel $var1 vazia"
+fi
+
+if [ -z $var2 ]
+then
+	echo "Variavel * $var2 * esta vazia"
+else
+	echo "Variavel $var2 nao esta vazia"
+fi
+--------------------------------------------------------------------------------------------------
+Aula 16
+
+Comparações de Arquivos
+
+-d arq   verifica se o arquivo existe e é um diretório
+-e arq	 verifica se o arquivo existe
+-f arq	 verifica se o arquivo existe e é um arquivo 
+-r arq	 verifica se o arquivo existe e se o usuario logado possui opcao de leitura
+-s arq	 permissao pra ver se o arquivo existe e nao esta vazio
+-w arq	 permissao de escrita 
+-x arq	 permissao de execucao
+-O arq	 verifica se o arquivo existe e é propriedade do user atual
+-G arq	 verifica se o arquivo existe e seu grupo padrão é o mesmo do user atual
+arq1 -nt arq2	verifica se arq1 é mais novo que arq2
+arq1 -ot arq2 	verifica se arq1 é mais antigo que arq2
+
+Ex.:
+
+#!/bin/bash
+if [ -d $HOME ]
+then
+	echo "Seu diretorio home existe e o conteudo é: "
+	cd $HOME
+	ls -l
+else
+	echo "Diretório não encontrado"
+fi
+
+#!/bin/bash
+
+if [ -e $HOME ] #objeto existe ou nao
+then
+	echo "O objeto existe. Vamos ver se é arquivo ou diretório"
+	if [ -f $HOME ] #file
+	then
+		echo "É um arquivo"
+	else
+		echo "É um diretório"
+	fi
+else
+	echo "Objeto não encontrado"
+fi
+
+#!/bin/bash
+arquivo=/etc/passwd
+if [ -f $arquivo ]
+then
+	if [ -r $arquivo ] #se o arquivo existe ele vai testar se há pouco lê-lo
+	then
+		tail -5 $arquivo #exibe 5 ultimas linhas do arquivo
+	else
+		echo "Sem permissao para ler o arquivo"
+	fi
+else 
+	echo "Arquivo nao encontrado"
+fi
+--------------------------------------------------------------------------------------------------
+Aula 17
+
+AND e OR
+
+[ condicao1 ] && [ condicao2]
+[ condicao1 ] || [ condicao2]
+
+Ex.:
+
+#!/bin/bash
+if [ $USER=matheus.jose ] && [ -w $HOME/.bashrc ]
+then
+	echo "o usuario $USER tem permissao para alterar o arquivo"
+else 
+	echo "o usuario $USER nao pode alterar o arquivo agora"
+fi
+
+--------------------------------------------------------------------------------------------------
+Aula 18
+
+Comando case
+
+Ex.:
+
+#!/bin/bash
+local=lavanderia
+local1=banheiro
+case $local in
+	quarto)
+		echo "voce está no quarto";;
+	cozinha)
+		echo "voce está na cozinha";;
+	sala)
+		echo "voce está na sala";;
+	banheiro | lavanderia)
+		echo "voce está no banheiro";;
+	*)
+		echo "Você não está dentro de casa";;
+esac
+--------------------------------------------------------------------------------------------------
+Aula 19
+
+Monica do caralho
+Mini faustão do caralho
+--------------------------------------------------------------------------------------------------
+Aula 20
+--------------------------------------------------------------------------------------------------
+Aula 21
+--------------------------------------------------------------------------------------------------
+Aula 22
+--------------------------------------------------------------------------------------------------
+Aula 23
+--------------------------------------------------------------------------------------------------
+Aula 24
+--------------------------------------------------------------------------------------------------
+Aula 25
+--------------------------------------------------------------------------------------------------
+Aula 26
+--------------------------------------------------------------------------------------------------
+Aula 27
+--------------------------------------------------------------------------------------------------
+Aula 28
+--------------------------------------------------------------------------------------------------
+Aula 29
+--------------------------------------------------------------------------------------------------
+Aula 30
+

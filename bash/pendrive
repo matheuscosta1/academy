@@ -1,0 +1,4 @@
+sudo fdisk -l
+sudo dd count=1 bs=512 if=/dev/zero of=/dev/sd(x) && sync
+sudo cfdisk /dev/sd(x)
+sudo mkfs.vfat -F32 /dev/sdx1

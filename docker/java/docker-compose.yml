@@ -1,0 +1,18 @@
+version: '3.3'
+
+db:
+  image: postgres
+  ports:
+    - "5432:5432"
+  restart: always
+  environment:
+    POSTGRES_USER: matheus
+    POSTGRES_PASSWORD: matheus
+
+realwave-com:
+  image: maven:3.5.0-jdk-8
+    volumes:
+      - .:/tmp
+      - /data/mvn-repository/:/data/mvn-repository
+    depends_on:
+      - db

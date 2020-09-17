@@ -1,0 +1,82 @@
+'''
+a=10
+b='matheus'
+print('O numero e %d' %a)
+print('Meu nome e %s' %b)
+
+c = str(a)+b
+print('Segue a concatenacao da string com um numero: %s' %c)
+d,e,f = 1,2,3 #consigo definir muitas variaveis separadas por virgulas
+print('%d' %d)
+print('%d' %e)
+print('%d' %f)
+d,e,f = 'OBA'
+print('\n')
+print('%s' %d)
+print('%s' %e)
+print('%s' %f)
+n1 = int(input('Primeiro numero: '))
+n2 = float(input('Segundo numero: '))
+soma = n1+n2
+print('Soma: %f'%soma)
+
+a = str(2 **1000000)
+b = len(a)
+print('Numero de caracteres da cadeia e: %d' %b)    
+
+a=int(input('Digite um numero: '))
+if a%2==0 and a>=0:
+    print("\nO numero %d e par e natural"%a)
+elif not(a%2==0) and a>=0: 
+    print("O numero %d e impar"%a)
+else: print("Numero nao natural")    
+
+a= raw_input("Entre com o nome de usuario: ")
+b= int(input('Entre com a velocidade do seu veiculo: '))
+
+if b>110: 
+    d = (b-110)*5 
+    print("Usuario %s foi multado em %d reais" %(a, d))
+else: print("Usuario %s dentro dos padroes de velocidade" %a)
+
+minutos = int(input("Minutos utilizados na linha: "))
+if minutos < 200:
+    preco = 0.20
+else:
+    if minutos <=400:
+        preco = 0.18
+    else: 
+        preco = 0.15
+print("Conta telefonica: R$%6.2f"%(minutos*preco))
+
+x=0
+while x <= 40:
+    print("%d" %x)
+    x=x+1
+ 
+n=1
+soma=0
+while n<=10:
+    x=int(input("Digite o %d numero: "%n))
+    soma = soma+x
+    n=n+1
+print("Soma: %d"%soma)
+media = soma/10
+print("media: %f" %media)
+'''
+x = int(input("Entre com um numero: "))
+i=1
+fat = 1
+while i<=x:
+    fat = fat*i
+    i = i+1
+print("Fat(%d) e: %d"%(x,fat))
+soma=0
+while True:
+    x = int(input("Entre com um numero: "))
+    if x==0: 
+        break
+    soma = soma+x
+print("Soma: %d"%soma)
+
+

@@ -1,0 +1,13 @@
+yum localinstall XYZ.rpm (forçar instalação para suprir dependências)
+yum localinstall --nogpgcheck XYZ.rpm (força mais ainda)
+
+rpm -ivh (pacote.rpm)
+rpm -qa | grep 'arquivo'
+rpm -ivh –nodeps (pacote.rpm) - instala dependencias (força)
+
+dnf check-update
+sudo dnf clean all && dnf update
+
+enabling php apache server to listen port 8080
+
+sudo php --server localhost:8080 --docroot  .

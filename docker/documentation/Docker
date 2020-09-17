@@ -1,0 +1,394 @@
+FOR DELETING AN ETHERNET CONNECTION FROM NETWORK LIST, I DO THIS FOLLOWING SENTENCE:
+
+ifconfig
+sudo ip link delete name_ethernetlink
+
+https://www.youtube.com/watch?v=YFl2mCHdv24
+https://www.youtube.com/watch?v=Qw9zlE3t8Ko - docker compose
+https://hub.docker.com/_/php/
+http://blog.mclaughlinsoftware.com/2018/07/05/docker-on-fedora-27/
+https://www.youtube.com/watch?v=gHlRpZJ768U - CI/CD docker integration
+
+sudo docker build -t hello-world . 
+sudo docker run -p 80:80 hello-world
+
+using a localhost refreshing all when i request
+ 
+sudo docker run -p 80:80 -v /home/matheus.costa/Git/Backup/PHP-DOCKER/src/:/var/html/ hello-world	
+
+DOCKER COMPOSE
+
+docker-compose up
+docker-compose up -d (to keep working on background)
+
+sudo docker ps -a
+sudo docker images
+sudo docker image
+
+Image Ubuntu by Docker
+
+docker search | head -n5
+docker image ls
+docker run -ti ubuntu /bin/bash
+cat /etc/os-release 
+ps -ef (nosso container criado está como PID 1, se o processo morrer, então nosso container também morre)
+CTRL + p + q
+docker container ls
+docker container stop cab0154e2e8f
+docker container rm cab0154e2e8f
+docker image rm ubuntu
+
+Continuando: documentação
+
+sudo docker system --help
+sudo docker system df
+sudo docker system df -v
+sudo docker container/network/image/volume prune --help (limpar area especifica)
+
+Listando todas as imagens e removendo:
+
+sudo docker container ls -a -q
+sudo docker image ls -a
+sudo docker image rm -f
+
+Bridge Network
+
+bridge: 
+host: daemon configura a rede do container como uma copia da rede do host docker. O container possui as mesmas configuracoes do host (IP, gateway, rotas, hostname)
+none: nao possui nenhuma config de rede no container
+
+docker network create --driver bridge rdglinux
+docker network ls
+
+Criando dois containers:
+
+sudo docker container run --name webserver1 --network rdglinux -d -p 8090:80 nginx
+sudo docker container run --name webserver2 --network rdglinux -d -p 8091:80 nginx
+sudo docker container ls
+sudo docker inspect webserver1 |grep -iE 'NetworkMode|IPAddress'
+sudo docker inspect webserver2 |grep -iE 'NetworkMode|IPAddress'
+
+OS ips dos containers podem ser visualizados com o comando acima e o que vem a seguir:
+
+sudo docker network inspect rdglinux |grep -A14 Containers
+
+Olhando se os containers estãoo se comunicando com a rede
+
+sudo docker container exec webserver1 ping -c1 webserver1
+
+Listando as portas em Listen no docker host
+
+netstat -antpu |grep LIST 
+
+Vendo se o serviço está rodando nos containers
+
+curl 192.168.100.102:8090 
+
+DOCKER SWARM e DOCKER-MACHINE
+
+Docker Swarm é uma das ferramentas mais sensacionais do Docker pois com ela podemos criar e gerenciar clusters de várias máquinas de Docker, tornando sua utilização muito mais ampla e sem dúvida muito mais poderosas.
+
+Segue algumas características:
+
+• Gerenciamento de cluster integrado com o Docker Engine
+• Design descentralizado
+• Modelo de serviço declarativo
+• Escala
+• Reconciliação do estado desejado
+• Rede multi-host
+• Descoberta do serviço
+• Balanceamento de carga
+• Seguro por padrão
+• Atualizações em rolo.
+
+for N in 1 2 3; do docker-machine create --driver virtualbox docker-node-$N; done;
+docker-machine ls
+docker-machine env docker-node-1
+eval $(docker-machine env docker-node-1)
+env |grep docker
+docker swarm init --advertise-addr 192.168.99.100
+eval $(docker-machine env docker-node-2)
+env |grep docker
+docker swarm join --token SWMTKN-1-3d2vk3oxjjrnr1tmap985lgmvt58ig63qz7avdwt2ybstq1ud2-0uv4topbbyx0b2r7962ype5xf 192.168.99.100:2377
+eval $(docker-machine env docker-node-3)
+docker swarm join --token SWMTKN-1-3d2vk3oxjjrnr1tmap985lgmvt58ig63qz7avdwt2ybstq1ud2-0uv4topbbyx0b2r7962ype5xf 192.168.99.100:2377
+eval $(docker-machine env docker-node-1)
+docker node ls
+
+PROMOVENDO DEMAIS NÓS COMO LEADER
+
+eval $(docker-machine env docker-node-1)
+docker node promote docker-node-2
+docker node promote docker-node-3
+docker node ls
+
+CASO O MANAGER LEADER CAIA, UM DOS OUTROS WORKERS IRÁ ASSUMIR O MANAGER LEADER, DEIXANDO COM QUE O CLUSTER VIVA
+
+REMOVENDO O NO LEADER-MANAGER
+
+docker-machine rm docker-node-1
+docker-machine ls
+docker node ls
+eval $(docker-machine env docker-node-3)
+docker node demote docker-node-1
+docker node rm docker-node-1
+-------------------------------------------------------------------------
+Construindo minhas próprias imagens
+
+Dockerfile: 
+
+# Chama a imagem "ubuntu:16.04" como imagem base para o build
+# O FROM é obrigatório no início
+FROM ubuntu:16.04
+ 
+# Atualizado o repo, instala o NGINX e remove o cache do APT
+RUN apt-get update -y && apt-get install nginx -y \
+    && rm -rf /var/lib/apt/lists/*
+ 
+# Inicia o NGINX quando o container for executado
+CMD ["nginx", "-g", "daemon off;"]
+
+sudo docker build -t churrops/nginx:1.0.0 .
+sudo docker image ls |grep churrops/nginx
+sudo docker container run -d -p 80:80 --name churrops-nginx churrops/nginx:1.0.0
+f6b55fa4b0b48732191ebc551b188cbb95b14277df435dd23e0e2304d96c4030
+sudo docker container ps
+sudo docker container rm -f churrops-nginx
+
+Observações para quando for criar minha própria imagem
+
+- Os containers devem ser efêmeros, ou seja, nascem pra morrer, então sua imagem precisa estar preparada pra isso.
+- Use um arquivo .dockerignore. O .dockerignore possui a mesma funcionalidade do .gitignore, fazendo com que você possa gerar a sua imagem excluindo alguns arquivos que estejam no diretório do seu Dockerfile.
+- Evite instalar pacotes desnecessários. Lembre-se que o container precisa ter somente o básico e necessário para o funcionamento da sua APP
+- Cada container deve rodar apenas um processo principal. Não faz sentido você ter um container rodando diversas aplicações
+- Minimize o número de camadas ou layers. Cada RUN, COPY, ADD por exemplo cria uma camada
+- Quebrar argumentos grandes em várias linhas utilizando barra invertida \
+- Sempre usar TAGS quando for fazer o build das imagens
+- Build cache – build-cache
+
+Alguns parâmetros do Dockerfile
+
+Para a criação de um container, faço camadas: 
+
+FROM: define a imagem básica para quando o docker-build compilar e começar a compilação. O docker-build faz um pull do dockerhub, pegando a nossa imagem e construindo-a como um container. Também podemos fazer Multi-stage, que, no caso, seria criar mais de uma imagem através de um FROM.
+
+- Everytime i'll catch my images from a official repository. It needs to do looking for system security.
+
+RUN: é a segunda camada, após o FROM (first). Com o RUN eu crio o que será feito em tempo de execução do Dockerfile.
+A cada RUN é gerado uma camada, logo, preciso utilizar menos RUN possíveis. Assim, conseguirei um container eficiente. Também, devo dividir RUN complexas em várias linhas separadas com barras invertidas \ (quebram as linhas) e utilizar menos RUN possíveis.
+
+LABEL: Adiciona metadados a uma imagem no formato chave-valor, é extremamente importante para identificação da imagem e inclusive para automação é muito utilizado.
+
+Ex.: 
+
+Set multiple labels at once, using line-continuation characters to break long lines
+LABEL vendor=ACME\ Incorporated \
+      com.example.is-beta= \
+      com.example.is-production=""
+
+MAINTAINER (deprecated)
+
+FOI SUBSTITUÍDA PELO LABEL. Mas é para definir o mantenedor da imagem
+
+EXPOSE:
+
+Expõe as portas de escuta do container. Jamais colocar EXPOSE 80:80 no meu Dockerfile. A declaração das portas de escuta devem ser feitas ou em um compose-file ou no start utilizando o parâmetro -p 80:80
+
+ENV:
+
+São as variáveis de ambiente a serem enviadas para a imagem
+
+COPY
+
+Copia os arquivos do DIR especificado do host para o diretório especificado dentro do container
+
+ADD
+
+Além de copiar arquivos do local ele serve para enviar arqs empacotados com tar na origem e auto descompactar no no destino e também tem a capacidade de baixar arquivos de uma URL, desde que não tenha autenticação.
+
+ENTRYPOINT
+
+É o ponto de entrada quando você iniciar o container. Definimos no ENTRYPOINT o comando ou script que chama o processo responsável pela execução do container e que manterá o container vivo.
+
+CMD
+
+É utilizado para promover argumentos para o ENTRYPOINT.
+Se eu usar CMD sem ENTRYPOINT, o que valerá é o CMD no start do container.
+Se eu tiver CMD e ENTRYPOINT, o que é colocado no CMD geralmente são parâmetros complementares para o ENTRYPOINT
+
+VOLUME
+
+Fala qual volume será mapeado/criado para o container
+
+USER
+
+Nome de usuário a serem usados ao executar a imgem e as instruções RUN, CMD e ENTRYPOINT que o seguem no Dockerfile
+
+WORKDIR
+
+Diretório de onde os comandos ou as ações serão realizadas durante a construação da imagem, para maior clareza e confibialidade, sempre devo usar caminhos absolutos para o WORKDIR
+
+ARG
+
+Define uma variável que os usuários podem passar no tempo de compilação para o construtor com o comando de compilação docker usando o sinalizador --build-arg =
+
+STOPSIGNAL
+
+Define o sinal de chamada do sistema que será enviado para o container para sair. Este sinal pode ser um numero assinado que coincide com uma posicao na tabela syscall do kernel, por exemplo, 9 ou um nome de sinal no formato SIGNAME, por exemplo SIGKILL.
+
+HEALTHCHECK
+
+A instrução HEALTHCHECK diz ao docker como testar um container para verificar se ele ainda está funcionando. Isso pode detectar casos como um servidor web que está preso em um loop infinito e incapaz de lidar com novas conexões, mesmo que o processo do servidor ainda esteja em execução.
+
+SHELL 
+
+Serve para definir ou mudar no caso o SHELL padrão para a execução dos comandos, no linux o padrão é o ["/bin/sh", "-c"]
+-----------------------------------------------------------------------------------------------------
+Subir uma imagem pro dockerhub
+
+sudo docker tag image_name username/repository_name:tag
+sudo docker tag friendlytest matheus/starting:part1
+sudo docker image ls
+
+Publishing the image 
+
+sudo docker push username/repository:tag
+sudo docker push matheusjose75/starting:part1
+
+Pull and run the image 
+
+sudo docker run -p 4000:80 username/repository:tag
+sudo docker run -p 4000:80 matheusjose75/starting:part1
+
+sudo docker container rm <hash>        # Remove specified container from this machine
+sudo docker container rm $(docker container ls -a -q)         # Remove all containers
+sudo docker container kill <hash>         # Force shutdown of the specified container
+
+Run my new load-balanced app
+
+before running docker stack deploy i need to run the following:
+
+docker swarm init
+
+------------------------------------------------------------------------------------------------------
+construir uma aplicacao que comunica dois containers, um wordpress e um mysql através de um apache
+
+
+
+----------------------------------------------------------------------------------------------
+Docker-machine
+
+sudo docker-machine create --driver virtualbox matheus_1
+for N in 1 2 3; do docker-machine create --driver virtualbox matheus-node-$N; done;
+eval $(docker-machine env matheus-node-1)
+
+sudo docker run -ti debian (testando uma distro)
+sudo docker ps
+sudo docker ps -a
+docker-machine ip matheus-node-$N
+docker-machine ssh matheus-node-$N
+docker-machine inspect matheus-node-$N
+docker-machine stop matheus-node-$N
+docker-machine ls
+docker-machine start matheus-node-$N
+docker-machine rm matheus-node-$N
+
+
+Docker-compose
+
+docker-compose scale db=N
+docker-compose scale web=N
+docker-compose scale "service"=N
+
+
+
+exemplo load balance 
+
+docker-machine create --driver virtualbox swarm-manager;
+docker-machine create --driver virtualbox swarm-worker1;
+docker-machine create --driver virtualbox swarm-worker2;
+
+
+docker-machine rm name_leadermanager
+
+
+
+docker-machine create --driver virtualbox swarm-manager
+docker-machine create --driver virtualbox swarm-worker1
+docker-machine create --driver virtualbox swarm-worker2
+
+manager:
+
+env |grep docker
+docker swarm init --listen-addr 192.168.99.103
+docker node ls
+
+----------------
+worker1:
+
+eval $(docker-machine env swarm-worker1)
+docker swarm join --token SWMTKN-1-2l4zj6t3t34rdjainbcmekhjajyk297aq9l5fmkzya3vtkf0yi-ept1o16vg99scybj1uiiixlyq 192.168.99.103:2377
+
+---------------
+worker2:
+
+docker-machine regenerate-certs swarm-worker2 (worker deu problema na localizacao do ip e rodei esse comando)
+eval $(docker-machine env swarm-worker2)
+docker swarm join --token SWMTKN-1-2l4zj6t3t34rdjainbcmekhjajyk297aq9l5fmkzya3vtkf0yi-ept1o16vg99scybj1uiiixlyq 192.168.99.103:2377
+eval $(docker-machine env swarm-manager)
+docker node ls
+
+
+criando services:
+
+eval $(docker-machine env swarm-manager)
+docker service create --network ingress --name mysql --env MYSQL_ROOT_PASSWORD=wordpress --env MYSQL_DATABASE=wordpress --env MYSQL_USER=wordpress --env MYSQL_PASSWORD=wordpress mysql:5.7  
+
+mysql:5.7 é a imagem do docker hub
+(ingress é a rede default do swarm e já vem com overlay, para manter a comunicação entre os containers)
+
+docker service create --network ingress --name wordpress --env WORDPRESS_DB_HOST=mysql:3306 --env WORDPRESS_DB_PASSWORD=wordpress --publish 8000:80 wordpress:latest
+---------------------------------------------------------------------------------
+Working:
+
+(creating my own standard ingress overlay): ingress wasnt working by default
+docker network create -d overlay my_overlay
+docker network create -d overlay --attachable my_atta_overlay 
+
+docker service create --network my_overlay --name mysql --env MYSQL_ROOT_PASSWORD=wordpress --env MYSQL_DATABASE=wordpress --env MYSQL_USER=wordpress --env MYSQL_PASSWORD=wordpress mysql:5.7
+
+docker service create --network my_overlay --name wordpress --env WORDPRESS_DB_HOST=mysql:3306 --env WORDPRESS_DB_PASSWORD=wordpress --publish 8000:80 wordpress:latest
+
+https://docs.docker.com/network/overlay/#encrypt-traffic-on-an-overlay-network
+---------------------------------------------------------------------------------
+Stack deploying:
+
+docker swarm init --advertise-addr ip_manager
+docker stack deploy --compose-file docker-compose.yml wordpress
+docker service ls
+docker network ls
+docker volume ls
+docker stack ps vote
+docker service inspect result
+docker ps
+docker machine ls   ->  192.168.99.103
+
+http://192.168.99.103:8080/
+http://192.168.99.103:5000/
+http://192.168.99.103:5001/
+
+docker stack ls -- this command find my stack's name
+docker stack rm vote
+
+Subindo novamente com mais replicas, usando scale
+
+docker stack deploy --compose-file docker-compose.yml wordpress
+docker service scale vote_vote=3
+docker service scale vote_result=3
+docker service scale vote_worker=3
+
+
+
+
+
+

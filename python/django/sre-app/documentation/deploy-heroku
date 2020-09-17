@@ -1,0 +1,185 @@
+sudo docker-compose exec web python manage.py makemigrations
+sudo docker-compose exec web python manage.py migrate
+sudo docker-compose exec web python manage.py createsuperuser
+
+sudo docker-compose exec web python3 manage.py inspectdb > models.py --> import data base script
+
+put 'django_userforeignkey' inside installed apps
+from django_userforeignkey.models.fields import UserForeignKey inside models.py
+defines class in admin.py
+
+
+pip install Pillow - biblioteca de manipulacao de imagens
+
+python3 -m venv venv --without-pip -> creating venv without pip
+sudo pip install django
+
+preparando para deploy no heroku
+
+cd pasta_projeto
+git init
+consigo migrar um projeto para o outro
+
+#https://simpleisbetterthancomplex.com/tutorial/2016/07/26/how-to-reset-migrations.html
+sudo docker-compose exec web python manage.py migrate --fake clients zero
+sudo docker-compose exec web python manage.py makemigrations
+sudo docker-compose exec web python manage.py migrate
+
+
+sudo docker-compose exec web python manage.py startapp home
+
+Deploying app to heroku
+
+create venv
+install django
+create django project
+git init
+git add .
+git commit -m "first commit"
+
+sudo pip install python-decouple
+create .env file
+
+retiro a secret key e o debug=true do setting no django e coloco no .env
+add ao setting do django:
+from decouple import config
+SECRET_KEY = config('SECRET_KEY')
+DEBUG = config('DEBUG', default=False, cast=bool)
+
+configuring data base
+
+pip install dj-database-url
+
+
+version: 
+setting.py: from dj_database_url import parse as dburl
+
+default_dburl = 'sqlite://' + os.path.join(BASE_DIR, 'db.sqlite3')
+DATABASES = { 'default': config('DATABASE_URL', default=default_dburl,cast=bool),}
+
+jogo meu banco pro .env
+
+static files
+
+pip install dj-static
+
+wsgi
+from dj_static import Cling
+application = Cling(get_wsgi_application())
+
+setting.py
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+create a requirements-dev.txt
+
+sudo pip install psycopg2
+pip freeze > requirements-dev.txt
+
+create a requirements.txt and add things
+
+create a file Procfile and add: web: gunicorn website.wsgi --log-file -
+
+create the app in heroku
+
+install heroku cli
+heroku apps:create app-name
+https://gestao-clients2.herokuapp.com/
+https://git.heroku.com/gestao-clients2.git
+https://sre-app.herokuapp.com/
+https://git.heroku.com/sre-app.git
+
+setting the allowed hosts
+ALLOWED_HOSTS = ['gestao-clients2.herokuapp.com/']
+
+sending configs
+heroku plugins:install heroku-config
+heroku config:push
+heroku config
+
+git add .
+git commit -m "comment"
+git push heroku 	master --force
+
+heroku run python3 manage.py migrate
+heroku run python3 manage.py createsuperuser
+heroku config:set DEBUG=False
+
+git push heroku master 
+
+
+
+
+
+class Evento(models.Model):
+    nome_evento = models.CharField(max_length=100, blank=True, null=True)
+    criador_evento = models.CharField(max_length=100, blank=True, null=True)
+    custos_evento = models.FloatField(blank=True, null=True)
+    duracao_evento = models.TimeField(blank=True, null=True)
+    data_evento = models.DateField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'Evento'
+
+class Usuariotarefa(models.Model):
+    id_usuariotarefa = models.AutoField(primary_key=True)
+    #id_user = models.ForeignKey(Usuario, models.DO_NOTHING, db_column='id_user', blank=True, null=True)
+    id_task = models.ForeignKey(Tarefa, models.DO_NOTHING, db_column='id_task', blank=True, null=True)
+    #usuario = UserForeignKey(auto_user_add=True)
+
+
+    class Meta:
+        managed = False
+        db_table = 'UsuarioTarefa'     
+
+
+
+class EventoForm(ModelForm):
+    class Meta:
+        model = Evento
+        fields = ['nome_evento','criador_evento','custos_evento','duracao_evento','data_evento']
+
+class Tarefa(models.Model):
+    #id_task = models.AutoField(primary_key=True)
+    nome_task = models.CharField(max_length=100, blank=True, null=True)
+    duracao_task = models.TimeField(blank=True, null=True)
+    data_task = models.DateField(blank=True, null=True)
+    custo_task = models.FloatField(blank=True, null=True)
+
+    class Meta:
+        #managed = False
+        db_table = 'Tarefa'
+
+class Evento(models.Model):
+    id_evento = models.AutoField(primary_key=True)
+    id_task = models.ForeignKey('Tarefa', models.DO_NOTHING, db_column='id_task', blank=True, null=True)
+    nome_evento = models.CharField(max_length=100, blank=True, null=True)
+    criador_evento = models.CharField(max_length=100, blank=True, null=True)
+    custos_evento = models.FloatField(blank=True, null=True)
+    duracao_evento = models.TimeField(blank=True, null=True)
+    data_evento = models.DateField(blank=True, null=True)
+
+    class Meta:
+        #managed = False
+        db_table = 'Evento'
+
+class Usuariotarefa(models.Model):
+    id_usuariotarefa = models.AutoField(primary_key=True)
+    #id_user = models.ForeignKey(Usuario, models.DO_NOTHING, db_column='id_user', blank=True, null=True)
+    id_task = models.ForeignKey(Tarefa, models.DO_NOTHING, db_column='id_task', blank=True, null=True)
+    #usuario = UserForeignKey(auto_user_add=True)
+
+
+    class Meta:
+        #managed = False
+        db_table = 'UsuarioTarefa'   
+
+
+sudo python3 manage.py migrate clients
+sudo python3 manage.py showmigrations
+sudo python3 manage.py migrate
+
+  
+error noReverseMatch : href="{% url 'eliminar_factura' 1 %}"> --> basta adicionar um valor apos a url. isso para quando eu passar um id que nao existe, dããr...
+

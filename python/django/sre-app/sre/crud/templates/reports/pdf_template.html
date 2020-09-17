@@ -1,0 +1,175 @@
+<html>
+<head>
+  <title>Relatorio</title>
+  <style>
+   table {
+        border-collapse: collapse;
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 20px;
+        font-size: 10px;
+    }
+
+    table, td, tr {
+        border: 1px solid black;
+    }
+    @page {
+      size: letter landscape;
+      margin: 2cm;
+    }
+    p{
+      font-size: 10px;
+    }
+  </style>
+</head>
+  <body>
+  {% load static %}
+    <table>
+      <tr>
+        <td>NOME</td>
+        <td>CIDADE</td>
+        <td>HOSPITAL</td>
+        <td>CAFE DA MANHA</td>
+        <td>ALMOÇO</td>
+        <td>CAFE DA TARDE</td>
+        <td>JANTA</td>
+        <td>BANHO</td>
+        <td>HOSPEDAGEM</td>
+        <td>ENTRADA</td>
+        <td>SAIDA</td>
+      </tr>
+      {% for item in obj %}
+      <tr>
+        <td>
+          {% if item.paciente == NONE %}
+            
+          {% else %}
+            {{item.paciente}}
+          {% endif %}
+        </td>
+        <td>
+          {% if item.paciente.cidade == NONE %}
+            
+          {% else %}
+            {{item.paciente.cidade}}
+          {% endif %}
+        </td>
+        <td>
+          {% if item.hospital == NONE %}
+            
+          {% else %}
+            {{item.hospital}}
+          {% endif %}
+        </td>
+        <td>
+          {% if item.cafe_manha == False %}
+            NÃO
+          {% else %}
+            SIM
+          {% endif %}
+        </td>
+        <td>
+          {% if item.almoco == False %}
+            NÃO
+          {% else %}
+            SIM
+          {% endif %}
+        </td>
+        <td>
+          {% if item.cafe_tarde == False %}
+            NÃO
+          {% else %}
+            SIM
+          {% endif %}
+        </td>
+        <td>
+          {% if item.janta == False %}
+            NÃO
+          {% else %}
+            SIM
+          {% endif %}
+        </td>
+        <td>
+          {% if item.banho == False %}
+            NÃO
+          {% else %}
+            SIM
+          {% endif %}
+        </td>
+        <td>
+          {% if item.hospedagem == False %}
+            NÃO
+          {% else %}
+            SIM
+          {% endif %}
+        </td>
+        <td>{{ item.inclusao }}</td>
+        <td>
+          {% if item.saida == NONE %}
+            
+          {% else %}
+            item.saida
+          {% endif %}
+        </td>
+        </tr>
+      {% endfor %}
+    </table>
+    <table>
+      <tr>
+        <td>Total Pacientes</td>
+        <td>Total de Cafes da Manha</td>
+        <td>Total Almoços</td>
+        <td>Total de Cafes da Tarde</td>
+        <td>Total Jantas</td>
+        <td>Total de Banhos</td>
+        <td>Total de Pernoites</td>
+        <td>Total</td>
+      </tr>
+      <tr>
+        <td>{{ obj.count }}</td>
+        <td>
+          {% if censo.cafe_manha == NONE %}
+            0
+          {% else %}
+            {{ censo.cafe_manha }}
+          {% endif %}
+        </td>
+        <td>
+          {% if censo.almoco == NONE %}
+            0
+          {% else %}
+            {{ censo.almoco }}
+          {% endif %}
+        </td>
+        <td>
+          {% if censo.cafe_tarde == NONE %}
+            0
+          {% else %}
+            {{ censo.cafe_tarde }}
+          {% endif %}
+        </td>
+        <td>
+          {% if censo.janta == NONE %}
+            0
+          {% else %}
+            {{ censo.janta }}
+          {% endif %}
+        </td>
+        <td>
+          {% if censo.banho == NONE %}
+            0
+          {% else %}
+            {{ censo.banho }}
+          {% endif %}
+        </td>
+        <td>
+          {% if censo.hospedagem == NONE %}
+            0
+          {% else %}
+            {{ censo.hospedagem }}
+          {% endif %}
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

@@ -1,0 +1,30 @@
+  355  git init
+  356  git status
+  357  git remote add origin https://github.com/matheuscostazup/Kidding.git
+  358  git status
+  359  git add StatusFirstCommit
+  361  git add StatusFirstCommit 
+  362  git status
+  363  git commit -m "TrabalhandoCommits"
+  364  git push origin master 
+  365  history | grep git
+  366  git checkout Processing
+  367  git fetch 
+  368  git checkout Processing 
+  369  git add StatusFirstCommit 
+  370  git status
+  371  git commit -m "Segunda Etapa"
+  372  git status
+  374  git add StatusFirstCommit1 
+  375  git commit -m "Segunda Etapa"
+  376  git push origin Processing 
+  377  history | grep git
+
+Erro do unrelated histories
+
+git pull origin --allow-unrelated-histories
+
+git config --global user.email "mail"
+git pull origin branch (puxar arquivos atualizados do git)
+git push -u origin branch (levar arquivos pro git)
+git add . (add all files)

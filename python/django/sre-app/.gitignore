@@ -1,0 +1,7 @@
+*.idea
+*.mysql
+*pyc
+media
+data
+docker-compose.yml
+.env

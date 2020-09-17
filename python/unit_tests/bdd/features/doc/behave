@@ -1,0 +1,1 @@
+behave arq.feature --junit

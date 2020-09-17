@@ -1,0 +1,170 @@
+﻿Docker-swarm manual:
+
+Before we start a docker-swarm we need to create some virtual machines using docker-machine. That virtual machines are called nodes. And more, in this article we’ll deploy a WordPress application and make this communicate with a MySQL data base.
+
+So, the following commands gonna do this:
+
+$ docker-machine create --driver virtualbox swarm-manager;
+$ docker-machine create --driver virtualbox swarm-worker1;
+$ docker-machine create --driver virtualbox swarm-worker2;
+
+We use --driver because the system understand our virtual machines are drivers. 
+
+After creating the nodes, we need to initialize our leader node – manager.
+For this, we need to catch the manager’s ip. So, we do:
+
+$ docker-machine ls
+
+Then will appear the nodes we created when we initialized the article.
+
+Initializing the manager node:
+
+$ docker swarm init --advertise-addr ip_manager
+
+Moment we init a leader node, we receive a token. This token will be useful integrating the workers we created. Doing this, we’re creating an orchestration cluster.
+
+Further, doing this command we can see if our node were really initialized.
+
+$ docker node ls
+
+Now, with the join token, we can put our “son’s” node inside them “father’s”. Before that, eval is utilized for turns on the node: node’s activating. Look:
+
+$ eval $(docker-machine env swarm-worker1)
+	
+After node’s activated, we finally can put him inside the manager:
+
+Did you remember about the generated token? So, we’ll use this right now inside our node worker1.
+
+$ docker swarm join --token SWMTKN-1-2l4zj6t3t34rdjainbcmekhjajyk297aq9l5fmkzya3vtkf0yi-ept1o16vg99scybj1uiiixlyq 192.168.99.103:2377
+
+You must've received a message telling you about node was integrated to the leader’s node.
+
+Do the same in your worker2 node. 
+
+Move to inside him for his activate:
+
+$ eval $(docker-machine env swarm-worker2)
+
+Run the join command, the same used for make worker1 a manager’s son:
+
+$ docker swarm join --token SWMTKN-1-2l4zj6t3t34rdjainbcmekhjajyk297aq9l5fmkzya3vtkf0yi-ept1o16vg99scybj1uiiixlyq 192.168.99.103:2377
+
+You know, if you’ve already a cluster running before, but your node’s cluster were stopped, maybe you cannot see his ip. Unless you regenerate the node, you’ll have no way to do an “eval” command on him, because he’s not available. So, there’s a solution, as always. We just need to run this:
+
+$ docker-machine regenerate-certs node_name
+
+After this, your node is again already to working on a service. It’s cool, isn’t it?
+
+If your intention is take knowledge, it’s interesting run this swarm application by the command line. But, why am I saying this? Because I was in trouble before doing this in a docker-compose file. Mainly with the network connection. You’ll understand it by the next lines. 
+
+When we started the swarm, was generated a token. But, more than this, was generate a default network too. This network is called ingress and we can see this typing:
+
+$ docker network ls
+
+This network has a special thing: the overlay. 
+
+Overlay is used to communicate our containers’ networking.
+
+Did you remember about the trouble I said? I solved this creating my own overlay-default networking:
+
+$ docker network create -d overlay my_own_overlay
+
+After this, we finally can initialize the service’s containers.
+
+Creating the data base container:
+
+$ docker service create --network my_own_overlay --name mysql --env MYSQL_ROOT_PASSWORD=wordpress --env MYSQL_DATABASE=wordpress --env MYSQL_USER=wordpress --env MYSQL_PASSWORD=wordpress mysql:5.7
+
+WordPress container:
+
+$ docker service create --network my_overlay --name wordpress --env WORDPRESS_DB_HOST=mysql:3306 --env WORDPRESS_DB_PASSWORD=wordpress --publish 8000:80 wordpress:latest	
+
+We’re specifying the local variables, ports for connect the application and, for last but not less important, the image we wanna pull from docker-hub.
+
+Now we created our cluster and containers are running, so we see can see this by doing the command:
+
+$ docker service ls
+
+Looking all this phases, do you agree it’s boring running this commands all time you want initialize your swarm? Either me.  
+
+So, after we learned how to do a cluster, this turn is for simplify our life:
+Stack deploying our swarm:
+
+We’ll need the nodes to be initialized and swarm too. Then, create a file called compose. This moment, I suppose you know how to do this.
+
+Look in the bottom line how it looks like:
+
+docker-compose.yml – name’s file
+
+version: '3.3'
+
+networks:
+	my_overlay:
+	driver: overlay
+
+services: 
+	db:
+		image: mysql:5.7
+		environment:
+			MYSQL_ROOT_PASSWORD: somewordpress
+			MYSQL_DATABASE: wordpress
+			MYSQL_USER: wordpress
+			MYSQL_PASSWORD: wordpress
+		restart: always
+
+	wordpress:
+		image: wordpress:latest
+		depends_on:
+			- db
+		links:
+			- db 
+		ports:
+			- "8000:80"
+		environment:
+			WORDPRESS_DB_HOST: db:3306
+			WORDPRESS_DB_USER: wordpress
+			WORDPRESS_DB_PASSWORD: wordpress
+		restart: always
+
+	visualizer:
+		image: dockersamples/visualizer:stable
+		ports:
+			- "8080:8080"
+		stop_grace_period: 1m30s
+		volumes:
+			- "/var/run/docker.sock:/var/run/docker.sock"
+		deploy:
+			placement:
+				constraints: [node.role == manager]
+
+
+I just added visualizer to know how our containers are being distributed.
+
+And now we can execute the stack deploy’s command:
+
+$ docker stack deploy --compose-file=docker-compose.yml wordpress
+$ docker service ls
+
+If you want add more containers – replicas – you can scale a service:
+
+$ docker service scale wordpress_db=3
+$ docker service scale wordpress_wordpress=4   
+
+Seeing the containers running:
+
+$ docker stack ps wordpress
+
+Getting more service container info:
+
+$ docker service inspect wordpress_wordpress
+
+What is happening inside the container’s running?
+
+$ docker service logs wordpress_wordpress
+
+And, for finalize this tutorial, we’ll remove the stack, so just:
+
+$ docker stack ls
+$ docker stack rm service_name
+
+Hope you enjoyed it and wish all the best! See you soon.

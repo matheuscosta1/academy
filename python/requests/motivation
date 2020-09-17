@@ -1,0 +1,18 @@
+Sempre que o nosso navegador se comunica com um servidor web a comunicação é feita utilizando o protocolo http que funciona em uma estrutura request-response e requisições são feitas usando verbos e as respostas são respondidas por códigos
+
+VERBOS:
+
+GET Pede um recurso ao servidor
+HEAD obtem somente o cabeçalho do recurso (metadados)
+POST envia dados para o servidor
+PUT cria ou edita algum recurso
+DELETE solicita a remoção de um recurso
+
+Família de retorno  O que dizer?
+
+1xx                 Envia informações para o cliente de que sua requisição foi recebida e está sendo processada
+2xx                 Indica que a requisição do cliente foi bem sucedida
+3xx                 Informa que a ação adicional que deve ser tomada para completar a requisição
+4xx                 Avisa que o cliente fez uma requisição que não pode ser atendida
+5xx                 Ocorreu um erro no servidor ao cumprir uma requisição válida
+

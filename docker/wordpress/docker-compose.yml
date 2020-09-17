@@ -1,0 +1,42 @@
+version: '3.3'
+
+services:
+   db:
+     image: mysql:5.7
+     volumes:
+       - db_data:/var/lib/mysql
+     restart: always
+     ports: 
+       - 3306:3306
+     environment: 
+       MYSQL_ROOT_PASSWORD: somewordpress
+       MYSQL_DATABASE: wordpress 
+       MYSQL_USER: wordpress
+       MYSQL_PASSWORD: wordpress
+
+   wordpress:
+     depends_on:
+       - db
+     image: wordpress:latest
+     ports:
+       - "8000:80"
+     restart: always
+     environment:
+       WORDPRESS_DB_HOST: db:3306 #porta que bate na porta do mysql
+       WORDPRESS_DB_USER: wordpress
+       WORDPRESS_DB_PASSWORD: wordpress
+   app:
+     image: phpmyadmin/phpmyadmin:latest
+     links:
+       - db
+     ports:
+       - 80:80
+     environment:
+       - PMA_ARBITRARY=1
+
+
+volumes:
+    db_data:
+
+#command "sudo docker-compose down" preserves my database but shutdown the wordpress server
+#command "sudo docker-compose down --volumes" remove all containers, default network and wordpress database

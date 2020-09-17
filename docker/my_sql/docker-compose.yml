@@ -1,0 +1,16 @@
+version: '3.3'
+
+services:
+   db:
+     image: mysql:5.7
+     ports: 
+       - 3306:3306
+     environment:
+       MYSQL_ROOT_PASSWORD: matheus
+       MYSQL_DATABASE: crud2
+       MYSQL_USER: crud2
+       MYSQL_PASSWORD: crud2
+
+
+#command "sudo docker-compose down" preserves my database but shutdown the wordpress server
+#command "sudo docker-compose down --volumes" remove all containers, default network and wordpress database

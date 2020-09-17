@@ -1,0 +1,215 @@
+Método novo de estudo, Git:
+
+--------------------------------------------
+Erro do unrelated histories
+
+git pull origin --allow-unrelated-histories
+---------------------------------------------
+
+git init: cria um repo novo
+git clone /caminho do repositorio que criei e quero clonar
+git clone usuário@servidor:/caminho do repositorio que criei e quero clonar
+
+Existem três árvores mantidas pelo git. A Working Directory que contém arquivos vigentes. O Index que funciona como uma árvore temporária e a HEAD que aponta para o último commit que criei.
+
+Working Dir   Index   HEAD -> lastcommit
+
+Promover mudanças no Index:
+
+git add <arquivo>
+git add	*
+
+Para confirmar essas mudanças, devo fazer: git commit -m "changes's comments"
+Depois disso o arquivo é enviado para o HEAD, mas ainda não para o repo remoto.
+Agora as alterações estão no HEAD da cópia da área de trabalho local. 
+Para enviar as alterações para o repositório remoto eu devo fazer:
+
+git push origin BRANCH_NAME
+
+Caso eu não tenha clonado o meu repositório e eu quiser enviá-lo ao servidor remoto, devo fazer: 
+
+git remote add origin <servidor remoto>
+
+Ramificando:
+
+Branchs são utilizados para desenvolver funcionalidades isoladas. O branch master é o branch padrão quando crio um repo. Posso utilizar branches para desenvolver e depois mesclá-los (merge) ao branch master then conclusion.
+
+
+Criando um novo branc chamado "func_x". Consigo selecioná-lo utilizando
+Esse checkout me cria um branch e o coloca como ativo, segue:
+
+git checkout -b branch_name
+
+Remover um branch:
+
+git branc -d branch_name
+
+Um branch nao está disponível a outros enquanto eu não enviar o branch a um repositório remoto
+
+git push origin <branch_name>
+
+Checkout branch commands:
+
+    -q, --quiet           suppress progress reporting
+    -b <branch>           create and checkout a new branch
+    -B <branch>           create/reset and checkout a branch
+    -l                    create reflog for new branch
+    --detach              detach HEAD at named commit
+    -t, --track           set upstream info for new branch
+    --orphan <new-branch>
+                          new unparented branch
+    -2, --ours            checkout our version for unmerged files
+    -3, --theirs          checkout their version for unmerged files
+    -f, --force           force checkout (throw away local modifications)
+    -m, --merge           perform a 3-way merge with the new branch
+    --overwrite-ignore    update ignored files (default)
+    --conflict <style>    conflict style (merge or diff3)
+    -p, --patch           select hunks interactively
+    --ignore-skip-worktree-bits
+                          do not limit pathspecs to sparse entries only
+    --ignore-other-worktrees
+                          do not check if another worktree is holding the given ref
+    --recurse-submodules[=<checkout>]
+                          control recursive updating of submodules
+    --progress            force progress reporting
+
+BRANCH commands
+
+git branch -d to delete
+git branch -D to delete temporarily
+git branch -l to create1--reflog	
+git branch -f resete the branchname
+git branch -f move
+git branch -m to shortcut move--force
+git branch --color[=<when>] it makes a color to highlight current
+git branch --no-color it turns off branch colors
+git branch --column display branch listing in columns
+git branch -r list or delete a remote tracking
+git branch -a list both remote-tracking branches and local branches
+git branch --list display a branches' list
+
+Atualizar e mesclar:
+
+Para atualiozar o repo local com a mais nova versão: git pull
+
+Para fazer merge de um outro branch ao meu branch ativo, uso: git merge <branch>
+Nem sempre isso é possível e pode resultar em erro. Daí posso lidar com os conflitos editando manualmente os arquivos exibidos pelo git: git add <arquivo>
+
+Antes de fazer o merge das alterações eu posso pré visualizá-las usando:
+
+git diff <branch origem> <branch destino>
+
+
+
+---------------------------------------------------------------------------------------------------
+https://learngitbranching.js.org/
+
+Commits no git:
+
+* Um commit é, basicamente, um copy and paste. Ele registra uma "fotografia" de todos os arquivos no meu diretório.
+* O Git tem por objetivo manter os commits o mais leve possível. Ele pode comprimir um commit como um conjunto de mudanças
+entre uma versao do repo e a seguinte.
+* Os commits possuem ancestrais entre si para facilitar a visualização das histórias de um projeto.
+
+git commit cria um novo git e os aparelha com conceitos de hierarquia: pai e filho.
+
+Ramos no git:
+
+É mais fácil dividir a minha tarefa em ramos a ramos grandes.
+
+Lembremos sobre ramos: "Quero incluir o trabalho deste commit e de todos os seus ancestrais".
+
+git branch newImage nos dá uma ramificação para um determinado commit master
+git checkout newImage; git commit 
+
+Eu crio um branch. Após isso, se eu der um checkout e, ainda, der um git commit logo em seguida. O nó que será criado será 
+principal ao nó do que dei checkout. Exemplo: se eu der um checkout num branch chamado bugFix, após isso der um commit. O meu nó
+principal será o bugFix
+
+Branches e Merge
+
+Darei um merge entre ramos e commits
+
+git merge
+
+O merge cria um commit especial que possui dois pais únicos.
+Um commit com dois pais essencialmente signfica que quero incluir todo o trabalho de um determinado pai com o de outro pai,
+e o conjunto de todos os seus ancestrais.
+Para dar um merge eu coloco o commit que não está o asterisco
+
+Exemplo: git branch bugFix (ramo)
+  	 git checkout bugFix 
+	 git commit
+	 git checkout master
+         git commit
+         git merge master
+
+Para combinar o trabalho entre ramos também pode-se utilizar o rebase.
+O rebase pega um conjunto de commits, copia eles, e os coloca em outro lugar.
+O rebase é vantajoso para que possa ser criada uma sequência mais bonita de commits.
+O registro de commits (história de repo) ficará mais limpa do que quando utilizando merge. 
+
+Quando um ramo está ativo ele fica com um asterisco
+
+Na minha árvore, quando faço rebase para algum lugar, é copiado o meu commit que será movido, ele ficará mais "clarinho" enquanto
+é formada uma sequência mais linear para o lugar que eu gostaria de ir. Suponha: git rebase master.
+Ele pega o nosso nó ativo e o move para o lugar que eu gostaria.
+
+*Quando dou checkout o nó vira ativo
+
+Quando um nó ativo é um ancestral e quero fazer um rebase para um dado nó não ativo. Então o meu nó ativo
+é colocado na história do nó que eu gostaria de ir. No caso: Tenho um nó não ativo bugFix, quero mover um nó master que está ativo
+e colocá-lo linearmente ao meu bugFix. Então, ele ficará na história do meu bugFix.  
+
+Exemplo de rebase:
+
+git branch bugFix
+git checkout bugFix (virou ativo)
+git commit
+git checkout master (virou ativo)
+git commit
+git checkout bugFix (virou ativo)
+git rebase master
+
+Movendo-se no Git
+
+HEAD
+
+Primeiro temos que conversar sobre a "cabeça" ("HEAD"). HEAD é um nome simbólico para o commit atualmente ativo (que sofreu checkout por último) -- é essencialmente o commit sobre o qual você está trabalhando no momento.
+
+Soltar o HEAD significa anexá-lo a um commit em vez de anexá-lo a um ramo (branch)
+
+HEAD -> master -> C1
+git checkout C1 
+E o a HEAD passa a ser C1: HEAD -> C1
+
+Exemplo: git checkout C4 (a cabeça fica em um nó, não num branch)
+
+Referências relativas
+
+Quando eu estiver trabalhando com git, no mundo real, não terei as árvores de visualização. Daí, usarei git log para poder visualizar o meu git log para ver os hashes.
+
+Posso mover para cima um commit por vez com ^
+Posso mover para cima um número de vezes com ~<num>
+
+dizer master^ equivale a "o primeiro pai do master"
+dizer master^^ equivale a dizer o avô do master
+
+Isso facilita digitarmos o hash do commit (código de identificação do commit)
+
+Exemplo: tenho três commits: C1 -> C2 -> C3 (com um branch master). Quero tornar o C2 ativo. Basta fazer: master^
+Utilizando HEAD^ podemos viajar no tempo dos commits
+
+git checkout bugFix
+git checkout HEAD^
+
+Forçando os ramos
+
+Posso mover ramos de lugar. Posso redefinir diretamente o commit para o qual um ramo aponta com a opção -f
+
+git branch -f NOME_BRANCH HEAD~3 -- ele  move à força o ramo master 3 ancestrais acima do HEAD.
+
+RESUMÃO: git checkout NÓ ou BRANCH; git branch -f NOME HEAD~<num>
+
+Revertendo mudanças no GIT
+---------------------------------------------------------------------------------------------------
