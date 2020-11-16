@@ -2,7 +2,7 @@ package sensor;
 
 import java.util.concurrent.TimeUnit;
 
-public class NewTemperatureSensor {
+public class TemperatureSensor {
     public static void publish() {
         int max = 46;
         int min = 15;
