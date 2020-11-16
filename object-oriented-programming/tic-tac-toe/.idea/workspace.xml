@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="f8b52a26-7f4a-4a91-8a29-6ec26dfc0e63" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../factory/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../factory/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../factory/out/production/factory/META-INF/factory.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/domain/java/DevelopmentConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/domain/java/GameState.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/domain/java/GameStateRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/domain/java/TicTacToeClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TicTacToeClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/domain/java/TicTacToeServer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application-dev.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/TicTacToeClientTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/TicTacToeClientTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/TicTacToeServerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/TicTacToeServerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DevelopmentConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/GameState.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/GameStateRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/TicTacToeClient$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/TicTacToeClient$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/TicTacToeClient$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/TicTacToeClient$Square$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/TicTacToeClient$Square.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/TicTacToeClient.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/TicTacToeServer$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/TicTacToeServer$Player.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/TicTacToeServer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application-dev.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/Application.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/TicTacToeClientTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/TicTacToeServerTest.class" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="$APPLICATION_HOME_DIR$/plugins/maven/lib/maven3" />
+      </MavenGeneralSettings>
+    </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="jdkForImporter" value="1.8" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="MavenRunner">
+    <option name="jreName" value="11" />
+  </component>
+  <component name="ProjectId" id="1iD3F5XtN8xj2jPsOCvsAOBicWH" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java" />
+    <property name="project.structure.last.edited" value="SDKs" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.importing" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java" />
+      <recent name="$PROJECT_DIR$/src/main" />
+      <recent name="$PROJECT_DIR$/src/main/domain" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java" />
+      <recent name="$PROJECT_DIR$/src/test/java" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="TicTacToeServerTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="TicTacToeServerTest" />
+      <module name="tic-tac-toe" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.TicTacToeServerTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f8b52a26-7f4a-4a91-8a29-6ec26dfc0e63" name="Default Changelist" comment="" />
+      <created>1601428229106</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1601428229106</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="2613" y="289" width="524" height="509" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1601429073889">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2613" y="289" width="524" height="509" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/72.27.1848.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1601429073889" />
+    <state width="1874" height="284" key="GridCell.Tab.0.bottom" timestamp="1601429565812">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1874" height="284" key="GridCell.Tab.0.bottom/72.27.1848.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1601429565812" />
+    <state width="1874" height="284" key="GridCell.Tab.0.center" timestamp="1601429565812">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1874" height="284" key="GridCell.Tab.0.center/72.27.1848.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1601429565812" />
+    <state width="1874" height="284" key="GridCell.Tab.0.left" timestamp="1601429565811">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1874" height="284" key="GridCell.Tab.0.left/72.27.1848.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1601429565811" />
+    <state width="1874" height="284" key="GridCell.Tab.0.right" timestamp="1601429565812">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1874" height="284" key="GridCell.Tab.0.right/72.27.1848.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1601429565812" />
+    <state x="2369" y="175" width="1022" height="737" key="SettingsEditor" timestamp="1601429440448">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2369" y="175" width="1022" height="737" key="SettingsEditor/72.27.1848.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1601429440448" />
+  </component>
+</project>

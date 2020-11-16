@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href= "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+    <title>Document</title>
+</head>
+<header>
+    <h1>Laboratório de CSS</h1>
+    <meta name="description" content="Meu nome é Matheus"> 
+</header>
+<nav>
+    <ul class="nav">
+        <li><a href="curriculo.html">Currículo</a></li>
+        <li><a href="galeria.html">Galeria</a></li>
+        <li><a href="formulario.html">Oferta de Trabalho</a></li>
+    </ul>
+</nav>
+<main>
+    <body>
+        <form class="modify-input" action="action.php" method="get">
+            
+            <fieldset class="fieldset-top-width fieldset-bottom-width fieldset-right-width fieldset-left-width">
+                <legend>Dados Pessoais</legend>
+                <div>
+
+                    <label for="user">Nome</label><br>
+                    <input type="text" id="nome" name="nome" autofocus autocomplete="off" required>
+                    <span></span>
+                </div><br>
+                
+                <div>
+                    <label for="email">E-mail</label><br>
+                    <input type="email" id="email" name="email" required>
+                    <span></span>
+                </div><br>
+                
+                <div>
+                    <label for="idade">Idade</label><br>
+                    <input type="number" id="idade" name="idade" required>
+                    <span></span>
+                </div><br>
+                
+                <div>
+                    <label for="telefone">Telefone</label><br>
+                    <input type="tel" id="telefone" name="telefone" required>
+                    <span></span>
+                </div><br>
+
+                <label for="data">Data de nascimento</label><br>
+                <input type="date" id="data" oninput="dataResult.textContent=data.value">
+                <span id="dataResult"></span><br><br>
+
+                <div>
+                    <label for="sexo">Sexo</label><br>
+                    <input type="text" id="sexo" name="sexo">
+                    <span></span>
+                </div><br>
+
+                <div>
+                    <label for="estadocivil">Estado civil</label><br>
+                    <input type="text" id="estadocivil" name="estadocivil">
+                    <span></span>
+                </div>
+            </fieldset>
+
+            <fieldset class="fieldset-top-width fieldset-bottom-width fieldset-right-width fieldset-left-width">
+                <legend>Dados da empresa</legend>
+                <div>
+                    <label for="user">CNPJ:</label><br>
+                    <input type="text" id="cnpj" name="cnpj">
+                    <span></span>
+                </div><br>
+                
+                <div>
+                    <label for="razaosocial">Razão Social</label><br>
+                    <input type="text" id="razaosocial" name="razaosocial">
+                    <span></span>
+                </div><br>
+
+                <div>
+                    <label for="ramo">Ramo de atuação</label><br>
+                    <input type="text" id="ramo" name="ramo">
+                    <span></span>
+                </div>
+            </fieldset>
+
+            <fieldset class="fieldset-top-width fieldset-bottom-width fieldset-right-width fieldset-left-width">
+                <legend>Endereço</legend>
+                <div>
+                    <label for="cep">CEP:</label><br>
+                    <input type="text" id="cep" name="cep" required>
+                    <span></span>
+                </div><br>
+
+                <div>
+                    <label for="logradouro">Tipo de Logradouro</label><br>
+                    <select name="logradouro" id="logradouro" required>
+                        <option value="rua">Rua</option>
+                        <option value="avenida">Avenida</option>
+                        <option value="praça">Praça</option>
+                    </select>
+                </div><br>
+
+                <div>
+                    <label for="logradouro">Logradouro:</label><br>
+                    <input type="text" id="cep" name="logradouro" required>
+                    <span></span>
+                </div><br>
+
+                <div>
+                    <label for="cidade">Cidade:</label><br>
+                    <input type="text" id="cidade" name="cidade" required>
+                    <span></span>
+                </div><br>
+
+                <div>
+                    <label for="estado">Estado:</label><br>
+                    <input type="text" id="estado" name="estado" required>
+                    <span></span>
+                </div>
+
+            </fieldset>
+            
+            <fieldset class="fieldset-top-width fieldset-bottom-width fieldset-right-width fieldset-left-width">
+                <legend>Motivo do Interesse</legend>
+                <div>
+                    <textarea name="descricao" id="descricao" cols="50" rows="30">Conte um pouco sobre a sua procura pela vaga</textarea>
+                </div>
+            </fieldset>
+
+            <fieldset class="fieldset-top-width fieldset-bottom-width fieldset-right-width fieldset-left-width">
+                <legend>Outro</legend>
+                <div>
+                    <input type="radio" id="frontend" name="frontend" value="frontend" checked>
+                    <label for="frontend">Frontend</label>
+                    <span></span>
+                </div>
+                <div>
+                    <input type="radio" id="backend" name="backend" value="backend">
+                    <label for="backend">Backend</label>
+                    <span></span>
+                </div> 
+                <div>
+                    <input type="radio" id="infraestrutura" nname="infraestrutura" value="infraestrutura">
+                    <label for="infraestrutura">Infraestrutura</label>
+                    <span></span>
+                </div> 
+
+                <div>
+                    <input type="checkbox" id="qa" name="profissao[]" value="qa" checked>
+                    <label for="qa">QA</label>
+                    <span></span>
+                </div>
+                <div>
+                    <input type="checkbox" id="suporte" name="profissao[]" value="suporte">
+                    <label for="suporte">Suporte</label>
+                    <span></span>
+                </div>
+                <div>
+                    <input type="checkbox" id="scrum" name="profissao[]" value="scrum">
+                    <label for="scrum">Scrum</label>
+                    <span></span>
+                </div>
+                <div>
+                    <input type="checkbox" id="ia" name="profissao[]" value="ia" checked>
+                    <label for="ia">Inteligência Artificial</label>
+                    <span></span>
+                </div>
+                
+            </fieldset>
+
+            <br> <button>Enviar</button>
+
+        </form>
+    </body>
+</main>
+<hr>
+<footer>Todos os direitos reservados</footer>
+</html>

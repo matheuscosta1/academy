@@ -1,7 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="88404ca2-a1fe-43f3-b9fc-9639079550ce" name="Default Changelist" comment="" />
+    <list default="true" id="88404ca2-a1fe-43f3-b9fc-9639079550ce" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/factory/META-INF/factory.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tic-tac-toe/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tic-tac-toe/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tic-tac-toe/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tic-tac-toe/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tic-tac-toe/docker-compose.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tic-tac-toe/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tic-tac-toe/src/main/domain/java/DevelopmentConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tic-tac-toe/src/main/domain/java/GameState.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tic-tac-toe/src/main/domain/java/GameStateRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tic-tac-toe/src/main/domain/java/TicTacToeClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/../tic-tac-toe/src/main/java/TicTacToeClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tic-tac-toe/src/main/domain/java/TicTacToeServer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tic-tac-toe/src/main/resources/application-dev.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tic-tac-toe/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tic-tac-toe/src/test/java/TicTacToeClientTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../tic-tac-toe/src/test/java/TicTacToeClientTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tic-tac-toe/src/test/java/TicTacToeServerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../tic-tac-toe/src/test/java/TicTacToeServerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tic-tac-toe/target/classes/DevelopmentConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tic-tac-toe/target/classes/GameState.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tic-tac-toe/target/classes/GameStateRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tic-tac-toe/target/classes/TicTacToeClient$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tic-tac-toe/target/classes/TicTacToeClient$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tic-tac-toe/target/classes/TicTacToeClient$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tic-tac-toe/target/classes/TicTacToeClient$Square$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tic-tac-toe/target/classes/TicTacToeClient$Square.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tic-tac-toe/target/classes/TicTacToeClient.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tic-tac-toe/target/classes/TicTacToeServer$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tic-tac-toe/target/classes/TicTacToeServer$Player.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tic-tac-toe/target/classes/TicTacToeServer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tic-tac-toe/target/classes/application-dev.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tic-tac-toe/target/classes/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tic-tac-toe/target/test-classes/Application.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tic-tac-toe/target/test-classes/TicTacToeClientTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tic-tac-toe/target/test-classes/TicTacToeServerTest.class" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,6 +66,9 @@
         <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
@@ -27,16 +83,17 @@
     </option>
   </component>
   <component name="ProjectId" id="1hTBaEVEj2i8fpGMikObR3N8GEe" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/abstractFactory/spaceInvaders" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../tic-tac-toe" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -55,7 +112,7 @@
       <recent name="$PROJECT_DIR$/src/abstractFactory/freezeMonster" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.SpaceInvadersGame">
+  <component name="RunManager" selected="Application.FreezeMonsterGame">
     <configuration name="FreezeMonsterGame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="abstractFactory.freezeMonster.FreezeMonsterGame" />
       <module name="factory" />
@@ -110,13 +167,14 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.SpaceInvadersGame" />
         <item itemvalue="Application.FreezeMonsterGame" />
+        <item itemvalue="Application.SpaceInvadersGame" />
         <item itemvalue="Application.JogoTenisMesa (1)" />
         <item itemvalue="Application.TenisMesaGame" />
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -134,6 +192,18 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
   <component name="WindowStateProjectService">
     <state x="67" y="91" width="800" height="677" key="#Project_Structure" timestamp="1600025651670">
       <screen x="67" y="27" width="1299" height="741" />
@@ -147,22 +217,30 @@
       <screen x="67" y="27" width="1299" height="741" />
     </state>
     <state x="378" y="27" width="657" height="741" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/67.27.1299.741@67.27.1299.741" timestamp="1600034632699" />
-    <state width="1253" height="195" key="GridCell.Tab.0.bottom" timestamp="1600036196649">
-      <screen x="67" y="27" width="1299" height="741" />
+    <state x="779" y="311" width="424" height="491" key="FileChooserDialogImpl" timestamp="1601428650834">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state x="779" y="311" width="424" height="491" key="FileChooserDialogImpl/72.27.1848.1053/1920.0.1920.1080@72.27.1848.1053" timestamp="1601428650834" />
+    <state width="1802" height="356" key="GridCell.Tab.0.bottom" timestamp="1601428861915">
+      <screen x="72" y="27" width="1848" height="1053" />
     </state>
     <state width="1253" height="195" key="GridCell.Tab.0.bottom/67.27.1299.741@67.27.1299.741" timestamp="1600036196649" />
-    <state width="1253" height="195" key="GridCell.Tab.0.center" timestamp="1600036196647">
-      <screen x="67" y="27" width="1299" height="741" />
+    <state width="1802" height="356" key="GridCell.Tab.0.bottom/72.27.1848.1053/1920.0.1920.1080@72.27.1848.1053" timestamp="1601428861915" />
+    <state width="1802" height="356" key="GridCell.Tab.0.center" timestamp="1601428861915">
+      <screen x="72" y="27" width="1848" height="1053" />
     </state>
     <state width="1253" height="195" key="GridCell.Tab.0.center/67.27.1299.741@67.27.1299.741" timestamp="1600036196647" />
-    <state width="1253" height="195" key="GridCell.Tab.0.left" timestamp="1600036196645">
-      <screen x="67" y="27" width="1299" height="741" />
+    <state width="1802" height="356" key="GridCell.Tab.0.center/72.27.1848.1053/1920.0.1920.1080@72.27.1848.1053" timestamp="1601428861915" />
+    <state width="1802" height="356" key="GridCell.Tab.0.left" timestamp="1601428861915">
+      <screen x="72" y="27" width="1848" height="1053" />
     </state>
     <state width="1253" height="195" key="GridCell.Tab.0.left/67.27.1299.741@67.27.1299.741" timestamp="1600036196645" />
-    <state width="1253" height="195" key="GridCell.Tab.0.right" timestamp="1600036196648">
-      <screen x="67" y="27" width="1299" height="741" />
+    <state width="1802" height="356" key="GridCell.Tab.0.left/72.27.1848.1053/1920.0.1920.1080@72.27.1848.1053" timestamp="1601428861915" />
+    <state width="1802" height="356" key="GridCell.Tab.0.right" timestamp="1601428861915">
+      <screen x="72" y="27" width="1848" height="1053" />
     </state>
     <state width="1253" height="195" key="GridCell.Tab.0.right/67.27.1299.741@67.27.1299.741" timestamp="1600036196648" />
+    <state width="1802" height="356" key="GridCell.Tab.0.right/72.27.1848.1053/1920.0.1920.1080@72.27.1848.1053" timestamp="1601428861915" />
     <state x="372" y="224" key="com.intellij.ide.util.TipDialog" timestamp="1600025270687">
       <screen x="67" y="27" width="1299" height="741" />
     </state>

@@ -1,0 +1,13 @@
+São conceitos inerentes a RPC
+
+IDL, stub, skeleton
+
+Em RPC, a transparência é a grande vantagem do uso de RPC, pois se pode escrever código distribuído "igual" ao centralizado, certo? Isto é, interface baseada em procedimentos e sem a necessidade de detalhar portas, sockets, e representação de dados. Ou seja, tudo é transparente!
+Em RPC, alguns fatores que atrapalham essa transparência são (assinale todas que julgar corretas):
+
+todas corretas
+
+Um grande vantagem do padrão publisher/subscriber é o desacoplamento entre as partes envolvidas, o qual ocorre em várias dimensões. Assinale a alternativa que melhor descreve o desacoplamento temporal.
+
+Tempo: publishers e subscribers não precisam nem estar em execução ao mesmo tempo.
+
