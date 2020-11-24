@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <main class="content">
+
+        <div>
+            <label for="interesse">Interesse:</label>
+            <input type="text" id="interesse" name="interesse">
+        </div>
+    
+        <ol>
+        </ol>
+
+    </main>
+    
+
+    <script>
+        window.onload = function () {
+            const campoInteresse = document.querySelector("#interesse");
+            campoInteresse.addEventListener("keyup", e => {
+                if (e.key === "Enter")
+                    adicionarInteresse();
+            }); // ao digitarmos algum item pra adicionar na lista, e clicarmos enter, então é chamado a função adicionarInteresse
+        }
+        function adicionarInteresse(){
+            const campoInteresse = document.querySelector("#interesse"); // pega o campo de interesse a partir do id da label
+            const listaInteresses = document.querySelector("ol"); // pega elementos da lista
+
+            const novoLi = document.createElement("li"); // cria elemento li
+            const novoSpan = document.createElement("span"); // cria elemento span
+            const novoButton = document.createElement("button"); // cria elemento botão
+            
+            novoSpan.textContent = campoInteresse.value; // atribui ao span o valor do campo de interesse
+            novoButton.textContent = '✖'; // atribui ao botão que adicionamos um botão para excluir
+
+            novoLi.appendChild(novoSpan); // adiciona na lista de spans um novo span
+            novoLi.appendChild(novoButton); // adiciona na lista de spans um novo botão
+            listaInteresses.appendChild(novoLi); // adiciona a lista de interesses o span e botão
+
+            novoButton.onclick = function(){
+                listaInteresses.removeChild(novoLi); // remove um span e botão
+            }
+
+            campoInteresse.value = ''; // coloca string vazia para o campo de interesse
+        }
+        
+    </script>
+
+    
+</body>
+</html>

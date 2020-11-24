@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <main>
+        <div>
+            <form name="formCadastro" action="action.ptp" method="post">
+
+                <div>
+                    <label for="usuario">Usuário:</label><br>
+                    <input class="modify-input" type="text" id="usuario" name="usuario" >
+                    <span></span>
+                </div><br>
+                <div>
+                    <label class="" for="senha">Senha:</label><br>
+                    <input class="modify-input" type="password" id="senha" name="senha">
+                    <span></span>
+                </div><br>
+                <div>
+                    <label class="" for="email">E-mail:</label><br>
+                    <input class="modify-input" type="email" id="email" name="email">
+                    <span></span>
+                </div><br>
+                <br><button>Cadastrar</button>
+
+            </form>
+        </div>
+    
+    <script>
+        window.onload = function () {
+            document.forms.formCadastro.onsubmit = validaForm; // chama função valida form ao enviar formulário
+        }
+
+        function validaForm(e){
+            let form = e.target; // começa texto do span com string vazia
+            let formValido = true; // formulario valido
+
+            const spanUsuario = form.usuario.nextElementSibling; // pega elemento span de usuario do formulario
+            const spanSenha = form.senha.nextElementSibling; // pega elemento span de senha do formulario
+            const spanEmail = form.email.nextElementSibling; // pega elemento span de email do formulario
+
+            spanUsuario.textContent = ""; // começa texto do span com string vazia
+            spanSenha.textContent = ""; // começa texto do span com string vazia
+            spanEmail.textContent = ""; // começa texto do span com string vazia
+            
+            if(form.usuario.value === ""){
+                spanUsuario.textContent = 'O usuário deve ser preenchido'; // envia mensagem de erro ao usuário dizendo que o campo é inválido
+                formValido = false; // diz que o formulário é inválido
+            }
+
+            if(form.senha.value === ""){
+                spanSenha.textContent = 'A senha deve ser preenchida'; // envia mensagem de erro ao usuário dizendo que o campo é inválido
+                formValido = false; // diz que o formulário é inválido
+            }
+
+            if(form.email.value === ""){
+                spanEmail.textContent = 'O e-mail deve ser preenchido'; // envia mensagem de erro ao usuário dizendo que o campo é inválido
+                formValido = false; // diz que o formulário é inválido
+            }
+
+            return formValido; // retorna o status do formulário, se é inválido ou não
+        }
+
+    </script>
+    </main>
+</body>
+</html>

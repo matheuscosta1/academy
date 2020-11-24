@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header>
+        <section>
+            <h1>Faculdade de Computação</h1>
+        </section>
+    </header>
+
+    <nav>
+        <section>
+            <ul>
+                <li><button>Ciência da Computação</button>|</li>
+                <li><button>Sistemas de Informação</button>|</li>
+                <li><button>Mestrado</button>|</li>
+                <li><button>Doutorado</button></li>
+            </ul>
+        </section>
+    </nav>
+
+    <main>
+        <div class="tabs">
+            <section>
+                <h2>Bacharelado em Ciência da Computação</h2>
+                <p> O curso de Bacharelado em Ciência da Computação é o marco inicial da Faculdade
+                    de Computação. Foi criado em 1988 e teve o seu reconhecimento em 11 de fevereiro
+                    de 1993 por meio da Portaria 181/93 do MEC. O Objetivo do Curso é formar profissionais
+                    da área de Informática com competência em desenvolvimento de software, atendendo
+                    adequadamente as exigências de mercado de trabalho, além de capacitar o egresso
+                    ao concluir com sucesso programas de pós-graduação.
+                </p>
+                <p>
+                    Os egressos do curso têm obtido grande êxito na realização profissional, destacando
+                    um considerável número de empresas pertencentes à ex-alunos do curso; um grande
+                    número de alunos que ingressam em consolidados cursos de pós graduação no país
+                    e exterior; atuação significativa de nossos ex-alunos em atividades de ensino e pesquisa
+                    em instituições de ensino de nível superior; e outros tantos que atuam em grandes empresas
+                    nacionais e multinacionais.
+                </p>
+            </section>
+
+            <section>
+                <h2>Bacharelado em Sistemas de Informação</h2>
+                <p> O curso de Bacharelado em Sistemas de Informação foi criado no ano de 2009 e teve o seu 
+                    reconhecimento em 31 de Maio de 2013 por meio da Portaria 248/13 do Ministério da Educação.
+                </p>
+                <p>
+                    O Objetivo do Curso é preparar profissionais com sólida e ampla fomração técnica na área
+                    de tecnologia da informação aplicada às organizações; desenvolver discentes empreendedores,
+                    capazes de projetar, implementar e gerenciar a infraestrutura de tecnologia da informação
+                    envolvendo computadores, comunicação e dados em sistemas organizacionais; consolidar um 
+                    profissional cidadão, com competências - conhecimentos, habilidades e atitudes - e com responsabilidade
+                    social, capaz de respeitar as diferenças individuais, saber produzir e usar a tecnologia em benefício
+                    da sociedade e com visão sistêmica de negócios.
+                </p>
+            </section>
+
+            <section>
+                <h2>Mestrado em Ciência Computação</h2>
+                <p> Nao boa apresenta emmudecer lhe arregalou soubesses. Escuro quanto bigode nao pao paulae valera que criada. 
+                    Mal cre postou encher ignota bolada bolota. Sagrados proferiu piedosas sentisse indicada lh no. 
+                    De disparou so so quizesse vantagem tu. Nobilitado deploravel se aconselhou ostentacao eu competente em. 
+                    Sei vejo mil alas irma digo olho guia. 
+
+                </p>
+                <p>
+                    Em para suas alem pola ouvi la. So convertido preconisam ar ma na movimentos imaginacao. So tido ca ha voce vejo 
+                    os. Concederam revestisse sympathico se sr. Cres elle onde iii foi tido pes. Grosso eu da centro va ar namoro. 
+                    Veras darei faria jorge tu va firme ja os. Louvacao piscando es decidida chegamos respeito do palavras. Acontece 
+                    de solteira ha em se ficticia transpol resoluto extirpar. 
+                </p>
+            </section>
+
+            <section>
+                <h2>Doutorado em Ciência da Computação</h2>
+                <p> Cabo meus vel teu peso teu cahe amor tel. Se postou miguel volver em medita alento caindo. De guiado os patria eu 
+                    plebeu passos talvez se. Labios crenca ve tomado do fructo. Sr estalos apanhar eu povoado no so durante podador 
+                    visivel. Manifestar beatrizita differente no ja tu importante irrequieto eu solucantes. Encontrar ha incumbira na do 
+                    distincta. 
+                </p>
+                <p>
+                    Eu as sympathico respeitosa satisfacao. Beatriz pae velludo patifes assobio fim faculta. Tu domestica desespero 
+                    proseguiu conquista ve. Dir estendida sou separarem commovido aproveita sae. Fez posse sao seita andar ficou viu 
+                    fundo teras. Sentiu ignota teu sentar comeca meu provar ira tomado bom. Affecto familia paredes teu seguida dao 
+                    revelar. 
+                </p>
+            </section>
+        <div>
+
+    </main>
+    
+
+    <script>
+        window.onload = function () {
+            buttons = document.querySelectorAll("nav button"); // pega todos os elementos nav buttons
+            for(let button of buttons){ // para cada elemento button
+                button.addEventListener("click", changeTab); // ao clicar em um botao, chama a função changeTab
+            }
+
+            openTab(0); // inicia a página inicial na seção de Ciencia da Computacao, cujo indice é o 0.
+        }
+        
+        function changeTab(e) {
+            const botaoAcionado = e.target; // pega elementos target do botão acionado
+            const liDoBotao = botaoAcionado.parentNode; // pega elemento li do botão
+            const nodes = Array.from(liDoBotao.parentNode.children); // pega todos os índices de botões
+            const index = nodes.indexOf(liDoBotao); // pega apenas o índice do botão que clicamos
+            openTab(index); // chama função openTab com o índice do botão que clicamos
+        }
+
+        function openTab(index){
+            const tabActive = document.querySelector(".tabActive"); // pega elementos da aba ativa
+            if(tabActive !== null ){ // verifica se o a aba está ativa
+                tabActive.className = "" //diz que a aba nao estará mais ativa
+            }
+
+            const buttonActive = document.querySelector(".buttonActive");
+            if(buttonActive !== null ){ // verifica se a o botão está ativo
+                buttonActive.className = ""//diz que o botão não será mais ativo
+            }
+
+            document.querySelectorAll(".tabs section")[index].className = "tabActive"; // mostra texto da seção do indice especifico na aba que clicamos
+            document.querySelectorAll("nav button")[index].className = "buttonActive"; // mostra o botão que clicamos como ativo
+        }
+
+    </script>
+
+    
+</body>
+</html>
