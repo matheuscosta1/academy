@@ -9,11 +9,17 @@
 #include <pthread.h>
 #include <signal.h>
 
+//int pipe01[2], pipe02[2];
+
+int thread_id[1];
+
 struct shared_memory_f1 {
 	int vetor[10]; //f1
 	int pids[7]; //vetor de pids
 	int tamanho, controle; //tamanho de f1, controle da f1
 	sem_t mutex; //semáforo
+	int pipe01[2], pipe02[2];
+	int valor;
 };
 
 struct shared_memory_f2 {
@@ -25,7 +31,7 @@ struct shared_memory_f2 {
 
 int enfileira_f1();
 int desenfileira_f1();
-void consome_f1();
+void consome_f1_and_send_to_p5_via_pipe_01();
 void thread_init_f1();
 
 struct shared_memory_f1 *shared_memory_f1;
@@ -68,10 +74,9 @@ int enfileira_f1() {
 int enfileira_f2(int valor) {
 	if(shared_memory_f2->controle) {
 		sem_wait(&shared_memory_f2->mutex);
-		int valor = rand() % 1000 + 1;
 		int i;
 		if(shared_memory_f2->tamanho < 10 && shared_memory_f2->controle) {
-			printf("Processo de pid %d enfileirando em f2\n", getpid());
+			printf("Processo de pid %d enfileirando em f2 o valor: %d\n", getpid(), valor);
 			shared_memory_f2->vetor[shared_memory_f2->tamanho] = valor;
 			shared_memory_f2->tamanho++;
 			printf("Vetor em %d: {", getpid());
@@ -80,8 +85,8 @@ int enfileira_f2(int valor) {
 				if(i != shared_memory_f2->tamanho - 1) printf(", ");
 			}
 			printf("}\n");
+			printf("Tamanho da fila de F2 %d", shared_memory_f2->tamanho);
 			sem_post(&shared_memory_f2->mutex);
-			desenfileira_f2();
 			return 1;
 		} else if ((shared_memory_f2->tamanho == 10 && shared_memory_f2->controle) || (shared_memory_f2->tamanho > 0 && !shared_memory_f2->controle)) {
 			printf("Processo %d solicitando a fila esvaziar: %d\n", getpid(), shared_memory_f2->tamanho);
@@ -143,27 +148,53 @@ int desenfileira_f2() {
 	return -1;
 }
 
-void consome_f1() {
-	int i;
+void consome_f1_and_send_to_p5_via_pipe_01() {
+    int valor;
+    int i;
 
-    int contador = 0;
-
-	for (i = 0; i < 5; i++) {
+    for(i = 0; i < 2; i++) {
 		sem_wait(&shared_memory_f1->mutex);
-		int valor = desenfileira_f1();
-		enfileira_f2(valor);
-		sem_post(&shared_memory_f1->mutex);
-		sleep(1);
+        shared_memory_f1->valor = desenfileira_f1();
+        sem_post(&shared_memory_f1->mutex);
+        printf("Pthread id: %d", pthread_self());
+        write(shared_memory_f1->pipe01[1], &shared_memory_f1->valor, sizeof(int)*sizeof(shared_memory_f1->valor));
+        printf("\nValor do pipe %d\n", shared_memory_f1->valor);
+        signal(SIGUSR1, shared_memory_f1->pids[4]);
+        close(shared_memory_f1->pipe01[1]);
+
+        sleep(1);
 	}
-	shared_memory_f1->controle = 1;
+
+    shared_memory_f1->controle = 1;
+}
+
+void consome_f1_and_send_to_p6_via_pipe_02() {
+    int valor;
+    int i;
+
+    for(i = 0; i < 2; i++) {
+		sem_wait(&shared_memory_f1->mutex);
+        shared_memory_f1->valor = desenfileira_f1();
+        sem_post(&shared_memory_f1->mutex);
+        printf("Pthread id: %d", pthread_self());
+        write(shared_memory_f1->pipe02[1], &shared_memory_f1->valor, sizeof(int)*sizeof(shared_memory_f1->valor));
+        printf("\nValor do pipe %d\n", shared_memory_f1->valor);
+        signal(SIGUSR1, shared_memory_f1->pids[5]);
+        close(shared_memory_f1->pipe02[1]);
+
+        sleep(1);
+	}
+
+    shared_memory_f1->controle = 1;
 }
 
 void thread_init_f1() {
-	int i;
 	pthread_t threads[2];
-	for (i = 0; i < 2; i++) {
-		pthread_create(&threads[i], NULL, (void*) consome_f1, NULL);
-	}
+    int i;
+
+	pthread_create(&threads[0], NULL, (void*) consome_f1_and_send_to_p5_via_pipe_01, NULL);
+	pthread_create(&threads[1], NULL, (void*) consome_f1_and_send_to_p6_via_pipe_02, NULL);
+
 	for(i = 0; i < 2; i++) {
 		pthread_join(threads[i], NULL);
 	}
@@ -171,13 +202,16 @@ void thread_init_f1() {
 
 void consome_f2() {
 	int i;
+    for(i = 0; i < 2; i++) {
+        printf("Requisição para verificar se tem valor para desenfileirar");
+        sem_wait(&shared_memory_f2->mutex);
+        int valor = desenfileira_f2();
+        printf("%d", valor);
+        sem_post(&shared_memory_f2->mutex);
+        sleep(1);
+    }
 
-    sem_wait(&shared_memory_f2->mutex);
-    desenfileira_f2();
-    sem_post(&shared_memory_f2->mutex);
-    sleep(1);
-
-	shared_memory_f1->controle = 1;
+	shared_memory_f2->controle = 1;
 }
 
 void thread_init_f2() {
@@ -185,6 +219,7 @@ void thread_init_f2() {
 	pthread_t threads[3];
 	for (i = 0; i < 3; i++) {
 		pthread_create(&threads[i], NULL, (void*) consome_f2, NULL);
+		printf("Threads ********");
 	}
 	for(i = 0; i < 3; i++) {
 		pthread_join(threads[i], NULL);
@@ -196,7 +231,7 @@ int main() {
 	int i, segment_id_f1, segment_size_f1 = sizeof(struct shared_memory_f1*);
 	int segment_id_f2, segment_size_f2 = sizeof(struct shared_memory_f2*);
 	pid_t pai = getpid();
-	int canal[2];
+	int valor;
 
 
 	//iniciando memória compartilhada
@@ -216,6 +251,10 @@ int main() {
 	sem_init(&shared_memory_f1->mutex, 1, 1); //endereço do semaforo, 0- compartilhado entre threads e 1 - compartilhado entre processos, valor inicial do semáforo
     sem_init(&shared_memory_f2->mutex, 1, 1);
 
+    if ( pipe(shared_memory_f1->pipe01) == -1 ){ printf("Erro pipe()"); return -1; }
+    if ( pipe(shared_memory_f1->pipe02) == -1 ){ printf("Erro pipe()"); return -1; }
+
+
 	int random;
 
 	pid_t pids[7] = {-1};
@@ -230,6 +269,7 @@ int main() {
 	if(getpid() == pai) {
 		for(i = 0; i < 7; i++) {
 			shared_memory_f1->pids[i] = pids[i];
+			printf("PIDS: %d", shared_memory_f1->pids[i]);
 		}
 		printf("Vetor de pids: {");
 		for(i = 0; i < 7; i++) {
@@ -260,11 +300,30 @@ int main() {
 			signal(SIGUSR1, thread_init_f1);
 		}
 	} else if(pids[4] == 0) { //p5
+        printf("\nEnviou sinal para P5\n");
+        read(shared_memory_f1->pipe01[0],&shared_memory_f1->valor,sizeof(int)*sizeof(shared_memory_f1->valor));
+        enfileira_f2(shared_memory_f1->valor);
+        close(shared_memory_f1->pipe01[0]);
+        //enfileira_f2(valor);
+        printf("\nValor do pipe %d\n", shared_memory_f1->valor);
 
+        /**for(;;) {
+			printf("PID do processo P5: %d\n\n\n\n", getpid());
+            read(shared_memory_f1->pipe01[0],&valor,sizeof(int)*sizeof(valor));
+            close(shared_memory_f1->pipe01[0]);
+            signal(SIGUSR1, enfileira_f2(valor));
+            printf("Valor recebido pelo pipe %d", valor);
+		}**/
 	} else if(pids[5] == 0) { //p6
-
+        printf("\nEnviou sinal para P6\n");
+        read(shared_memory_f1->pipe02[0],&shared_memory_f1->valor,sizeof(int)*sizeof(shared_memory_f1->valor));
+        enfileira_f2(shared_memory_f1->valor);
+        close(shared_memory_f1->pipe02[0]);
+        //enfileira_f2(valor);
+        printf("\nValor do pipe %d\n", shared_memory_f1->valor);
 	} else if(pids[6] == 0) { //p7
         for(;;) {
+            //printf("PID do processo P7: %d\n\n\n\n", getpid());
 			signal(SIGUSR1, thread_init_f2);
 		}
 	}
