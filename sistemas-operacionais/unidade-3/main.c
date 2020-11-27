@@ -9,59 +9,60 @@
 #include <pthread.h>
 #include <signal.h>
 
+#define QUANTIDADE_EXECUCAO 10000
+
 int thread_id[1];
 
-struct shared_memory_f1 {
-	int vetor[10]; //f1
-	int pids[7]; //vetor de pids
-	int tamanho, controle; //tamanho de f1, controle da f1
-	sem_t mutex; //semáforo
+int contador_p5, contador_p6, contador_total;
+
+clock_t tempo_inicial;
+
+struct shared_memory_fila_01 {
+	int valoresFila[10];
+	int pids[7];
+	int pai;
+	int tamanho, controle;
+	sem_t mutex;
 	int pipe01[2], pipe02[2];
 	int valor;
+	int contador_p5, contador_p6;
 };
 
-struct shared_memory_f2 {
-	int vetor[10]; //f1
-	int pids[7]; //vetor de pids
-	int tamanho, controle; //tamanho de f1, controle da f1
-	sem_t mutex; //semáforo
+struct shared_memory_fila_02 {
+	int vetor[10];
+	int pids[7];
+	int tamanho, controle;
+	int contador_total;
+	int vetorValores[QUANTIDADE_EXECUCAO];
+	int tamanhoVetor;
 };
 
-int enfileira_f1();
-int desenfileira_f1();
-void consome_f1_and_send_to_p5_via_pipe_01();
+int enfileira_fila_01();
+void consome_fila_01_e_envia_para_p5_via_pipe_01();
 void thread_init_f1();
 
-struct shared_memory_f1 *shared_memory_f1;
-struct shared_memory_f2 *shared_memory_f2;
+struct shared_memory_fila_01 *shared_memory_fila_01;
+struct shared_memory_fila_02 *shared_memory_fila_02;
 
 
-int enfileira_f1() {
-	if(shared_memory_f1->controle) {
-		sem_wait(&shared_memory_f1->mutex);
-		int valor = rand() % 1000 + 1;
+int enfileira_fila_01() {
+	if(shared_memory_fila_01->controle) {
+		sem_wait(&shared_memory_fila_01->mutex);
+		int valor = rand() % 1000 +1;
 		int i;
-		if(shared_memory_f1->tamanho < 10 && shared_memory_f1->controle) {
-			printf("Processo de pid %d enfileirando em f1\n", getpid());
-			shared_memory_f1->vetor[shared_memory_f1->tamanho] = valor;
-			shared_memory_f1->tamanho++;
-			printf("Vetor em %d: {", getpid());
-			for(i = 0; i < shared_memory_f1->tamanho; i++) {
-				printf("[%d] = %d",i , shared_memory_f1->vetor[i]);
-				if(i != shared_memory_f1->tamanho - 1) printf(", ");
-			}
-			printf("}\n");
-			sem_post(&shared_memory_f1->mutex);
+		if(shared_memory_fila_01->tamanho < 10 && shared_memory_fila_01->controle) {
+			shared_memory_fila_01->valoresFila[shared_memory_fila_01->tamanho] = valor;
+			shared_memory_fila_01->tamanho++;
+			sem_post(&shared_memory_fila_01->mutex);
 			return 1;
-		} else if ((shared_memory_f1->tamanho == 10 && shared_memory_f1->controle) || (shared_memory_f1->tamanho > 0 && !shared_memory_f1->controle)) {
-			printf("Processo %d solicitando a fila esvaziar: %d\n", getpid(), shared_memory_f1->tamanho);
-			shared_memory_f1->controle = 0;
-			sem_post(&shared_memory_f1->mutex);
-			kill(shared_memory_f1->pids[3], SIGUSR1);
+		} else if ((shared_memory_fila_01->tamanho == 10 && shared_memory_fila_01->controle) || (shared_memory_fila_01->tamanho > 0 && !shared_memory_fila_01->controle)) {
+			shared_memory_fila_01->controle = 0;
+			sem_post(&shared_memory_fila_01->mutex);
+			kill(shared_memory_fila_01->pids[3], SIGUSR1);
 			return 0;
-		} else if (shared_memory_f1->tamanho == 0 && shared_memory_f1->controle){
-			shared_memory_f1->controle = 1;
-			sem_post(&shared_memory_f1->mutex);
+		} else if (shared_memory_fila_01->tamanho == 0 && shared_memory_fila_01->controle){
+			shared_memory_fila_01->controle = 1;
+			sem_post(&shared_memory_fila_01->mutex);
 			return 1;
 		}
 	}  else {
@@ -69,33 +70,20 @@ int enfileira_f1() {
 	}
 }
 
-int enfileira_f2(int valor) {
-	if(shared_memory_f2->controle) {
-		sem_wait(&shared_memory_f2->mutex);
+int enfileira_fila_02(int valor) {
+	if(shared_memory_fila_02->controle) {
 		int i;
-		if(shared_memory_f2->tamanho < 10 && shared_memory_f2->controle) {
-			printf("Processo de pid %d enfileirando em f2 o valor: %d\n", getpid(), valor);
-			shared_memory_f2->vetor[shared_memory_f2->tamanho] = valor;
-			shared_memory_f2->tamanho++;
-			printf("Vetor em %d: {", getpid());
-			for(i = 0; i < shared_memory_f2->tamanho; i++) {
-				printf("[%d] = %d",i , shared_memory_f2->vetor[i]);
-				if(i != shared_memory_f2->tamanho - 1) printf(", ");
-			}
-			printf("}\n");
-			printf("Tamanho da fila de F2 %d", shared_memory_f2->tamanho);
-			kill(shared_memory_f1->pids[6], SIGUSR1);
-			sem_post(&shared_memory_f2->mutex);
+		if(shared_memory_fila_02->tamanho < 10 && shared_memory_fila_02->controle) {
+			shared_memory_fila_02->vetor[shared_memory_fila_02->tamanho] = valor;
+			shared_memory_fila_02->tamanho++;
+			signal(shared_memory_fila_01->pids[6], SIGUSR1);
 			return 1;
-		} else if ((shared_memory_f2->tamanho == 10 && shared_memory_f2->controle) || (shared_memory_f2->tamanho > 0 && !shared_memory_f2->controle)) {
-			printf("Processo %d solicitando a fila esvaziar: %d\n", getpid(), shared_memory_f2->tamanho);
-			shared_memory_f2->controle = 0;
-			sem_post(&shared_memory_f2->mutex);
-			kill(shared_memory_f1->pids[6], SIGUSR1);
+		} else if ((shared_memory_fila_02->tamanho == 10 && shared_memory_fila_02->controle) || (shared_memory_fila_02->tamanho > 0 && !shared_memory_fila_02->controle)) {
+			shared_memory_fila_02->controle = 0;
+			kill(shared_memory_fila_01->pids[6], SIGUSR1);
 			return 0;
-		} else if (shared_memory_f2->tamanho == 0 && shared_memory_f2->controle){
-			shared_memory_f2->controle = 1;
-			sem_post(&shared_memory_f2->mutex);
+		} else if (shared_memory_fila_02->tamanho == 0 && shared_memory_fila_02->controle){
+			shared_memory_fila_02->controle = 1;
 			return 1;
 		}
 	}  else {
@@ -103,97 +91,103 @@ int enfileira_f2(int valor) {
 	}
 }
 
-int desenfileira_f1() {
+int desenfileira_fila_01() {
 	int i, valor;
-	if(shared_memory_f1->tamanho > 0) {
-		printf("Processo de pid %d desenfileirando em f1, tamanho da fila: %d\n", getpid(), shared_memory_f1->tamanho);
-		valor = shared_memory_f1->vetor[0];
-		printf("Removendo o valor %d da fila\n", valor);
-		shared_memory_f1->tamanho --;
-		for(i = 0; i < shared_memory_f1->tamanho; i++) {
-			shared_memory_f1->vetor[i] = shared_memory_f1->vetor[i+1];
+	if(shared_memory_fila_01->tamanho > 0) {
+
+		valor = shared_memory_fila_01->valoresFila[0];
+
+		shared_memory_fila_01->tamanho --;
+
+		for(i = 0; i < shared_memory_fila_01->tamanho; i++) {
+			shared_memory_fila_01->valoresFila[i] = shared_memory_fila_01->valoresFila[i+1];
 		}
 
-		printf("Vetor em %d: {", getpid());
-		for(i = 0; i < shared_memory_f1->tamanho; i++) {
-			printf("[%d] = %d",i , shared_memory_f1->vetor[i]);
-			if(i == shared_memory_f1->tamanho - 2) printf(", ");
-		}
-		printf("}\n");
 		return valor;
 	}
 	return -1;
 }
 
-int desenfileira_f2() {
-	int i, valor;
-	if(shared_memory_f2->tamanho > 0) {
-		printf("Processo de pid %d desenfileirando em f2, tamanho da fila: %d\n", getpid(), shared_memory_f2->tamanho);
-		valor = shared_memory_f2->vetor[0];
-		printf("Removendo o valor %d da fila\n", valor);
-		shared_memory_f2->tamanho --;
-		for(i = 0; i < shared_memory_f2->tamanho; i++) {
-			shared_memory_f2->vetor[i] = shared_memory_f2->vetor[i+1];
+int desenfileira_fila_02() {
+	int i, valor, contador=0;
+	if(shared_memory_fila_02->tamanho > 0) {
+
+		valor = shared_memory_fila_02->vetor[0];
+
+		shared_memory_fila_02->tamanho --;
+
+		for(i = 0; i < shared_memory_fila_02->tamanho; i++) {
+			shared_memory_fila_02->vetor[i] = shared_memory_fila_02->vetor[i+1];
 		}
 
-		printf("Vetor em %d: {", getpid());
-		for(i = 0; i < shared_memory_f2->tamanho; i++) {
-			printf("[%d] = %d",i , shared_memory_f2->vetor[i]);
-			if(i == shared_memory_f2->tamanho - 2) printf(", ");
-		}
-		printf("}\n");
+
+        sem_wait(&shared_memory_fila_01->mutex);
+        shared_memory_fila_02->vetorValores[shared_memory_fila_02->tamanhoVetor] = valor;
+        shared_memory_fila_02->tamanhoVetor++;
+        sem_post(&shared_memory_fila_01->mutex);
+
+        printf("[Fila 2] O valor %d foi desenfileirado\n", valor);
+        if(shared_memory_fila_02->tamanhoVetor == QUANTIDADE_EXECUCAO){
+            clock_t tempo_final = clock();
+            double tempo_gasto = (double)(tempo_final - tempo_inicial) / CLOCKS_PER_SEC;
+            printf("\nO tempo total de execucao, eh: %f.", tempo_gasto);
+            printf("\n\nO valor total de processamento de P5, eh: %d eh P6: %d.\n", shared_memory_fila_01->contador_p5, shared_memory_fila_01->contador_p6);
+            calcula_valor_maximo_e_valor_minimo(shared_memory_fila_02->vetorValores);
+            calcula_moda(shared_memory_fila_02->vetorValores);
+            kill(0, SIGTERM);
+        }
+
 		return valor;
 	}
 	return -1;
 }
 
-void consome_f1_and_send_to_p5_via_pipe_01() {
+void consome_fila_01_e_envia_para_p5_via_pipe_01() {
     int valor;
     int i;
 
     for(i = 0; i < 2; i++) {
-		sem_wait(&shared_memory_f1->mutex);
-        shared_memory_f1->valor = desenfileira_f1();
-        sem_post(&shared_memory_f1->mutex);
-        printf("Pthread id: %d", pthread_self());
-        write(shared_memory_f1->pipe01[1], &shared_memory_f1->valor, sizeof(int)*sizeof(shared_memory_f1->valor));
-        printf("\nValor do pipe %d\n", shared_memory_f1->valor);
-        printf("PID do Filho 5: %d\n", shared_memory_f1->pids[4]);
-        kill(shared_memory_f1->pids[4], SIGUSR1);
-        close(shared_memory_f1->pipe01[1]);
+		sem_wait(&shared_memory_fila_01->mutex);
+        shared_memory_fila_01->valor = desenfileira_fila_01();
+        sem_post(&shared_memory_fila_01->mutex);
+        write(shared_memory_fila_01->pipe01[1], &shared_memory_fila_01->valor, sizeof(int)*sizeof(shared_memory_fila_01->valor));
+        sem_wait(&shared_memory_fila_01->mutex);
+        kill(shared_memory_fila_01->pids[4], SIGUSR1);
+        sem_post(&shared_memory_fila_01->mutex);
+        close(shared_memory_fila_01->pipe01[1]);
 
         sleep(1);
 	}
 
-    shared_memory_f1->controle = 1;
+    shared_memory_fila_01->controle = 1;
 }
 
-void consome_f1_and_send_to_p6_via_pipe_02() {
+void consome_fila_01_e_envia_para_p6_via_pipe_02() {
     int valor;
     int i;
 
     for(i = 0; i < 2; i++) {
-		sem_wait(&shared_memory_f1->mutex);
-        shared_memory_f1->valor = desenfileira_f1();
-        sem_post(&shared_memory_f1->mutex);
-        write(shared_memory_f1->pipe02[1], &shared_memory_f1->valor, sizeof(int)*sizeof(shared_memory_f1->valor));
-        printf("\nValor do pipe %d\n", shared_memory_f1->valor);
-        printf("\nPID do Filho 6: %d\n", shared_memory_f1->pids[5]);
-        kill(shared_memory_f1->pids[5], SIGUSR1);
-        close(shared_memory_f1->pipe02[1]);
+		sem_wait(&shared_memory_fila_01->mutex);
+        shared_memory_fila_01->valor = desenfileira_fila_01();
+        sem_post(&shared_memory_fila_01->mutex);
+        write(shared_memory_fila_01->pipe02[1], &shared_memory_fila_01->valor, sizeof(int)*sizeof(shared_memory_fila_01->valor));
+        sem_wait(&shared_memory_fila_01->mutex);
+        kill(shared_memory_fila_01->pids[5], SIGUSR1);
+        sem_post(&shared_memory_fila_01->mutex);
+        close(shared_memory_fila_01->pipe02[1]);
 
         sleep(1);
 	}
 
-    shared_memory_f1->controle = 1;
+    shared_memory_fila_01->controle = 1;
 }
 
 void thread_init_f1() {
 	pthread_t threads[2];
     int i;
 
-	pthread_create(&threads[0], NULL, (void*) consome_f1_and_send_to_p5_via_pipe_01, NULL);
-	pthread_create(&threads[1], NULL, (void*) consome_f1_and_send_to_p6_via_pipe_02, NULL);
+	pthread_create(&threads[0], NULL, (void*) consome_fila_01_e_envia_para_p5_via_pipe_01, NULL);
+	pthread_create(&threads[1], NULL, (void*) consome_fila_01_e_envia_para_p6_via_pipe_02, NULL);
 
 	for(i = 0; i < 2; i++) {
 		pthread_join(threads[i], NULL);
@@ -201,15 +195,10 @@ void thread_init_f1() {
 }
 
 void consome_f2() {
-	int i;
-    for(i = 0; i < 2; i++) {
-        sem_wait(&shared_memory_f2->mutex);
-        int valor = desenfileira_f2();
-        sem_post(&shared_memory_f2->mutex);
-        sleep(1);
-    }
 
-	shared_memory_f2->controle = 1;
+    desenfileira_fila_02();
+
+	shared_memory_fila_02->controle = 1;
 }
 
 void thread_init_f2() {
@@ -224,50 +213,98 @@ void thread_init_f2() {
 }
 
 void p5_process(){
-    printf("\nEnviou sinal para P5\n");
-    read(shared_memory_f1->pipe01[0],&shared_memory_f1->valor,sizeof(int)*sizeof(shared_memory_f1->valor));
-    enfileira_f2(shared_memory_f1->valor);
-    close(shared_memory_f1->pipe01[0]);
-    printf("\nValor do pipe %d\n", shared_memory_f1->valor);
+    read(shared_memory_fila_01->pipe01[0],&shared_memory_fila_01->valor,sizeof(int)*sizeof(shared_memory_fila_01->valor));
+    shared_memory_fila_01->contador_p5++;
+    enfileira_fila_02(shared_memory_fila_01->valor);
+    close(shared_memory_fila_01->pipe01[0]);
 }
 
 
 void p6_process(){
-    printf("\nEnviou sinal para P6\n");
-    read(shared_memory_f1->pipe02[0],&shared_memory_f1->valor,sizeof(int)*sizeof(shared_memory_f1->valor));
-    enfileira_f2(shared_memory_f1->valor);
-    close(shared_memory_f1->pipe02[0]);
-    printf("\nValor do pipe %d\n", shared_memory_f1->valor);
+    read(shared_memory_fila_01->pipe02[0],&shared_memory_fila_01->valor,sizeof(int)*sizeof(shared_memory_fila_01->valor));
+    shared_memory_fila_01->contador_p6++;
+    enfileira_fila_02(shared_memory_fila_01->valor);
+    close(shared_memory_fila_01->pipe02[0]);
 }
 
+void calcula_moda(float vetor[]){
+	int tamanho = shared_memory_fila_02->tamanhoVetor;
+	int iterador_1, iterador_2, contador[tamanho];
+	float conta, moda;
+
+
+	for(iterador_1=0; iterador_1 < tamanho; iterador_1++){
+        for(iterador_2 = iterador_1+1; iterador_2 < tamanho; iterador_2++){
+
+
+			if(shared_memory_fila_02->vetorValores[iterador_1] == shared_memory_fila_02->vetorValores[iterador_2]){
+				contador[iterador_1]++;
+					if(contador[iterador_1] > conta){
+						conta = contador[iterador_1];
+						moda = shared_memory_fila_02->vetorValores[iterador_1];
+					}
+			}
+
+        }
+        contador[iterador_1] = 0;
+    }
+    if(conta == 0){
+    	printf("\nNao existe moda.\n");
+	}
+	else{
+		printf("\nA moda eh: %.0f.\n", moda);
+	}
+}
+
+void calcula_valor_maximo_e_valor_minimo(int *vetor){
+    int maximo, minimo;
+    int tamanho = QUANTIDADE_EXECUCAO;
+
+    for(int iterator=0; iterator < tamanho; iterator++){
+        if (iterator == 0)
+            maximo = minimo = shared_memory_fila_02->vetorValores[iterator];
+        else {
+            if (shared_memory_fila_02->vetorValores[iterator] > maximo) maximo = shared_memory_fila_02->vetorValores[iterator];
+            if (shared_memory_fila_02->vetorValores[iterator] < minimo) minimo = shared_memory_fila_02->vetorValores[iterator];
+        }
+    }
+
+    printf("O valor maximo eh: %d e o valor minimo eh: %d.", maximo, minimo);
+
+}
+
+
 int main() {
+    tempo_inicial = clock();
 	int status;
-	int i, segment_id_f1, segment_size_f1 = sizeof(struct shared_memory_f1*);
-	int segment_id_f2, segment_size_f2 = sizeof(struct shared_memory_f2*);
+	int i, segment_id_f1, segment_size_f1 = sizeof(struct shared_memory_fila_01*);
+	int segment_id_f2, segment_size_f2 = sizeof(struct shared_memory_fila_02*);
 	pid_t pai = getpid();
 	int valor;
 
 
-	//iniciando memória compartilhada
-	segment_id_f1 = shmget(IPC_PRIVATE, segment_size_f1, IPC_CREAT | 0666); //
-	shared_memory_f1 = (struct shared_memory_f1*) shmat(segment_id_f1, 0, 0);
+	segment_id_f1 = shmget(IPC_PRIVATE, segment_size_f1*QUANTIDADE_EXECUCAO, IPC_CREAT | 0666); //
+	shared_memory_fila_01 = (struct shared_memory_fila_01*) shmat(segment_id_f1, 0, 0);
 	shmctl(segment_id_f1, IPC_STAT, NULL);
-	shared_memory_f1->tamanho = 0; //tamanho f1
-	shared_memory_f1->controle = 1; //define a fila como enchendo na inicialização
+	shared_memory_fila_01->tamanho = 0;
+	shared_memory_fila_01->controle = 1;
 
-	segment_id_f2 = shmget(IPC_PRIVATE, segment_size_f2, IPC_CREAT | 0666); //
-	shared_memory_f2 = (struct shared_memory_f2*) shmat(segment_id_f2, 0, 0);
+	segment_id_f2 = shmget(IPC_PRIVATE, segment_size_f2*QUANTIDADE_EXECUCAO, IPC_CREAT | 0666); //
+	shared_memory_fila_02 = (struct shared_memory_fila_02*) shmat(segment_id_f2, 0, 0);
 	shmctl(segment_id_f2, IPC_STAT, NULL);
-	shared_memory_f2->tamanho = 0; //tamanho f2
-	shared_memory_f2->controle = 1; //define a fila como enchendo na inicialização
+	shared_memory_fila_02->tamanho = 0;
+	shared_memory_fila_02->controle = 1;
+    shared_memory_fila_02->tamanhoVetor = 0;
 
 	//semáforo
-	sem_init(&shared_memory_f1->mutex, 1, 1); //endereço do semaforo, 0- compartilhado entre threads e 1 - compartilhado entre processos, valor inicial do semáforo
-    sem_init(&shared_memory_f2->mutex, 1, 1);
+	sem_init(&shared_memory_fila_01->mutex, 1, 1);
 
-    if ( pipe(shared_memory_f1->pipe01) == -1 ){ printf("Erro pipe()"); return -1; }
-    if ( pipe(shared_memory_f1->pipe02) == -1 ){ printf("Erro pipe()"); return -1; }
+    if ( pipe(shared_memory_fila_01->pipe01) == -1 ){ printf("Erro pipe()"); return -1; }
+    if ( pipe(shared_memory_fila_01->pipe02) == -1 ){ printf("Erro pipe()"); return -1; }
 
+    shared_memory_fila_01->contador_p5 = 0;
+    shared_memory_fila_01->contador_p6 = 0;
+    shared_memory_fila_02->contador_total = 0;
 
 	int random;
 
@@ -282,65 +319,64 @@ int main() {
 
 	if(getpid() == pai) {
 		for(i = 0; i < 7; i++) {
-			shared_memory_f1->pids[i] = pids[i];
-			printf("PIDS: %d", shared_memory_f1->pids[i]);
+			shared_memory_fila_01->pids[i] = pids[i];
+			printf("PIDS: %d", shared_memory_fila_01->pids[i]);
 		}
 		printf("Vetor de pids: {");
 		for(i = 0; i < 7; i++) {
-			printf("%d", shared_memory_f1->pids[i]);
+			printf("%d", shared_memory_fila_01->pids[i]);
 			if (i != 6) printf(", ");
 		}
 		printf("}\n");
-	} else if(pids[0] == 0) { //p1
+	} else if(pids[0] == 0) {
 		srand(1234);
 		for(;;) {
-			enfileira_f1();
+			enfileira_fila_01();
 			sleep(1);
 		}
-	} else if(pids[1] == 0) { //p2
+	} else if(pids[1] == 0) {
 		srand(4321);
  		for(;;) {
-			enfileira_f1();
+			enfileira_fila_01();
 			sleep(1);
 		}
- 	} else if(pids[2] == 0) { //p3
+ 	} else if(pids[2] == 0) {
  		srand(1423);
  		for(;;) {
-			enfileira_f1();
+			enfileira_fila_01();
 			sleep(1);
 		}
-	} else if(pids[3] == 0) { //p4
+	} else if(pids[3] == 0) {
 		for(;;) {
 			signal(SIGUSR1, thread_init_f1);
 			sleep(1);
 		}
-	} else if(pids[4] == 0) { //p5
+	} else if(pids[4] == 0) {
         for(;;){
             signal(SIGUSR1, p5_process);
-            sleep(1);
         }
-	} else if(pids[5] == 0) { //p6
+
+	} else if(pids[5] == 0) {
         for(;;){
             signal(SIGUSR1, p6_process);
-            sleep(1);
         }
-	} else if(pids[6] == 0) { //p7
+	} else if(pids[6] == 0) {
         for(;;) {
-			signal(SIGUSR1, thread_init_f2);
+			thread_init_f2();
 			sleep(1);
 		}
 	}
-	shmdt(shared_memory_f1);
-    shmdt(shared_memory_f2);
+
+	shmdt(shared_memory_fila_01);
+    shmdt(shared_memory_fila_02);
 	if(getpid() == pai) {
 		for(i = 0; i < 7; i++) {
 			wait(&status);
 		}
-		sem_destroy(&shared_memory_f1->mutex);
-		sem_destroy(&shared_memory_f2->mutex);
+		sem_destroy(&shared_memory_fila_01->mutex);
 		shmctl(segment_id_f1, IPC_RMID, 0);
 		shmctl(segment_id_f2, IPC_RMID, 0);
 	}
 
-	return 0;
+	exit(0);
 }
