@@ -18,12 +18,12 @@ int contador_p5, contador_p6, contador_total;
 clock_t tempo_inicial;
 
 struct shared_memory_fila_01 {
-	int valoresFila[10];
+	int valores_fila[10];
 	int pids[7];
 	int pai;
 	int tamanho, controle;
 	sem_t mutex;
-	int pipe01[2], pipe02[2];
+	int pipe_01[2], pipe_02[2];
 	int valor;
 	int contador_p5, contador_p6;
 };
@@ -33,7 +33,7 @@ struct shared_memory_fila_02 {
 	int pids[7];
 	int tamanho, controle;
 	int contador_total;
-	int vetorValores[QUANTIDADE_EXECUCAO];
+	int vetor_valores_desenfileirados[QUANTIDADE_EXECUCAO];
 	int tamanhoVetor;
 };
 
@@ -51,11 +51,12 @@ int enfileira_fila_01() {
 		int valor = rand() % 1000 +1;
 		int i;
 		if(shared_memory_fila_01->tamanho < 10 && shared_memory_fila_01->controle) {
-			shared_memory_fila_01->valoresFila[shared_memory_fila_01->tamanho] = valor;
+			shared_memory_fila_01->valores_fila[shared_memory_fila_01->tamanho] = valor;
 			shared_memory_fila_01->tamanho++;
 			sem_post(&shared_memory_fila_01->mutex);
 			return 1;
 		} else if ((shared_memory_fila_01->tamanho == 10 && shared_memory_fila_01->controle) || (shared_memory_fila_01->tamanho > 0 && !shared_memory_fila_01->controle)) {
+            printf("Processo %d solicitando a fila esvaziar: %d\n", getpid(), shared_memory_fila_01->tamanho);
 			shared_memory_fila_01->controle = 0;
 			sem_post(&shared_memory_fila_01->mutex);
 			kill(shared_memory_fila_01->pids[3], SIGUSR1);
@@ -79,6 +80,7 @@ int enfileira_fila_02(int valor) {
 			signal(shared_memory_fila_01->pids[6], SIGUSR1);
 			return 1;
 		} else if ((shared_memory_fila_02->tamanho == 10 && shared_memory_fila_02->controle) || (shared_memory_fila_02->tamanho > 0 && !shared_memory_fila_02->controle)) {
+            printf("Processo %d solicitando a fila 2 esvaziar: %d\n", getpid(), shared_memory_fila_02->tamanho);
 			shared_memory_fila_02->controle = 0;
 			kill(shared_memory_fila_01->pids[6], SIGUSR1);
 			return 0;
@@ -95,12 +97,12 @@ int desenfileira_fila_01() {
 	int i, valor;
 	if(shared_memory_fila_01->tamanho > 0) {
 
-		valor = shared_memory_fila_01->valoresFila[0];
+		valor = shared_memory_fila_01->valores_fila[0];
 
 		shared_memory_fila_01->tamanho --;
 
 		for(i = 0; i < shared_memory_fila_01->tamanho; i++) {
-			shared_memory_fila_01->valoresFila[i] = shared_memory_fila_01->valoresFila[i+1];
+			shared_memory_fila_01->valores_fila[i] = shared_memory_fila_01->valores_fila[i+1];
 		}
 
 		return valor;
@@ -120,20 +122,24 @@ int desenfileira_fila_02() {
 			shared_memory_fila_02->vetor[i] = shared_memory_fila_02->vetor[i+1];
 		}
 
+        for(i = 0; i < shared_memory_fila_02->tamanho; i++) {
+            printf("[%d] = %d",i , shared_memory_fila_02->vetor[i]);
+            if(i != shared_memory_fila_02->tamanho - 1) printf(", ");
+        }
+
 
         sem_wait(&shared_memory_fila_01->mutex);
-        shared_memory_fila_02->vetorValores[shared_memory_fila_02->tamanhoVetor] = valor;
+        shared_memory_fila_02->vetor_valores_desenfileirados[shared_memory_fila_02->tamanhoVetor] = valor;
         shared_memory_fila_02->tamanhoVetor++;
         sem_post(&shared_memory_fila_01->mutex);
-
-        printf("[Fila 2] O valor %d foi desenfileirado\n", valor);
+        printf("\n[Contador: %d]: [Fila 2] O valor %d foi desenfileirado\n", shared_memory_fila_02->tamanhoVetor, valor);
         if(shared_memory_fila_02->tamanhoVetor == QUANTIDADE_EXECUCAO){
             clock_t tempo_final = clock();
             double tempo_gasto = (double)(tempo_final - tempo_inicial) / CLOCKS_PER_SEC;
             printf("\nO tempo total de execucao, eh: %f.", tempo_gasto);
             printf("\n\nO valor total de processamento de P5, eh: %d eh P6: %d.\n", shared_memory_fila_01->contador_p5, shared_memory_fila_01->contador_p6);
-            calcula_valor_maximo_e_valor_minimo(shared_memory_fila_02->vetorValores);
-            calcula_moda(shared_memory_fila_02->vetorValores);
+            calcula_valor_maximo_e_valor_minimo(shared_memory_fila_02->vetor_valores_desenfileirados);
+            calcula_moda(shared_memory_fila_02->vetor_valores_desenfileirados);
             kill(0, SIGTERM);
         }
 
@@ -150,16 +156,11 @@ void consome_fila_01_e_envia_para_p5_via_pipe_01() {
 		sem_wait(&shared_memory_fila_01->mutex);
         shared_memory_fila_01->valor = desenfileira_fila_01();
         sem_post(&shared_memory_fila_01->mutex);
-        write(shared_memory_fila_01->pipe01[1], &shared_memory_fila_01->valor, sizeof(int)*sizeof(shared_memory_fila_01->valor));
-        sem_wait(&shared_memory_fila_01->mutex);
+        write(shared_memory_fila_01->pipe_01[1], &shared_memory_fila_01->valor, sizeof(int)*sizeof(shared_memory_fila_01->valor));
         kill(shared_memory_fila_01->pids[4], SIGUSR1);
-        sem_post(&shared_memory_fila_01->mutex);
-        close(shared_memory_fila_01->pipe01[1]);
-
         sleep(1);
+        shared_memory_fila_01->controle = 1;
 	}
-
-    shared_memory_fila_01->controle = 1;
 }
 
 void consome_fila_01_e_envia_para_p6_via_pipe_02() {
@@ -170,16 +171,11 @@ void consome_fila_01_e_envia_para_p6_via_pipe_02() {
 		sem_wait(&shared_memory_fila_01->mutex);
         shared_memory_fila_01->valor = desenfileira_fila_01();
         sem_post(&shared_memory_fila_01->mutex);
-        write(shared_memory_fila_01->pipe02[1], &shared_memory_fila_01->valor, sizeof(int)*sizeof(shared_memory_fila_01->valor));
-        sem_wait(&shared_memory_fila_01->mutex);
+        write(shared_memory_fila_01->pipe_02[1], &shared_memory_fila_01->valor, sizeof(int)*sizeof(shared_memory_fila_01->valor));
         kill(shared_memory_fila_01->pids[5], SIGUSR1);
-        sem_post(&shared_memory_fila_01->mutex);
-        close(shared_memory_fila_01->pipe02[1]);
-
         sleep(1);
+        shared_memory_fila_01->controle = 1;
 	}
-
-    shared_memory_fila_01->controle = 1;
 }
 
 void thread_init_f1() {
@@ -195,36 +191,37 @@ void thread_init_f1() {
 }
 
 void consome_f2() {
-
-    desenfileira_fila_02();
+    for(int i = 0; i < 3; i++) {
+        desenfileira_fila_02();
+        sleep(1);
+    }
 
 	shared_memory_fila_02->controle = 1;
 }
 
 void thread_init_f2() {
-	int i;
 	pthread_t threads[3];
-	for (i = 0; i < 3; i++) {
+	for(int i = 0; i < 3; i++) {
 		pthread_create(&threads[i], NULL, (void*) consome_f2, NULL);
 	}
-	for(i = 0; i < 3; i++) {
+	for(int i = 0; i < 3; i++) {
 		pthread_join(threads[i], NULL);
 	}
 }
 
 void p5_process(){
-    read(shared_memory_fila_01->pipe01[0],&shared_memory_fila_01->valor,sizeof(int)*sizeof(shared_memory_fila_01->valor));
+    read(shared_memory_fila_01->pipe_01[0],&shared_memory_fila_01->valor,sizeof(int)*sizeof(shared_memory_fila_01->valor));
     shared_memory_fila_01->contador_p5++;
     enfileira_fila_02(shared_memory_fila_01->valor);
-    close(shared_memory_fila_01->pipe01[0]);
+    close(shared_memory_fila_01->pipe_01[0]);
 }
 
 
 void p6_process(){
-    read(shared_memory_fila_01->pipe02[0],&shared_memory_fila_01->valor,sizeof(int)*sizeof(shared_memory_fila_01->valor));
+    read(shared_memory_fila_01->pipe_02[0],&shared_memory_fila_01->valor,sizeof(int)*sizeof(shared_memory_fila_01->valor));
     shared_memory_fila_01->contador_p6++;
     enfileira_fila_02(shared_memory_fila_01->valor);
-    close(shared_memory_fila_01->pipe02[0]);
+    close(shared_memory_fila_01->pipe_02[0]);
 }
 
 void calcula_moda(float vetor[]){
@@ -237,11 +234,11 @@ void calcula_moda(float vetor[]){
         for(iterador_2 = iterador_1+1; iterador_2 < tamanho; iterador_2++){
 
 
-			if(shared_memory_fila_02->vetorValores[iterador_1] == shared_memory_fila_02->vetorValores[iterador_2]){
+			if(shared_memory_fila_02->vetor_valores_desenfileirados[iterador_1] == shared_memory_fila_02->vetor_valores_desenfileirados[iterador_2]){
 				contador[iterador_1]++;
 					if(contador[iterador_1] > conta){
 						conta = contador[iterador_1];
-						moda = shared_memory_fila_02->vetorValores[iterador_1];
+						moda = shared_memory_fila_02->vetor_valores_desenfileirados[iterador_1];
 					}
 			}
 
@@ -262,10 +259,10 @@ void calcula_valor_maximo_e_valor_minimo(int *vetor){
 
     for(int iterator=0; iterator < tamanho; iterator++){
         if (iterator == 0)
-            maximo = minimo = shared_memory_fila_02->vetorValores[iterator];
+            maximo = minimo = shared_memory_fila_02->vetor_valores_desenfileirados[iterator];
         else {
-            if (shared_memory_fila_02->vetorValores[iterator] > maximo) maximo = shared_memory_fila_02->vetorValores[iterator];
-            if (shared_memory_fila_02->vetorValores[iterator] < minimo) minimo = shared_memory_fila_02->vetorValores[iterator];
+            if (shared_memory_fila_02->vetor_valores_desenfileirados[iterator] > maximo) maximo = shared_memory_fila_02->vetor_valores_desenfileirados[iterator];
+            if (shared_memory_fila_02->vetor_valores_desenfileirados[iterator] < minimo) minimo = shared_memory_fila_02->vetor_valores_desenfileirados[iterator];
         }
     }
 
@@ -299,8 +296,8 @@ int main() {
 	//semáforo
 	sem_init(&shared_memory_fila_01->mutex, 1, 1);
 
-    if ( pipe(shared_memory_fila_01->pipe01) == -1 ){ printf("Erro pipe()"); return -1; }
-    if ( pipe(shared_memory_fila_01->pipe02) == -1 ){ printf("Erro pipe()"); return -1; }
+    if ( pipe(shared_memory_fila_01->pipe_01) == -1 ){ printf("Erro pipe()"); return -1; }
+    if ( pipe(shared_memory_fila_01->pipe_02) == -1 ){ printf("Erro pipe()"); return -1; }
 
     shared_memory_fila_01->contador_p5 = 0;
     shared_memory_fila_01->contador_p6 = 0;
@@ -320,14 +317,7 @@ int main() {
 	if(getpid() == pai) {
 		for(i = 0; i < 7; i++) {
 			shared_memory_fila_01->pids[i] = pids[i];
-			printf("PIDS: %d", shared_memory_fila_01->pids[i]);
 		}
-		printf("Vetor de pids: {");
-		for(i = 0; i < 7; i++) {
-			printf("%d", shared_memory_fila_01->pids[i]);
-			if (i != 6) printf(", ");
-		}
-		printf("}\n");
 	} else if(pids[0] == 0) {
 		srand(1234);
 		for(;;) {
