@@ -26,7 +26,6 @@
 					</div>
 					<div class="col-sm-6">
 						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons"></i> <span>Add New User</span></a>
-						<a href="JavaScript:void(0);" class="btn btn-danger" id="delete_multiple"><i class="material-icons"></i> <span>Delete</span></a>						
 					</div>
                 </div>
             </div>
@@ -39,7 +38,7 @@
 								<label for="selectAll"></label>
 							</span>
 						</th>
-						<th>SL NO</th>
+						<th>Código</th>
                         <th>Nome</th>
                         <th>Email</th>
 						<th>Telefone</th>
@@ -54,48 +53,47 @@
 				<tbody>
 				
 				<?php
-				$connection = connect();
-				$result = mysqli_query($connection,"SELECT * FROM clinica.pessoa");
-					$i=1;
-					while($row = mysqli_fetch_array($result)) {
+					$connection = connect();
+					$result = $connection->prepare("SELECT * FROM clinica.pessoa");
+					$result->execute();
+					while($row = $result->fetch(PDO::FETCH_ASSOC)){	
 				?>
-				<tr id="<?php echo $row["codigo"]; ?>">
+				<tr id="<?php echo $row->codigo; ?>">
 				<td>
 							<span class="custom-checkbox">
-								<input type="checkbox" class="user_checkbox" data-user-id="<?php echo $row["codigo"]; ?>">
+								<input type="checkbox" class="user_checkbox" data-user-id="<?php echo $row['codigo']; ?>">
 								<label for="checkbox2"></label>
 							</span>
 						</td>
-					<td><?php echo $i; ?></td>
-					<td><?php echo $row["nome"]; ?></td>
-					<td><?php echo $row["email"]; ?></td>
-					<td><?php echo $row["telefone"]; ?></td>
-                    <td><?php echo $row["cep"]; ?></td>
-                    <td><?php echo $row["logradouro"]; ?></td>
-                    <td><?php echo $row["bairro"]; ?></td>
-                    <td><?php echo $row["cidade"]; ?></td>
-                    <td><?php echo $row["estado"]; ?></td>
+					<td><?php echo $row['codigo']; ?></td>
+					<td><?php echo $row['nome']; ?></td>
+					<td><?php echo $row['email']; ?></td>
+					<td><?php echo $row['telefone']; ?></td>
+                    <td><?php echo $row['cep']; ?></td>
+                    <td><?php echo $row['logradouro']; ?></td>
+                    <td><?php echo $row['bairro']; ?></td>
+                    <td><?php echo $row['cidade']; ?></td>
+                    <td><?php echo $row['estado']; ?></td>
 					<td>
 						<a href="#editEmployeeModal" class="edit" data-toggle="modal">
 							<i class="material-icons update" data-toggle="tooltip" 
-							data-codigo="<?php echo $row["codigo"]; ?>"
-							data-nome="<?php echo $row["nome"]; ?>"
-							data-email="<?php echo $row["email"]; ?>"
-							data-telefone="<?php echo $row["telefone"]; ?>"
-                            data-cep="<?php echo $row["cep"]; ?>"
-                            data-logradouro="<?php echo $row["logradouro"]; ?>"
-                            data-bairro="<?php echo $row["bairro"]; ?>"
-                            data-cidade="<?php echo $row["cidade"]; ?>"
-                            data-estado="<?php echo $row["estado"]; ?>"
+							data-codigo="<?php echo $row['codigo']; ?>"
+							data-nome="<?php echo $row['nome']; ?>"
+							data-email="<?php echo $row['email']; ?>"
+							data-telefone="<?php echo $row['telefone']; ?>"
+                            data-cep="<?php echo $row['cep']; ?>"
+                            data-logradouro="<?php echo $row['logradouro']; ?>"
+                            data-bairro="<?php echo $row['bairro']; ?>"
+                            data-cidade="<?php echo $row['cidade']; ?>"
+                            data-estado="<?php echo $row['estado']; ?>"
 							title="Edit"></i>
 						</a>
-						<a href="#deleteEmployeeModal" class="delete" data-codigo="<?php echo $row["codigo"]; ?>" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" 
+						<a href="#deleteEmployeeModal" class="delete" data-codigo="<?php echo $row['codigo']; ?>" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" 
 						 title="Delete"></i></a>
                     </td>
 				</tr>
 				<?php
-				$i++;
-				}
+			}
 				?>
 				</tbody>
 			</table>
@@ -112,10 +110,7 @@
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 					</div>
 					<div class="modal-body">
-						<div class="form-group">
-							<label>Código</label>
-							<input type="text" id="codigo" name="codigo" class="form-control" required>
-						</div>			
+
 						<div class="form-group">
 							<label>Nome</label>
 							<input type="text" id="nome" name="nome" class="form-control" required>
@@ -170,8 +165,8 @@
 					<div class="modal-body">
 						<div class="form-group">
 							<label>Código</label>
-							<input type="text" id="codigo_u" name="codigo" class="form-control" required>
-						</div>				
+							<input type="text" style="display:block" id="codigo_u" name="codigo" class="form-control" required readonly >
+						</div>	
 						<div class="form-group">
 							<label>Nome</label>
 							<input type="text" id="nome_u" name="nome" class="form-control" required>

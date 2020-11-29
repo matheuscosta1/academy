@@ -6,19 +6,17 @@ $(document).on('click','#btn-add',function(e) {
         url: "model/save.php",
         success: function(dataResult){
                 var dataResult = JSON.parse(dataResult);
-                if(dataResult.statusCode==200){
+                if(dataResult == 1){
                     $('#addEmployeeModal').modal('hide');
                     alert('Data added successfully !'); 
                     location.reload();						
                 }
-                else if(dataResult.statusCode==201){
-                   alert(dataResult);
-                }
+                
         }
     });
 });
 $(document).on('click','.update',function(e) {
-    var codigo=$(this).attr("data-codigo");
+    var codigo=$(this).attr("data-codigo")
     var nome=$(this).attr("data-nome");
     var email=$(this).attr("data-email");
     var telefone=$(this).attr("data-telefone");
@@ -47,13 +45,10 @@ $(document).on('click','#update',function(e) {
         url: "model/save.php",
         success: function(dataResult){
                 var dataResult = JSON.parse(dataResult);
-                if(dataResult.statusCode==200){
+                if(dataResult == 1){
                     $('#editEmployeeModal').modal('hide');
                     alert('Data updated successfully !'); 
                     location.reload();						
-                }
-                else if(dataResult.statusCode==201){
-                   alert(dataResult);
                 }
         }
     });
@@ -61,8 +56,8 @@ $(document).on('click','#update',function(e) {
 $(document).on("click", ".delete", function() { 
     var codigo=$(this).attr("data-codigo");
     $('#codigo_d').val(codigo);
-    
 });
+
 $(document).on("click", "#delete", function() { 
     $.ajax({
         url: "model/save.php",
@@ -73,44 +68,18 @@ $(document).on("click", "#delete", function() {
             codigo: $("#codigo_d").val()
         },
         success: function(dataResult){
-                $('#deleteEmployeeModal').modal('hide');
-                $("#"+dataResult).remove();
+                if(dataResult == 1){
+                    $('#deleteEmployeeModal').modal('hide');
+                    $("#"+dataResult).remove();
+                    location.reload();
+                }
+                
         
         }
     });
 });
-$(document).on("click", "#delete_multiple", function() {
-    var user = [];
-    $(".user_checkbox:checked").each(function() {
-        user.push($(this).data('user-id'));
-    });
-    if(user.length <=0) {
-        alert("Please select records."); 
-    } 
-    else { 
-        WRN_PROFILE_DELETE = "Are you sure you want to delete "+(user.length>1?"these":"this")+" row?";
-        var checked = confirm(WRN_PROFILE_DELETE);
-        if(checked == true) {
-            var selected_values = user.join(",");
-            console.log(selected_values);
-            $.ajax({
-                type: "POST",
-                url: "model/save.php",
-                cache:false,
-                data:{
-                    type: 4,						
-                    codigo : selected_values
-                },
-                success: function(response) {
-                    var ids = response.split(",");
-                    for (var i=0; i < ids.length; i++ ) {	
-                        $("#"+ids[i]).remove(); 
-                    }	
-                } 
-            }); 
-        }  
-    } 
-});
+
+
 $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip();
     var checkbox = $('table tbody input[type="checkbox"]');

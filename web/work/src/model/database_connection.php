@@ -5,10 +5,7 @@
     define("DATABASE", "clinica");
 
     function connect(){
-        $connection = new mysqli(HOST, USER, PASSWORD, DATABASE);
-        if($connection->connect_error){
-            throw new Exception('MySQL connection error.'.$connection->connect_error);
-        }
+        $connection = new PDO("mysql:host=127.0.0.1;dbname=clinica", "root", "clinica");
         return $connection;
     }
 ?>
