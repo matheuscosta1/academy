@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  mysqlsrv:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: "clinica"
+      MYSQL_DATABASE: "clinica"
+    ports:
+      - "3306:3306"
+    # volumes:
+    #   - ./scripts/development/create-table-test-schema.sql:/docker-entrypoint-initdb.d/create-tables.sql
+    #   - ./scripts/development/spring-course-test-schema.sql:/docker-entrypoint-initdb.d/insert.sql
+    networks:
+      - mysql-compose-network
+
+networks:
+  mysql-compose-network:
+    driver: bridge
