@@ -50,7 +50,7 @@
 				<table class="table table-striped table-hover">
 					<thead>
 						<tr>
-							<th >Código</th>
+							<th>Código</th>
 							<th>Nome</th>
 							<th>Email</th>
 							<th>Telefone</th>
@@ -59,13 +59,16 @@
 							<th>Bairro</th>
 							<th>Cidade</th>
 							<th>Estado</th>
+							<th>Data do Contrato</th>
+							<th>Salário</th>
+							<th>Senha</th>
 						</tr>
 					</thead>
 					<tbody>
 					
 					<?php
 						$connection = connect();
-						$result = $connection->prepare("SELECT * FROM clinica.pessoa");
+						$result = $connection->prepare("SELECT * FROM clinica.pessoa INNER JOIN funcionario ON pessoa.codigo = funcionario.funcionario_codigo_fk");
 						$result->execute();
 						while($row = $result->fetch(PDO::FETCH_ASSOC)){	
 					?>
@@ -79,6 +82,9 @@
 							<td><?php echo $row['bairro']; ?></td>
 							<td><?php echo $row['cidade']; ?></td>
 							<td><?php echo $row['estado']; ?></td>
+							<td><?php echo $row['data_contrato']; ?></td>
+							<td><?php echo $row['salario']; ?></td>
+							<td><?php echo $row['senha_hash']; ?></td>
 						</tr>
 					<?php
 					}
