@@ -1,4 +1,4 @@
-<?php include 'model/database_connection.php';?>
+<?php include '../../model/database_connection.php';?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,10 +10,9 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-CuOF+2SnTUfTwSZjCXf01h7uYhfOBuxIhGKPbfEJ3+FqH/s6cIFN9bGr1HmAg4fQ" crossorigin="anonymous"></head>
-	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="../../css/style.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script src="ajax/cadastra_funcionario.js"></script>
 </head>
 <body>
 
@@ -29,7 +28,7 @@
                 <li><button onclick="location.href='cria_paciente.php'">Novo Paciente</button>|</li>
                 <li><button onclick="location.href='lista_funcionario.php'">Listar Funcionários</button>|</li>
 				<li><button onclick="location.href='lista_paciente.php'">Listar Pacientes</button>|</li>
-				<li><button>Listar Endereços</button>|</li>
+				<li><button onclick="location.href='lista_endereco.php'">Listar Endereços</button>|</li>
 				<li><button>Listar todos Agendamentos</button>|</li>
 				<li><button>Listar meus Agendamentos</button></li>
             </ul>

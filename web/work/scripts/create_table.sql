@@ -12,9 +12,9 @@ create table if not exists pessoa(
 );
 
 create table if not exists funcionario(
-    data_contrato date,
+    data_contrato datetime,
     salario double,
-    senha_hash varchar(40),
+    senha_hash varchar(255),
     codigo int AUTO_INCREMENT not null,
     funcionario_codigo_fk int not null,
     primary key(codigo),
@@ -41,7 +41,7 @@ create table paciente(
 );
 
 create table if not exists agenda(
-	data_agendamento date,
+	data_agendamento datetime,
     horario time,
     nome varchar(40),
     email varchar(40),
@@ -52,7 +52,7 @@ create table if not exists agenda(
     foreign key(codigo_medico_fk) REFERENCES medico(codigo)
 );
 
-create table if not exists enderecos(
+create table if not exists endereco(
 	cep varchar(11),
     logradouro varchar(40),
 	bairro varchar(40),
