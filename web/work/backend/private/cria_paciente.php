@@ -15,6 +15,20 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="../../ajax/cadastra_paciente.js"></script>
 </head>
+
+<?php
+
+	session_start();
+	if((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true))
+	{
+		header("location: error.php");
+		unset($_SESSION['email']);
+		unset($_SESSION['senha']);
+	}
+
+	$logado = $_SESSION['email'];
+?>
+
 <body>
 	<header>
         <section>
@@ -30,8 +44,8 @@
                 <li><button onclick="location.href='lista_funcionario.php'">Listar Funcionários</button>|</li>
 				<li><button onclick="location.href='lista_paciente.php'">Listar Pacientes</button>|</li>
 				<li><button onclick="location.href='lista_endereco.php'">Listar Endereços</button>|</li>
-				<li><button>Listar todos Agendamentos</button>|</li>
-				<li><button>Listar meus Agendamentos</button></li>
+				<li><button onclick="location.href='lista_todos_agendamentos.php'">Listar todos Agendamentos</button>|</li>
+				<li><button onclick="location.href='lista_meus_agendamentos.php'">Listar meus Agendamentos</button></li>
             </ul>
         </section>
 	</nav>

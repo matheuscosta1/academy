@@ -16,6 +16,20 @@
 	<script src="../../ajax/cadastra_funcionario.js"></script>
 </head>
 <body>
+
+<?php
+
+	session_start();
+	if((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true))
+	{
+		header("location: error.php");
+		unset($_SESSION['email']);
+		unset($_SESSION['senha']);
+	}
+
+	$logado = $_SESSION['email'];
+?>
+
 <header>
         <section>
             <h1>Clínica</h1>
@@ -29,8 +43,8 @@
                 <li><button onclick="location.href='lista_funcionario.php'">Listar Funcionários</button>|</li>
 				<li><button onclick="location.href='lista_paciente.php'">Listar Pacientes</button>|</li>
 				<li><button onclick="location.href='lista_endereco.php'">Listar Endereços</button>|</li>
-				<li><button>Listar todos Agendamentos</button>|</li>
-				<li><button>Listar meus Agendamentos</button></li>
+				<li><button onclick="location.href='lista_todos_agendamentos.php'">Listar todos Agendamentos</button>|</li>
+				<li><button onclick="location.href='lista_meus_agendamentos.php'">Listar meus Agendamentos</button></li>
             </ul>
         </section>
 	</nav>
@@ -57,7 +71,7 @@
 								<label id="especialidade" for="especialidade" class="form-label">Especialidade</label><br>
 							</div>
 							<div class="form-floating form-group row" id="hidden_crm" style="display: none;">
-								<input type="number" name="crm" class="form-control" id="especialidade" placeholder="CRM">
+								<input type="text" name="crm" class="form-control" id="especialidade" placeholder="CRM">
 								<label id="crm" for="crm" class="form-label">CRM</label><br>
 							</div>
 							<div class="form-floating form-group row">
@@ -73,7 +87,7 @@
 								<label class="form-label">Telefone</label>
 							</div><br>
 							<div class="form-floating form-group row">
-								<input type="text" id="cep" name="cep" class="form-control" placeholder="CEP" required>
+								<input type="number" id="cep" name="cep" class="form-control" placeholder="CEP" required>
 								<label class="form-label">CEP</label>
 							</div><br>	
 							<div class="form-floating form-group row">
@@ -89,11 +103,11 @@
 								<label class="form-label">Cidade</label>
 							</div><br>
 							<div class="form-floating form-group row">
-								<input type="text" id="estado" name="estado" class="form-control" placeholder="Estado" required>
+								<input type="text" id="estado" name="estado" class="form-control" placeholder="Estado" min="2" max="2" required>
 								<label class="form-label">Estado</label>
 							</div><br>
 							<div class="form-floating form-group row">
-								<input type="date" id="data-contrato" name="data-contrato" class="form-control" placeholder="Data de contrato" required>
+								<input type="datetime-local" id="data-contrato" name="data-contrato" class="form-control" placeholder="Data de contrato" required>
 								<label class="form-label">Data do Contrato<label>
 							</div><br>
 							<div class="form-floating form-group row">

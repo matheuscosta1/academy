@@ -3,6 +3,8 @@ include 'database_connection.php';
 
 $connection = connect();
 
+session_start();
+
 if(count($_POST)>0){
 	if($_POST['type']==1){
         $email = $senha = "";
@@ -22,10 +24,14 @@ if(count($_POST)>0){
             $retorno = $stmt->fetch(PDO::FETCH_ASSOC);
             
             if(!empty($retorno['senha_hash']) && password_verify($senha, $retorno['senha_hash'])){
+                $_SESSION['email'] = $email;
+                $_SESSION['senha'] = $senha;
                 echo "1";
             } 
             else {
-                echo "0";
+              unset ($_SESSION['email']);
+              unset ($_SESSION['senha']);
+              echo "0";
             }
 
         } catch(PDOException $e) {

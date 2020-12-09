@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>User Data</title>
+	<title>Clínica</title>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -57,55 +57,44 @@
 				<div class="table-title">
 					<div class="row">
 						<div class="col-sm-6">
-							<h2>Listagem de <b>Funcionários</b></h2>
+							<h2>Listagem de <b>Agendamentos</b></h2>
 						</div>
 					</div>
 				</div>
 				<table class="table table-striped table-hover">
 					<thead>
 						<tr>
-							<th>Código</th>
-							<th>Nome</th>
-							<th>Email</th>
+							<th>Data de Agendamento</th>
+							<th>Horário</th>
+							<th>Paciente</th>
+							<th>E-mail</th>
 							<th>Telefone</th>
-							<th>CEP</th>
-							<th>Logradouro</th>
-							<th>Bairro</th>
-							<th>Cidade</th>
-							<th>Estado</th>
-							<th>Data do Contrato</th>
-							<th>Salário</th>
-							<th>Senha</th>
+							<th>Médico</th>
+							<th>Especialidade</th>
 						</tr>
 					</thead>
 					<tbody>
 					
 					<?php
 						$connection = connect();
-						$result = $connection->prepare("SELECT * FROM clinica.pessoa INNER JOIN funcionario ON pessoa.codigo = funcionario.funcionario_codigo_fk");
+						$result = $connection->prepare("SELECT a.data_agendamento, a.horario, a.nome as paciente, a.email, a.telefone, p.nome as medico, m.especialidade FROM agenda a INNER JOIN medico m ON a.codigo_medico_fk = m.codigo inner join funcionario f on f.codigo = m.medico_codigo_fk inner join pessoa p on p.codigo = f.funcionario_codigo_fk");
 						$result->execute();
 						while($row = $result->fetch(PDO::FETCH_ASSOC)){	
 					?>
 						<tr id="<?php echo $row->codigo; ?>">
-							<td><?php echo $row['codigo']; ?></td>
-							<td><?php echo $row['nome']; ?></td>
+							<td><?php echo $row['data_agendamento']; ?></td>
+							<td><?php echo $row['horario']; ?></td>
+							<td><?php echo $row['paciente']; ?></td>
 							<td><?php echo $row['email']; ?></td>
 							<td><?php echo $row['telefone']; ?></td>
-							<td><?php echo $row['cep']; ?></td>
-							<td><?php echo $row['logradouro']; ?></td>
-							<td><?php echo $row['bairro']; ?></td>
-							<td><?php echo $row['cidade']; ?></td>
-							<td><?php echo $row['estado']; ?></td>
-							<td><?php echo $row['data_contrato']; ?></td>
-							<td><?php echo $row['salario']; ?></td>
-							<td><?php echo $row['senha_hash']; ?></td>
+							<td><?php echo $row['medico']; ?></td>
+							<td><?php echo $row['especialidade']; ?></td>
 						</tr>
 					<?php
 					}
 					?>
 					</tbody>
 				</table>
-				
 			</div>
 		</div>
 	</main>

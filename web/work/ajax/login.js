@@ -7,7 +7,7 @@ $(document).on('click','#btn-add',function(e) {
         success: function(data){
             if(data == 1){
                 $('#login').modal('hide');
-                window.location.href='../private/index.php';					
+                window.location.href='../private/index.php';		
             }
             else if (data == 0){
                 $('#login').modal('hide');

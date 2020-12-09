@@ -28,7 +28,7 @@
                 <li><button onclick="location.href='index.php'"> </a> Home </button>|</li>
                 <li><button onclick="location.href='cria_endereco.php'">Galeria</button>|</li>
                 <li><button onclick="location.href='cria_endereco.php'">Novo Endereço</button>|</li>
-				<li><button onclick="location.href='lista_paciente.php'">Agendar Consulta</button>|</li>
+				<li><button onclick="location.href='cria_agendamento.php'">Agendar Consulta</button>|</li>
 				<li><button onclick="location.href='login.php'">Login</button></li>
             </ul>
         </section>
