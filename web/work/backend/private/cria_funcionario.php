@@ -14,6 +14,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="../../ajax/cadastra_funcionario.js"></script>
+	<script src="../../ajax/lista_enderecos_baseado_no_cep.js"></script>
 </head>
 <body>
 
@@ -136,6 +137,14 @@
 					document.getElementById('hidden_crm').style.display = style;
 				});
 			}
+
+			// window.onload=function(){
+			// 	document.getElementById('cep').addEventListener('change', function () {
+			// 		var enderecos = getEnderecos();
+			// 		document.getElementById('logradouro').style.display = style;
+			// 		document.getElementById('bairro').style.display = style;
+			// 	});
+			// }
 		</script>
 	</main>
 

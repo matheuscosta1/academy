@@ -43,7 +43,7 @@
 						</div>
 						<div class="modal-body">
 							<div class="form-floating form-group row">
-								<input type="text" id="cep" name="cep" class="form-control" placeholder="CEP" required>
+								<input type="number" id="cep" name="cep" class="form-control" placeholder="CEP" required>
 								<label class="form-label">CEP</label>
 							</div><br>	
 							<div class="form-floating form-group row">
@@ -72,6 +72,5 @@
 			</div>
 		</div>
 	</main>
-
 </body>
 </html>    
