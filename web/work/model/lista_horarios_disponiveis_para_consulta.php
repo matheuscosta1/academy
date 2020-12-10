@@ -12,8 +12,9 @@ if(isset($_POST['data_agendamento'])){
 
     try{
         $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $stmt = $connection->prepare('SELECT horario FROM clinica.agenda a WHERE a.codigo_medico_fk = ?');
+        $stmt = $connection->prepare('SELECT horario FROM clinica.agenda a WHERE a.codigo_medico_fk = ? and a.data_agendamento = ?');
         $stmt->bindValue(1, $codigo_medico);
+        $stmt->bindValue(2, $data_agendamento);
         $stmt->execute();
 
 

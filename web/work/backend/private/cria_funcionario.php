@@ -2,17 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>User Data</title>
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-CuOF+2SnTUfTwSZjCXf01h7uYhfOBuxIhGKPbfEJ3+FqH/s6cIFN9bGr1HmAg4fQ" crossorigin="anonymous"></head>
-	<link rel="stylesheet" href="../../css/style.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<?php include "../../templates/head.html"; ?>
 	<script src="../../ajax/cadastra_funcionario.js"></script>
 	<script src="../../ajax/lista_enderecos_baseado_no_cep.js"></script>
 </head>
@@ -31,26 +21,9 @@
 	$logado = $_SESSION['email'];
 ?>
 
-<header>
-        <section>
-            <h1>Clínica</h1>
-        </section>
-    </header>
-    <nav>
-        <section>
-            <ul>
-                <li><button onclick="location.href='cria_funcionario.php'"> </a> Novo Funcionário</button>|</li>
-                <li><button onclick="location.href='cria_paciente.php'">Novo Paciente</button>|</li>
-                <li><button onclick="location.href='lista_funcionario.php'">Listar Funcionários</button>|</li>
-				<li><button onclick="location.href='lista_paciente.php'">Listar Pacientes</button>|</li>
-				<li><button onclick="location.href='lista_endereco.php'">Listar Endereços</button>|</li>
-				<li><button onclick="location.href='lista_todos_agendamentos.php'">Listar todos Agendamentos</button>|</li>
-				<li><button onclick="location.href='lista_meus_agendamentos.php'">Listar meus Agendamentos</button></li>
-            </ul>
-        </section>
-	</nav>
+	<?php include "../../templates/private_header.html"; ?>
+	
 	<main>
-		
 		<div id="addEmployeeModal" >
 			<div >
 				<div >
@@ -137,14 +110,6 @@
 					document.getElementById('hidden_crm').style.display = style;
 				});
 			}
-
-			// window.onload=function(){
-			// 	document.getElementById('cep').addEventListener('change', function () {
-			// 		var enderecos = getEnderecos();
-			// 		document.getElementById('logradouro').style.display = style;
-			// 		document.getElementById('bairro').style.display = style;
-			// 	});
-			// }
 		</script>
 	</main>
 
