@@ -1,4 +1,4 @@
-create database 3635065_cosmos;
+create database clinica;
 
 create table if not exists pessoa(
     codigo int AUTO_INCREMENT not null,
@@ -61,3 +61,5 @@ create table if not exists endereco(
 	cidade varchar(50),
 	estado char(2)
 ) ENGINE=InnoDB;
+
+SELECT a.data_agendamento, a.horario, a.nome as paciente, a.email, a.telefone, p.nome as medico, m.especialidade FROM agenda a INNER JOIN medico m ON a.codigo_medico_fk = m.codigo inner join funcionario f on f.codigo = m.medico_codigo_fk inner join pessoa p on p.codigo = f.funcionario_codigo_fk;
