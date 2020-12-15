@@ -6,6 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Seleta Cosmos</title>
+	<link rel="icon" href="../../images/icone.png">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -18,27 +19,33 @@
 <body>
 
 	<?php include "../../templates/public_header.html"; ?>
+	<div class="container"></div>
+		<main class="col-sm-4">
 
-		
-	<div class="align-login">
-		<form name="formCadastro" id="user_form">
-			<div class="modal-header">						
-				<h4 class="modal-title">Login</h4>
-			</div>
-			<div class="form-floating form-group row">
-					<input type="email" id="email" name="email" class="form-control" placeholder="E-mail" required>
-					<label class="form-label">E-mail</label>
-			</div><br>
-			<div class="form-floating form-group row">
-					<input type="password" id="senha" name="senha" class="form-control" placeholder="Senha" required>
-					<label class="form-label">Senha</label>
-			</div>	
-			<div class="modal-footer">
-				<input type="hidden" value="1" name="type">
-				<button type="button" class="btn btn-success" id="btn-add">Login</button>
-			</div>
-		</form>
-	</div>
+			<form name="formCadastro" id="user_form">
+				<div class="modal-body">
+
+					<div class="modal-header">						
+						<h4 class="modal-title">Login</h4>
+					</div>
+					<div class="form-floating form-group row">
+							<input type="email" id="email" name="email" class="form-control" placeholder="E-mail" required>
+							<label class="form-label">E-mail</label>
+					</div><br>
+					<div class="form-floating form-group row">
+							<input type="password" id="senha" name="senha" class="form-control" placeholder="Senha" required>
+							<label class="form-label">Senha</label>
+					</div>	
+					<div class="modal-footer">
+						<input type="hidden" value="1" name="type">
+						<button type="button" class="btn btn-success" id="btn-add">Login</button>
+					</div>
+				</div>
+
+			</form>
+		</main>
+	
+	
 
 </body>
 </html>    

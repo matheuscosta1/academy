@@ -5,7 +5,8 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>User Data</title>
+    <title>Seleta Cosmos</title>
+    <link rel="icon" href="../../images/icone.png">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -29,15 +30,15 @@
                     <tr>
                         <td><img class="border-photo" src="../../images/clinica1.jpg"></td>
                         <td><img class="border-photo" src="../../images/clinica2.jpg"></td>
-                        <td><img class="border-photo" src="../../images/clinica1.jpg"></td>
-                        <td><img class="border-photo" src="../../images/clinica2.jpg"></td>
+                        <td><img class="border-photo" src="../../images/clinica3.jpg"></td>
+                        <td><img class="border-photo" src="../../images/clinica4.jpg"></td>
                     </tr>
                     <br>
                     <tr>
-                        <td><img class="border-photo" src="../../images/clinica1.jpg"></td>
-                        <td><img class="border-photo" src="../../images/clinica2.jpg"></td>
-                        <td><img class="border-photo" src="../../images/clinica1.jpg"></td>
-                        <td><img class="border-photo" src="../../images/clinica2.jpg"></td>
+                        <td><img class="border-photo" src="../../images/clinica5.jpg"></td>
+                        <td><img class="border-photo" src="../../images/clinica6.jpg"></td>
+                        <td><img class="border-photo" src="../../images/clinica7.jpg"></td>
+                        <td><img class="border-photo" src="../../images/clinica8.jpg"></td>
                     </tr>
                 </table>
             </div>
