@@ -5,18 +5,21 @@ $connection = connect();
 
 
 if(isset($_POST['data_agendamento'])){
+    $data_agendamento = $codigo_medico = "";
+    if (isset($_POST["data_agendamento"])) $data_agendamento=$_POST['data_agendamento'];
+    if (isset($_POST["codigo_medico"])) $codigo_medico = $_POST['codigo_medico'];
+    
+    $data_agendamento = htmlspecialchars($data_agendamento);
+    $codigo_medico = htmlspecialchars($codigo_medico);
 
-    $data_agendamento=$_POST['data_agendamento'];
-    $codigo_medico = $_POST['codigo_medico'];
     $horarios = array(8,9,10,11,12,13,14,15,16,17);
 
     try{
         $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $stmt = $connection->prepare('SELECT horario FROM clinica.agenda a WHERE a.codigo_medico_fk = ? and a.data_agendamento = ?');
+        $stmt = $connection->prepare('SELECT horario FROM 3635065_cosmos.agenda a WHERE a.codigo_medico_fk = ? and a.data_agendamento = ?');
         $stmt->bindValue(1, $codigo_medico);
         $stmt->bindValue(2, $data_agendamento);
         $stmt->execute();
-
 
         while($retorno = $stmt->fetch(PDO::FETCH_ASSOC)){
             if (($key = array_search($retorno['horario'], $horarios)) !== false) {

@@ -1,11 +1,4 @@
 <?php include '../../model/database_connection.php';?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<?php include "../../templates/head.html"; ?>
-	<script src="../../ajax/cadastra_funcionario.js"></script>
-</head>
-
 <?php
 
 	session_start();
@@ -17,7 +10,18 @@
 	}
 
 	$logado = $_SESSION['email'];
+	$connection = connect();
+	$sql = <<<SQL
+	SELECT * FROM 3635065_cosmos.endereco
+	SQL;
+	$result = $connection->query($sql);
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<?php include "../../templates/head.html"; ?>
+	<script src="../../ajax/cadastra_funcionario.js"></script>
+</head>
 
 <body>
 
@@ -45,23 +49,26 @@
 						</tr>
 					</thead>
 					<tbody>
-					
-					<?php
-						$connection = connect();
-						$result = $connection->prepare("SELECT * FROM clinica.endereco");
-						$result->execute();
-						while($row = $result->fetch(PDO::FETCH_ASSOC)){	
-					?>
-						<tr id="<?php echo $row->codigo; ?>">
-							<td><?php echo $row['cep']; ?></td>
-							<td><?php echo $row['logradouro']; ?></td>
-							<td><?php echo $row['bairro']; ?></td>
-							<td><?php echo $row['cidade']; ?></td>
-							<td><?php echo $row['estado']; ?></td>
-						</tr>
-					<?php
-					}
-					?>
+						<?php
+							while($row = $result->fetch(PDO::FETCH_ASSOC)){
+								$codigo = htmlspecialchars($row->codigo);
+								$cep = htmlspecialchars($row['cep']);
+								$logradouro = htmlspecialchars($row['logradouro']);
+								$bairro = htmlspecialchars($row['bairro']);
+								$cidade = htmlspecialchars($row['cidade']);
+								$estado = htmlspecialchars($row['estado']);
+
+								echo <<<HTML
+									<tr $codigo>
+									<td>$cep</td>
+									<td>$logradouro</td>
+									<td>$bairro</td>
+									<td>$cidade</td>
+									<td>$estado</td>
+								</tr>
+								HTML;
+							}	
+						?>
 					</tbody>
 				</table>
 			</div>

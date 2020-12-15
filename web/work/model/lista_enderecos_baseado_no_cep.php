@@ -9,11 +9,13 @@ if(isset($_POST['cep'])){
     if(isset($_POST['cep'])){
         $cep=$_POST['cep'];
     }
+
+    $cep = htmlspecialchars($cep);
     $return = $_POST;
 
     try{
         $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $stmt = $connection->prepare('SELECT * FROM clinica.endereco WHERE cep = ?');
+        $stmt = $connection->prepare('SELECT * FROM 3635065_cosmos.endereco WHERE cep = ?');
         $stmt->bindValue(1, $cep);
         $stmt->execute();
         while($retorno = $stmt->fetch(PDO::FETCH_ASSOC)){

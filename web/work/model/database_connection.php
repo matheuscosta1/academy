@@ -1,11 +1,7 @@
 <?php
-    define("HOST", "127.0.0.1"); 
-    define("USER", "root");
-    define("PASSWORD", "clinica"); 
-    define("DATABASE", "clinica");
 
     function connect(){
-        $connection = new PDO("mysql:host=127.0.0.1;dbname=clinica", "root", "clinica");
+        $connection = new PDO("mysql:host=fdb30.awardspace.net;dbname=3635065_cosmos", "3635065_cosmos", "kjkszpj91");
         return $connection;
     }
 ?>

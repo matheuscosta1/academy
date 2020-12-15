@@ -1,4 +1,4 @@
-create database clinica;
+create database 3635065_cosmos;
 
 create table if not exists pessoa(
     codigo int AUTO_INCREMENT not null,

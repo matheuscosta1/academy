@@ -1,11 +1,4 @@
 <?php include '../../model/database_connection.php';?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<?php include "../../templates/head.html"; ?>
-	<script src="../../ajax/cadastra_funcionario.js"></script>
-</head>
-
 <?php
 
 	session_start();
@@ -17,7 +10,17 @@
 	}
 
 	$logado = $_SESSION['email'];
+	$connection = connect();
+	$sql = <<<SQL
+	SELECT * FROM 3635065_cosmos.pessoa INNER JOIN paciente ON pessoa.codigo = paciente.paciente_codigo_fk
+	SQL;
+	$result = $connection->query($sql);
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<?php include "../../templates/head.html"; ?>
+</head>
 
 <body>
 
@@ -53,29 +56,39 @@
 					</thead>
 					<tbody>
 					
-					<?php
-						$connection = connect();
-						$result = $connection->prepare("SELECT * FROM clinica.pessoa INNER JOIN paciente ON pessoa.codigo = paciente.paciente_codigo_fk");
-						$result->execute();
-						while($row = $result->fetch(PDO::FETCH_ASSOC)){	
-					?>
-						<tr id="<?php echo $row->codigo; ?>">
-							<td><?php echo $row['codigo']; ?></td>
-							<td><?php echo $row['nome']; ?></td>
-							<td><?php echo $row['email']; ?></td>
-							<td><?php echo $row['telefone']; ?></td>
-							<td><?php echo $row['cep']; ?></td>
-							<td><?php echo $row['logradouro']; ?></td>
-							<td><?php echo $row['bairro']; ?></td>
-							<td><?php echo $row['cidade']; ?></td>
-							<td><?php echo $row['estado']; ?></td>
-							<td><?php echo $row['peso']; ?></td>
-							<td><?php echo $row['altura']; ?></td>
-							<td><?php echo $row['tipo_sanguineo']; ?></td>
-						</tr>
-					<?php
-					}
-					?>
+						<?php
+							while($row = $result->fetch(PDO::FETCH_ASSOC)){
+								$codigo = htmlspecialchars($row['codigo']);
+								$nome = htmlspecialchars($row['nome']);
+								$email = htmlspecialchars($row['email']);
+								$telefone = htmlspecialchars($row['telefone']);
+								$cep = htmlspecialchars($row['cep']);
+								$logradouro = htmlspecialchars($row['logradouro']);
+								$bairro = htmlspecialchars($row['bairro']);
+								$cidade = htmlspecialchars($row['cidade']);
+								$estado = htmlspecialchars($row['estado']);
+								$peso = htmlspecialchars($row['peso']);
+								$altura = htmlspecialchars($row['altura']);
+								$tipoSanguineo = htmlspecialchars($row['tipo_sanguineo']);
+
+								echo <<<HTML
+									<tr>
+									<td>$codigo</td>
+									<td>$nome</td>
+									<td>$email</td>
+									<td>$telefone</td>
+									<td>$cep</td>
+									<td>$logradouro</td>
+									<td>$bairro</td>
+									<td>$cidade</td>
+									<td>$estado</td>
+									<td>$peso</td>
+									<td>$altura</td>
+									<td>$tipoSanguineo</td>
+									</tr>
+								HTML;
+							}	
+						?>
 					</tbody>
 				</table>
 			</div>

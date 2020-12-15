@@ -1,10 +1,4 @@
 <?php include '../../model/database_connection.php';?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<?php include "../../templates/head.html"; ?>
-</head>
-
 <?php
 
 	session_start();
@@ -17,6 +11,12 @@
 
 	$logado = $_SESSION['email'];
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<?php include "../../templates/head.html"; ?>
+</head>
+
 <body>
 
     <?php include "../../templates/private_header.html"; ?>

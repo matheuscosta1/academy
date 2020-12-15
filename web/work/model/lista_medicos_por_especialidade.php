@@ -10,10 +10,11 @@ if(isset($_POST['especialidade_name'])){
         $especialidade_name=$_POST['especialidade_name'];
     }
 
+    $especialidade_name = htmlspecialchars($especialidade_name);
 
     try{
         $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $stmt = $connection->prepare('SELECT m.codigo, p.nome FROM clinica.pessoa p INNER JOIN funcionario f ON p.codigo = f.funcionario_codigo_fk INNER JOIN clinica.medico m ON f.codigo = m.medico_codigo_fk WHERE m.especialidade = ?');
+        $stmt = $connection->prepare('SELECT m.codigo, p.nome FROM 3635065_cosmos.pessoa p INNER JOIN funcionario f ON p.codigo = f.funcionario_codigo_fk INNER JOIN 3635065_cosmos.medico m ON f.codigo = m.medico_codigo_fk WHERE m.especialidade = ?');
         $stmt->bindValue(1, $especialidade_name);
         $stmt->execute();
 

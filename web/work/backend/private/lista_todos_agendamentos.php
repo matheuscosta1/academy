@@ -1,11 +1,4 @@
 <?php include '../../model/database_connection.php';?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<?php include "../../templates/head.html"; ?>
-	<script src="../../ajax/cadastra_funcionario.js"></script>
-</head>
-
 <?php
 
 	session_start();
@@ -17,7 +10,17 @@
 	}
 
 	$logado = $_SESSION['email'];
+	$connection = connect();
+	$sql = <<<SQL
+	SELECT a.data_agendamento, a.horario, a.nome as paciente, a.email, a.telefone, p.nome as medico, m.especialidade FROM agenda a INNER JOIN medico m ON a.codigo_medico_fk = m.codigo inner join funcionario f on f.codigo = m.medico_codigo_fk inner join pessoa p on p.codigo = f.funcionario_codigo_fk
+	SQL;
+	$result = $connection->query($sql);
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<?php include "../../templates/head.html"; ?>
+</head>
 
 <body>
 
@@ -47,25 +50,29 @@
 						</tr>
 					</thead>
 					<tbody>
-					
-					<?php
-						$connection = connect();
-						$result = $connection->prepare("SELECT a.data_agendamento, a.horario, a.nome as paciente, a.email, a.telefone, p.nome as medico, m.especialidade FROM agenda a INNER JOIN medico m ON a.codigo_medico_fk = m.codigo inner join funcionario f on f.codigo = m.medico_codigo_fk inner join pessoa p on p.codigo = f.funcionario_codigo_fk");
-						$result->execute();
-						while($row = $result->fetch(PDO::FETCH_ASSOC)){	
-					?>
-						<tr id="<?php echo $row->codigo; ?>">
-							<td><?php echo $row['data_agendamento']; ?></td>
-							<td><?php echo $row['horario']; ?></td>
-							<td><?php echo $row['paciente']; ?></td>
-							<td><?php echo $row['email']; ?></td>
-							<td><?php echo $row['telefone']; ?></td>
-							<td><?php echo $row['medico']; ?></td>
-							<td><?php echo $row['especialidade']; ?></td>
-						</tr>
-					<?php
-					}
-					?>
+						<?php
+							while($row = $result->fetch(PDO::FETCH_ASSOC)){
+								$dataAgendamento = htmlspecialchars($row['data_agendamento']);
+								$horario = htmlspecialchars($row['horario']);
+								$paciente = htmlspecialchars($row['paciente']);
+								$email = htmlspecialchars($row['email']);
+								$telefone = htmlspecialchars($row['telefone']);
+								$medico = htmlspecialchars($row['medico']);
+								$especialidade = htmlspecialchars($row['especialidade']);
+
+								echo <<<HTML
+									<td>$dataAgendamento</td>
+									<td>$horario</td>
+									<td>$paciente</td>
+									<td>$email</td>
+									<td>$telefone</td>
+									<td>$medico</td>
+									<td>$especialidade</td>
+									</tr>
+								HTML;
+							}	
+						?>
+
 					</tbody>
 				</table>
 			</div>
