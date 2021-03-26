@@ -413,7 +413,7 @@ combinar2 (x: xs) n = x : (n : combinar xs n)
  
 parImpar :: [Int]->[[Int]]
 parImpar [] = [[],[]]
-parImpar (x :xs) | mod x 2 ==0 = [x: head (parImpar xs), last (parImpar xs)]
+parImpar (x :xs) | mod x 2 == 0 = [x: head (parImpar xs), last (parImpar xs)]
 parImpar (x : xs) = [head (parImpar xs), x : last (parImpar xs)]
 
 -- Trabalhando com compreensão 

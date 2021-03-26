@@ -13,12 +13,18 @@
 
 struct timeval  tv1, tv2; //variáveis para estipular o tempo de execução
 
+int pipe01[2];
+int pipe02[2];
+
+long int p7Id1; //TID da thread 1 do P7
+long int p7Id2; //TID da thread 2 do P7
+long int p7Id3;
+
 struct shared_memory_fila_01 {
 	int valores_fila[10]; //define tamanho da fila 01
 	int pids[7]; //processos filhos
 	int tamanho; //controla o tamanho que está a fila
 	sem_t mutex; //semáforo
-	int pipe_01[2], pipe_02[2]; //pipe que será utilizado para trafegar informações entre a fila 01 e a fila 02 a partir do processo P4 enviando valores para P5 e P6
 	int valor, valor2; //utilizado para armazenar valores do pipe
 	int contador_p5, contador_p6; //contador para sabermos quantas vezes o processo P5 e processo P6, processaram
 }; //struct que representa a fila 01
@@ -29,12 +35,26 @@ struct shared_memory_fila_02 {
 	int tamanho, controle; //controla o tamanho que está a fila
 	int vetor_valores_desenfileirados[QUANTIDADE_EXECUCAO]; //armazena valores que foram desenfileirados da fila 02 para ser calculado, posteriormente, a moda e o valor máximo e mínimo
 	int quantidadeValoresDesenfileirados; // controla a quantidade de registros que foram desenfileirados da fila 02
+	int vez;
 }; //struct que representa a fila 02
 
 
 struct shared_memory_fila_01 *shared_memory_fila_01; //define um ponteiro para a fila 01
 struct shared_memory_fila_02 *shared_memory_fila_02; //define um ponteiro para a fila 02
 
+
+long int vez (long int identifier) {
+	if (identifier == p7Id1)
+		return p7Id2;
+	else if (identifier == p7Id2)
+		return p7Id3;
+	else if (identifier == p7Id3)
+		return 5;
+	else if (identifier == 5)
+		return 6;
+	else if (identifier == 6) 
+		return p7Id1;
+}
 
 int enfileira_fila_01() {
 
@@ -58,7 +78,7 @@ int enfileira_fila_01() {
     } else if ((shared_memory_fila_01->tamanho == 10)) { //verifica se a fila está cheia
         printf("\n[Processo P1|P2|P3 - PID: %d] - [Fila 01] - Solicitando esvaziar: %d\n", getpid(), shared_memory_fila_01->tamanho);
         sem_post(&shared_memory_fila_01->mutex); //libera o semáforo
-        kill(shared_memory_fila_01->pids[3], SIGUSR1); //manda um sinal para o processo P4 começar a desenfileirar da fila 01
+        while(kill(shared_memory_fila_01->pids[3], SIGUSR1) == -1); //manda um sinal para o processo P4 começar a desenfileirar da fila 01
         return 0;
     } else if (shared_memory_fila_01->tamanho == 0){
         sem_post(&shared_memory_fila_01->mutex); //caso a fila esteja vazia, então libera o semáforo.
@@ -69,7 +89,9 @@ int enfileira_fila_01() {
 	}
 }
 
-int enfileira_fila_02(int valor) {
+int enfileira_fila_02(int valor, int id) {
+	while(shared_memory_fila_02->vez != id);
+
 	if(shared_memory_fila_02->controle) { //variável de controle que diz se pode ou não enfileirar na fila
 		int i;
 		if(shared_memory_fila_02->tamanho < 10) {
@@ -82,16 +104,15 @@ int enfileira_fila_02(int valor) {
                 if(i != shared_memory_fila_02->tamanho - 1) printf(", ");
             }
             printf("}\n\n");
-
-			signal(shared_memory_fila_01->pids[6], SIGUSR1);  //manda um sinal para o processo P7 começar a desenfileirar da fila 02
+			while(signal(shared_memory_fila_01->pids[6], SIGUSR1)==-1);  //manda um sinal para o processo P7 começar a desenfileirar da fila 02
 			return 1;
 		} else if ((shared_memory_fila_02->tamanho == 10 && shared_memory_fila_02->controle)) {
             printf("\n[Processo P5|P6 - PID: %d] - [Fila 02] - Solicitando esvaziar: %d\n", getpid(), shared_memory_fila_02->tamanho); //caso a fila 2 esteja cheia, então manda-se um sinal para P7 começar a desenfileirar da fila 02
 			shared_memory_fila_02->controle = 0; //bloquea o acesso a fila enquanto não for tirado um elemento da fila 02
-			kill(shared_memory_fila_01->pids[6], SIGUSR1); //manda um sinal para o processo P7 começar a desenfileirar da fila 02
+			while(kill(shared_memory_fila_01->pids[6], SIGUSR1) == -1);
 			return 0;
 		} else if (shared_memory_fila_02->tamanho == 0){
-			shared_memory_fila_02->controle = 1; //caso a fila 02 esteja vazia, então pode-se continuar a colocar elementos na fila 02
+			shared_memory_fila_02->controle = 1;
 			return 1;
 		}
 	}  else {
@@ -127,6 +148,7 @@ int desenfileira_fila_01() {
 
 int desenfileira_fila_02() {
 	int i, valor, contador=0;
+	while(shared_memory_fila_02->vez != gettid());
 	if(shared_memory_fila_02->tamanho > 0) {
 
 		valor = shared_memory_fila_02->vetor[0]; // atribui à variável valor o primeiro valor da fila 02
@@ -145,7 +167,6 @@ int desenfileira_fila_02() {
         }
         printf("}\n");
 
-
         sem_wait(&shared_memory_fila_01->mutex);//define região crítica
         shared_memory_fila_02->vetor_valores_desenfileirados[shared_memory_fila_02->quantidadeValoresDesenfileirados] = valor; //coloca no vetor de desenfileirados o valor desenfileirado da fila 02
         printf("\n[Processo P7 - PID: %d] - [Fila 2] - O valor %d foi desenfileirado\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t[Contador: %d]\n", getpid(), shared_memory_fila_02->vetor_valores_desenfileirados[shared_memory_fila_02->quantidadeValoresDesenfileirados], shared_memory_fila_02->quantidadeValoresDesenfileirados);
@@ -162,7 +183,7 @@ int desenfileira_fila_02() {
             calcula_moda(shared_memory_fila_02->vetor_valores_desenfileirados); //calcula a moda da quantidade de valores desenfileirados.
             kill(0, SIGTERM);
         }
-
+		shared_memory_fila_02->vez = gettid();
 		return valor;
 	}
 	return -1;
@@ -174,10 +195,11 @@ void consome_fila_01_e_envia_para_p5_via_pipe_01() {
 
     for(i = 0; i < 5; i++) {
 		sem_wait(&shared_memory_fila_01->mutex); //define regiao crítica
-        shared_memory_fila_01->valor = desenfileira_fila_01(); //processo P4 desenfileira da fila 01
-        printf("\n[Processo P4 - PID: %d] - Está consumindo da fila 01 e enviando para o Pipe 01 o valor: %d\n", getpid(), shared_memory_fila_01->valor);
+        valor = desenfileira_fila_01(); //processo P4 desenfileira da fila 01
+        printf("\n[Processo P4 - PID: %d] - Está consumindo da fila 01 e enviando para o Pipe 01 o valor: %d\n", getpid(), valor);
         sem_post(&shared_memory_fila_01->mutex); //libera região crítica
-        write(shared_memory_fila_01->pipe_01[1], &shared_memory_fila_01->valor, sizeof(int)*sizeof(shared_memory_fila_01->valor)); //grava valor desenfilerado da fila 01 no pipe 01
+        write(pipe01[1], &valor, sizeof(int)); //grava valor desenfilerado da fila 01 no pipe 01
+		shared_memory_fila_02->vez = 5;
         kill(shared_memory_fila_01->pids[4], SIGUSR1); //envia sinal para o processo P5 começar a processar o valor que foi gravado no pipe 01
         sleep(1);
 	}
@@ -189,10 +211,11 @@ void consome_fila_01_e_envia_para_p6_via_pipe_02() {
 
     for(i = 0; i < 5; i++) {
 		sem_wait(&shared_memory_fila_01->mutex); //define regiao crítica
-        shared_memory_fila_01->valor2 = desenfileira_fila_01(); //processo P4 desenfileira da fila 01
-        printf("\n[Processo P4 - PID: %d] - Está consumindo da fila 01 e enviando para o Pipe 02 o valor: %d\n", getpid(), shared_memory_fila_01->valor2);
+        valor = desenfileira_fila_01(); //processo P4 desenfileira da fila 01
+        printf("\n[Processo P4 - PID: %d] - Está consumindo da fila 01 e enviando para o Pipe 02 o valor: %d\n", getpid(), valor);
         sem_post(&shared_memory_fila_01->mutex); //libera região crítica
-        write(shared_memory_fila_01->pipe_02[1], &shared_memory_fila_01->valor2, sizeof(int)*sizeof(shared_memory_fila_01->valor2)); //grava valor desenfilerado da fila 01 no pipe 02
+		shared_memory_fila_02->vez = 6;
+        write(pipe02[1], &valor, sizeof(int)); //grava valor desenfilerado da fila 01 no pipe 02
         kill(shared_memory_fila_01->pids[5], SIGUSR1); //envia sinal para o processo P6 começar a processar o valor que foi gravado no pipe 02
         sleep(1);
 	}
@@ -219,30 +242,36 @@ void consome_fila_02() {
 }
 
 void thread_init_f2() {
-	pthread_t threads[3];
-	for(int i = 0; i < 3; i++) {
+
+	pthread_t threads[2];
+	p7Id1 = gettid();
+
+	for(int i = 0; i < 2; i++) {
 		pthread_create(&threads[i], NULL, (void*) consome_fila_02, NULL); // cria três threads a partir do processo P7 para consumir da fila 02
+		p7Id2 = gettid();
+		p7Id3 = gettid();
+		shared_memory_fila_02->vez = vez(gettid());
 	}
-	for(int i = 0; i < 3; i++) {
+	for(int i = 0; i < 2; i++) {
 		pthread_join(threads[i], NULL); //espera até que as threads terminem a sua execução
 	}
 }
 
 void p5_process(){
-    read(shared_memory_fila_01->pipe_01[0],&shared_memory_fila_01->valor,sizeof(int)*sizeof(shared_memory_fila_01->valor)); //lê valor que foi gravado no pipe 01
-    printf("\n[Processo P5 - PID: %d] - [Fila 02] - Enfileirando o valor: %d e variável de controle: %d\n", getpid(), shared_memory_fila_01->valor, shared_memory_fila_02->controle);
+	int valor;
+    read(pipe01[0],&valor,sizeof(int)); //lê valor que foi gravado no pipe 01
+    printf("\n[Processo P5 - PID: %d] - [Fila 02] - Enfileirando o valor: %d\n", getpid(), valor);
     shared_memory_fila_01->contador_p5++; //incrementa a quantidade de valores que estão sendo processados pelo processo P5
-    enfileira_fila_02(shared_memory_fila_01->valor); //enfileira valor que veio do pipe 01 na fila 02
-    close(shared_memory_fila_01->pipe_01[0]); //fecha o pipe 01
+    enfileira_fila_02(valor, 5); //enfileira valor que veio do pipe 01 na fila 02
 }
 
 
 void p6_process(){
-    read(shared_memory_fila_01->pipe_02[0],&shared_memory_fila_01->valor2,sizeof(int)*sizeof(shared_memory_fila_01->valor2));
-    printf("\n[Processo P6 - PID: %d] - [Fila 02] - Enfileirando o valor: %d e variável de controle: %d\n", getpid(), shared_memory_fila_01->valor2, shared_memory_fila_02->controle);
+	int valor;
+    read(pipe02[0],&valor,sizeof(int));
+    printf("\n[Processo P6 - PID: %d] - [Fila 02] - Enfileirando o valor: %d\n", getpid(), valor);
     shared_memory_fila_01->contador_p6++; //incrementa a quantidade de valores que estão sendo processados pelo processo P6
-    enfileira_fila_02(shared_memory_fila_01->valor2); //enfileira valor que veio do pipe 02 na fila 02
-    close(shared_memory_fila_01->pipe_02[0]); //fecha o pipe 02
+    enfileira_fila_02(valor, 6); //enfileira valor que veio do pipe 02 na fila 02
 }
 
 void calcula_moda(float vetor[]){ //função que calcula a quantidade de valores que mais se repetiram ao serem consumidos da fila 02
@@ -260,7 +289,6 @@ void calcula_moda(float vetor[]){ //função que calcula a quantidade de valores
 						moda = shared_memory_fila_02->vetor_valores_desenfileirados[iterador_1];
 					}
 			}
-
         }
         contador[iterador_1] = 0;
     }
@@ -314,8 +342,9 @@ int main() {
 	//semáforo
 	sem_init(&shared_memory_fila_01->mutex, 1, 1); //endereço do semaforo, 0- compartilhado entre threads e 1 - compartilhado entre processos, valor inicial do semáforo
 
-    if ( pipe(shared_memory_fila_01->pipe_01) == -1 ){ printf("Erro pipe()"); return -1; } //verifica se o pipe 01 deu sucesso
-    if ( pipe(shared_memory_fila_01->pipe_02) == -1 ){ printf("Erro pipe()"); return -1; } //verifica se o pipe 02 deu sucesso
+    if ( pipe(pipe01) == -1 ){ printf("Erro pipe()"); return -1; }
+	//Criando canal de comunicacao pipe02
+	if ( pipe(pipe02) == -1 ){ printf("Erro pipe()"); return -1; }
 
     shared_memory_fila_01->contador_p5 = 0; //define o contador de valores processador por P5 como 0.
     shared_memory_fila_01->contador_p6 = 0; //define o contador de valores processador por P6 como 0.
@@ -356,23 +385,19 @@ int main() {
 	} else if(pids[3] == 0) {
 		for(;;) {
 			signal(SIGUSR1, thread_init_fila_01); //P4: processo 04 cria duas threads as quais desenfileirarão da fila 01 e gravarão no pipe 01 e pipe 02
-			sleep(1);
+			//sleep(1);
 		}
 	} else if(pids[4] == 0) {
         for(;;){
             signal(SIGUSR1, p5_process); //P5: processo 05 lê valores do pipe 01 e grava na fila 02
-            sleep(1);
         }
-
 	} else if(pids[5] == 0) {
         for(;;){
             signal(SIGUSR1, p6_process); //P6: processo 06 lê valores do pipe 02 e grava na fila 02
-            sleep(1);
         }
 	} else if(pids[6] == 0) {
         for(;;) {
 			thread_init_f2(); //P7: processo 07 desenfileira da fila 02 valores processados pelos processos P5 e P6
-			sleep(1);
 		}
 	}
 

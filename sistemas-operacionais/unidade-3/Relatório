@@ -1,0 +1,8 @@
+11711BCC008
+Matheus José da Costa
+
+
+Olá, professor, com esta versão do programa da Unidade III, fiz alguns ajustes em relação ao Pipe e à parte do Busy Wait para a Fila 02. Não está de fato funcionando, mas segue um pouco do que eu fiz.
+
+Para compilar, use o seguinte comando: gcc -o main main.c -pthread
+Para executar, este outro comando: ./main 

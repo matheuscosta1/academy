@@ -24,8 +24,6 @@
 					</thead>
 					<tbody>
 					
-
-
 					<?php
 						$qde = "";
 						if(isset($_GET["qde"])) {
