@@ -1,4 +1,5 @@
-import Grafos3
+import Grafo3
+import GrafoListAdj
 
 -- Testes
 
@@ -51,20 +52,6 @@ g23 = novoGrafo 4 [(0,1),(1,2),(2,3)]
 g24 = novoGrafo 5 [(1,2),(1,0),(2,0),(0,3),(3,4)]
 
 g25 = novoGrafo 2 [(0,1)]
-
-g26 = novoGrafo 4 [(1,2),(1,3),(1,4)]
-
-g27 = novoGrafo 9 [(1,2),(1,3),(2,4),(3,5),(3,6),(4,7),(5,8),(5,9)]
-
-g28 = novoGrafo 6 [(1,4),(2,4),(3,4),(4,5),(5,6)]
-
-g29 = novoGrafo 15 [(1,4),(1,6),(1,2),(1,10),(6,11),(6,12),(4,5),(5,9),(5,8),(2,3),(3,7),(7,15),(7,14),(7,13)]
-
-g30 = novoGrafo 5 [(1,3),(3,2),(3,4),(3,5)]
-
-g31 = novoGrafo 7 [(1,2),(1,3),(2,4),(2,5),(3,6),(3,7)]
-
-g32 = novoGrafo 8 [(1,2),(1,3),(2,4),(2,5),(3,6),(3,7),(4,8)]
 
 -- Exemplos de uso
 
@@ -543,84 +530,3 @@ g32 = novoGrafo 8 [(1,2),(1,3),(2,4),(2,5),(3,6),(3,7),(4,8)]
 
 -- > éBiconexo g9
 --False
-
--- > éÁrvore g26
---True
-
--- > éÁrvore g27
---True
-
--- > éÁrvore g25
---False
-
--- > éEstrela g26
---True
-
--- > éEstrela g27
---False
-
--- > éEstrela g19
---False
-
--- > éFloresta A FAZER
---False
-
--- > éFloresta A FAZER
---False
-
--- > éFloresta A FAZER
---False
-
--- > folhas g28
---[1,2,3,6]
-
--- > folhas g27
---[6,7,8,9]
-
--- > folhas g26
---[2,3,4]
-
--- > internos g28
---[4,5]
-
--- > internos g28
---[4,5]
-
--- > internos g24
---[0,1,2,3]
-
--- > centroÁrvore g24
---
-
--- > centroÁrvore g24
---
-
--- > centroÁrvore g24
---
-
--- > éAncestral g29 6 1 10
---True
-
--- > éAncestral g29 7 15 3
---False
-
--- > éAncestral g29 1 6 3
---False
-
--- > éDescendente g29 3 1 2
---True
-
--- > éDescendente g29 4 5 9
---True
-
--- > éDescendente g29 5 8 9
---False
-
--- > éIrmão g31 1 4 3
---False
-
--- > éIrmão g31 1 4 5
---True
-
--- > éIrmão g31 1 6 7
---True

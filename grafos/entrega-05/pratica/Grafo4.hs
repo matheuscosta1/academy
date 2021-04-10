@@ -1,3 +1,80 @@
+module Grafo4
+   (
+        éTrivial,
+        éVazio,
+        éIsolado,
+        éNulo,
+        éTerminal,
+        éPar,
+        éImpar,
+        seqGraus,
+        grauMax,
+        grauMin,
+        éRegular,
+        éKRegular,
+        éCompleto,
+        éKn,
+        grafoCompleto,
+        grafoComplemento,
+        éSubgrafo,
+        éSubgrafoPróprio,
+        éSubgrafoInduzidoVértices,
+        éSubgrafoInduzidoArestas,
+        éClique,
+        éCjIndependenteVértices,
+        união,
+        interseção,
+        fundeVértices,
+        contraiVértices,
+        contraiAresta,
+        éPasseio,
+        éPasseioAberto,
+        éPasseioFechado,
+        éTrilha,
+        éCaminho,
+        éCiclo,
+        éGrafoCíclico,
+        éCn,
+        éGrafoCaminho,
+        éPn,
+        éGrafoBipartido,
+        éTrilhaEuleriana,
+        éGrafoEuleriano,
+        éSemiEuleriano,
+        éHamiltonianoDirac,
+        éConexo,
+        ciclo,
+        distância,
+        excentricidade,
+        raio,
+        diâmetro,
+        centro,
+        éArticulação,
+        éPonte,
+        conectividade,
+        éBiconexo,
+        éÁrvore,
+        éEstrela,
+        éFloresta,
+        folhas,
+        internos,
+        centroÁrvore,
+        éAncestral,
+        éDescendente,
+        éIrmão,
+        nível,
+        nivel,
+        éÁrvoreBin,
+        estrito,
+        éÁrvoreBinEstrita,
+        éÁrvoreM,
+        éÁrvoreMcheia,
+        prufer,
+        decodPrufer,
+        éSeqVálida,
+        numÁrvRotuladas
+   ) where
+
 import GrafoListAdj
 import Data.List
 
@@ -84,6 +161,14 @@ pegaTodasAsTuplasAPartirDoPrimeiroValor xs = filter ((==) primeiroMinimo . fst) 
 remove element list = filter (\e -> e/=element) list
 
 verificaSeTodosOsElementosDaListaSaoIguais xs = and $ map (== head xs) (tail xs)
+
+fatorial 0 = 1
+fatorial verticeN = fatorial (verticeN - 1) * verticeN
+
+fatorialBaixo [x] = fatorial (x-1)
+fatorialBaixo (x:xs) =  (fatorial (x-1)) * (fatorialBaixo xs)
+
+fatorialCima x = fatorial (x-2)
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --Primeira parte:
@@ -417,8 +502,8 @@ nível arvore raiz vertice = resultado
     where 
     resultado = distância arvore raiz vertice
 
-nível1:: Grafo -> Int -> Int
-nível1 arvore raiz = maximum(map(distância arvore raiz) (vértices arvore))
+nivel:: Grafo -> Int -> Int
+nivel arvore raiz = maximum(map(distância arvore raiz) (vértices arvore))
 
 mapeaQuantidadeDeFilhosDeUmVertice arvore [] = []
 mapeaQuantidadeDeFilhosDeUmVertice arvore (x:xs) = resultado
@@ -444,10 +529,10 @@ estrito grafo visitados (x:y)
 
 éÁrvoreBinEstrita arvore = (éÁrvore arvore) && (estrito arvore [] [head(vértices arvore)])
 
-m_aria m grafo visitados [] = True
-m_aria m grafo visitados (x:y)
+arvoreMAria m grafo visitados [] = True
+arvoreMAria m grafo visitados (x:y)
     |   ((checa_vizinhos) == False) = False
-    |   otherwise = m_aria m grafo novosVisitados fila
+    |   otherwise = arvoreMAria m grafo novosVisitados fila
     where
     filhos = [adj | adj <- vizinhos grafo x, not (elem adj visitados)]
     tamanho = length(filhos)
@@ -455,7 +540,7 @@ m_aria m grafo visitados (x:y)
     fila = filhos ++ y
     novosVisitados = if not (elem x visitados) then visitados ++ [x] else visitados
 
-éÁrvoreM arvore m = (éÁrvore arvore) && (m_aria m arvore [head(vértices arvore)] [head(vértices arvore)])
+éÁrvoreM arvore m = (éÁrvore arvore) && (arvoreMAria m arvore [head(vértices arvore)] [head(vértices arvore)])
 
 éÁrvoreMcheia arvore raiz m = resultado
     where
@@ -485,13 +570,5 @@ decodPrufer c =
         j = head(v) in [(i,j)] ++ decod (tail v) (filter (/= i) l)
 
 éSeqVálida s = (sum s) == (2*(length s) - 2)
-
-fatorial 0 = 1
-fatorial verticeN = fatorial (verticeN - 1) * verticeN
-
-fatorialBaixo [x] = fatorial (x-1)
-fatorialBaixo (x:xs) =  (fatorial (x-1)) * (fatorialBaixo xs)
-
-fatorialCima x = fatorial (x-2)
 
 numÁrvRotuladas s = div (fatorialCima (length s)) (fatorialBaixo s)

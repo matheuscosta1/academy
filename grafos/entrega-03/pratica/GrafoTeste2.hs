@@ -1,4 +1,5 @@
-import Grafos
+import Grafo2
+import GrafoListAdj
 
 -- Testes
 
@@ -25,6 +26,21 @@ g10 = novoGrafo 3 [(1,2),(1,3),(2,3)]
 g11 = novoGrafo 4 [(1,2),(1,3),(2,3),(3,4)]
 
 g12 = novoGrafo 3 [(1,2), (1,3), (2,3)]
+
+g13 = novoGrafo 4 [(1,2), (1,3), (1,4), (3,4)]
+
+g14 = novoGrafo 5 [(1,3), (1,4), (1,5), (2,3), (2,4), (2,5)]
+
+g15 = novoGrafo 5 [(1,3), (1,2), (1,4), (1,5), (2,3), (2,4), (2,5)]
+
+g16 = novoGrafo 4 [(1,2), (1,3), (1,4), (2,3), (2,4), (3,4)]
+
+g17 = novoGrafo 7 [(1,2), (1,7), (2,3), (2,6), (2,7), (3,4), (3,5), (3,6), (4,5), (5,6), (5,7), (6,7)]
+
+g18 = novoGrafo 6 [(1,2), (1,5), (1,6), (2,3), (2,4), (2,6), (3,4), (4,5), (4,6), (5,6)]
+
+g19 = novoGrafo 6 [(1,2), (1,3), (1,6), (2,3), (2,4), (3,5), (4,5), (4,6), (5,6)]
+
 
 -- Exemplos de uso
 
@@ -240,5 +256,167 @@ g12 = novoGrafo 3 [(1,2), (1,3), (2,3)]
 -- > interseção g10 g11
 --  LsAdj (fromList [(1,[3,2]),(2,[1,3]),(3,[1,2])])
 
+-- > fundeVértices g13 2 3
+--  LsAdj (fromList [(1,[4,2,2]),(2,[1,4,1]),(4,[1,2])])
 
+-- > fundeVértices g13 1 2
+--  LsAdj (fromList [(1,[4,3,1,1]),(3,[1,4]),(4,[1,3])])
 
+-- > fundeVértices g13 3 4
+--  LsAdj (fromList [(1,[3,2,3]),(2,[1]),(3,[1,3,3,1])])
+
+-- > contraiVértices g13  4
+--  LsAdj (fromList [(1,[4,2,1,1]),(2,[1]),(4,[1])])
+
+-- > contraiVértices g10 1 2
+--  LsAdj (fromList [(1,[3,1,1]),(3,[1])])
+
+-- > contraiVértices g8 1 3
+--  LsAdj (fromList [(1,[2,1,1]),(2,[1])])
+
+-- > contraiAresta g8 (1,3)
+--  LsAdj (fromList [(1,[2]),(2,[1])])
+
+-- > contraiAresta g10 (1,2)
+--  LsAdj (fromList [(1,[3]),(2,[]),(3,[1])])
+
+-- > contraiAresta g8 (1,3)
+--  LsAdj (fromList [(1,[2]),(2,[1])])
+
+-- > éPasseio g14 [1,3,2,5]
+--  True
+
+-- > éPasseio g15 [1,2,3]
+--  True
+
+-- > éPasseio g15 [1,2,3,5]
+--  False
+
+-- > éPasseioAberto g14 [1,2,3,5]
+--  True
+
+-- > éPasseioAberto g14 [1,3,5]
+--  False
+
+-- > éPasseioAberto g15 [1,3,2,5]
+--  True
+
+-- > éPasseioFechado g15 [1,3,2,5]
+--  False
+
+-- > éPasseioFechado g10 [1,3,2,1]
+--  True
+
+-- > éPasseioFechado g10 [1,2,2,1]
+--  False
+
+-- > éTrilha g10 [1,2,3,1]
+--  True
+
+-- > éTrilha g10 [1,2,1,3]
+--  False
+
+-- > éTrilha g15 [1,2,3]
+--  True
+
+-- > éCaminho g10 [1,2,3,1]
+--False
+
+-- > éCaminho g3 [1,2,1]
+--False
+
+-- > éCaminho g5 [1,3,2]
+--True
+
+-- > éCiclo g10 [1,2,1]
+--True
+
+-- > éCiclo g10 [1,2,3,1]
+--True
+
+-- > éCiclo g10 [1,3,2]
+--False
+
+-- > éCiclo g10 [1,3,2]
+--False
+
+-- > éGrafoCíclico g10
+--True
+
+-- > éGrafoCíclico g13
+--False
+
+-- > éGrafoCíclico g14
+--False
+
+-- > éCn g10 3
+--True
+
+-- > éCn g10 2
+--False
+
+-- > éCn g13 3
+--False
+
+-- > éGrafoCaminho g16
+--True
+
+-- > éGrafoCaminho g10
+--True
+
+-- > éGrafoCaminho g15
+--False
+
+-- > éGrafoCaminho g16 4
+--True
+
+-- > éGrafoCaminho g10 3
+--True
+
+-- > éGrafoCaminho g10 2
+--False
+
+-- > éGrafoBipartido g14 [1,3] [3,4,5]
+--True
+
+-- > éGrafoBipartido g16 [1,3] [3,4,5]
+--False
+
+-- > éGrafoBipartido g14 [1,2] [3,4]
+--False
+
+-- > éTrilhaEuleriana g17 [1,2,3,4,5,7,2,6,3,5,6,7,1]
+--True
+
+-- > éTrilhaEuleriana g14 [1,2,3]
+--False
+
+-- > éTrilhaEuleriana g17 [1,2,3,4,5,7,2,6,3,5,6,7]
+--False
+
+-- > éGrafoEuleriano g17
+--True
+
+-- > éGrafoEuleriano g14
+--False
+
+-- > éGrafoEuleriano g9
+--True
+
+-- > éSemiEuleriano g9
+--False
+
+-- > éSemiEuleriano g18
+--True
+
+-- > éSemiEuleriano g14
+--True
+
+-- > éHamiltonianoDirac g19
+--True
+
+-- > éHamiltonianoDirac g16
+--True
+
+-- > éHamiltonianoDirac g18
+--False

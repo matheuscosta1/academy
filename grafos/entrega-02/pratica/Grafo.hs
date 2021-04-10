@@ -1,3 +1,31 @@
+module Grafo
+   (
+        éTrivial,
+        éVazio,
+        éIsolado,
+        éNulo,
+        éTerminal,
+        éPar,
+        éImpar,
+        seqGraus,
+        grauMax,
+        grauMin,
+        éRegular,
+        éKRegular,
+        éCompleto,
+        éKn,
+        grafoCompleto,
+        grafoComplemento,
+        éSubgrafo,
+        éSubgrafoPróprio,
+        éSubgrafoInduzidoVértices,
+        éSubgrafoInduzidoArestas,
+        éClique,
+        éCjIndependenteVértices,
+        união,
+        interseção
+   ) where
+
 import GrafoListAdj
 import Data.List
 
