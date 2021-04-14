@@ -567,13 +567,13 @@ g34 = novoGrafo 11 [(1,2),(1,3),(2,4),(2,5),(3,6),(3,7),(7,8),(7,9),(7,10)]
 -- > éEstrela g19
 --False
 
--- > éFloresta A FAZER
+-- > éFloresta g34
+--True
+
+-- > éFloresta g31
 --False
 
--- > éFloresta A FAZER
---False
-
--- > éFloresta A FAZER
+-- > éFloresta g33
 --False
 
 -- > folhas g28
@@ -594,14 +594,14 @@ g34 = novoGrafo 11 [(1,2),(1,3),(2,4),(2,5),(3,6),(3,7),(7,8),(7,9),(7,10)]
 -- > internos g24
 --[0,1,2,3]
 
--- > centroÁrvore g24
---
+-- > centroÁrvore g31
+--[1,2,3,4,5,6,7]
 
--- > centroÁrvore g24
---
+-- > centroÁrvore g34
+--[1,2,3,4,5,6,7,8,9,10,11]
 
--- > centroÁrvore g24
---
+-- > centroÁrvore g30
+--[3]
 
 -- > éAncestral g29 6 1 10
 --True
