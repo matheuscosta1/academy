@@ -76,7 +76,8 @@ module Grafo5
         éEmparelhamento,
         éEmpMaximal,
         éEmpPerfeito,
-        éCaminhoAlternante
+        éCaminhoAlternante,
+        éCaminhoAumentador
    ) where
 
 import GrafoListAdj
@@ -600,6 +601,11 @@ quantidadeDeVerticesEParOuImpar grafo = ((length(vértices grafo)) `div` 2 == 0)
         comumEntreDuasPrimeirasArestasDoCaminhoEEmparelhamento = comumEntreDuasListas pegaDuasPrimeirasArestasDoCaminho arestasDoEmparelhamento
         caminhoComACabeçaRemovida = remove (head caminho) caminho
         resultado = if (éEmparelhamento grafo arestasDoEmparelhamento) && length(comumEntreDuasPrimeirasArestasDoCaminhoEEmparelhamento) == 1 && length(arestasDoCaminho) == 2 then True else if (length(arestasDoCaminho) > 0) then éCaminhoAlternante grafo arestasDoEmparelhamento caminhoComACabeçaRemovida else False
+
+éCaminhoAumentador grafo arestasDoEmparelhamento caminho = resultado
+    where
+        listaVérticesSaturados = sort((map fst arestasDoEmparelhamento) ++ (map snd arestasDoEmparelhamento))
+        resultado = (éCaminhoAlternante grafo arestasDoEmparelhamento caminho) && not((head caminho) `elem` listaVérticesSaturados) && not((last caminho) `elem` listaVérticesSaturados)
 
 cobertura grafo [] = []
 cobertura grafo ((x,y):xs) = [x,y] ++ (cobertura novo_g nova_a) 

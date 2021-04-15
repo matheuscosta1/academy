@@ -748,3 +748,15 @@ g35 = novoGrafo 8 [(1,2),(1,4),(1,5),(2,3),(2,5),(2,1),(3,2),(3,5),(3,6),(4,1),(
 
 -- > éCaminhoAlternante g37 [(2,3),(1,6),(2,1)] [6,1,2,3,4]
 --False
+
+-- > éCaminhoAumentador g37 [(2,3),(1,6)] [5,6,1,2,3,4]
+--True
+
+-- > éCaminhoAumentador g37 [(2,3),(1,6)] [5,6,1,2,3,4]
+--True
+
+-- > éCaminhoAumentador g37 [(2,3),(1,6)] [5,6,1,2,3,4,6]
+--False
+
+-- > éCaminhoAumentador g37 [(2,3),(1,6),(1,2)] [5,6,1,2,3,4]
+--False
