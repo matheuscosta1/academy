@@ -593,11 +593,13 @@ numÁrvRotuladas s = div (fatorialCima (length s)) (fatorialBaixo s)
 
 quantidadeDeVerticesEParOuImpar grafo = ((length(vértices grafo)) `div` 2 == 0)
 
-éCaminhoAlternante grafo listaArestas caminhoAlternante = resultado
+éCaminhoAlternante grafo arestasDoEmparelhamento caminho = resultado
     where
-        listaVérticesSaturados = sort((map fst listaArestas) ++ (map snd listaArestas))
-        
-        resultado = removeRepetidos (vértices grafo) listaVérticesSaturados 
+        arestasDoCaminho = constróiArestasAPartirDosVértices caminho
+        pegaDuasPrimeirasArestasDoCaminho = take 2 arestasDoCaminho
+        comumEntreDuasPrimeirasArestasDoCaminhoEEmparelhamento = comumEntreDuasListas pegaDuasPrimeirasArestasDoCaminho arestasDoEmparelhamento
+        caminhoComACabeçaRemovida = remove (head caminho) caminho
+        resultado = if (éEmparelhamento grafo arestasDoEmparelhamento) && length(comumEntreDuasPrimeirasArestasDoCaminhoEEmparelhamento) == 1 && length(arestasDoCaminho) == 2 then True else if (length(arestasDoCaminho) > 0) then éCaminhoAlternante grafo arestasDoEmparelhamento caminhoComACabeçaRemovida else False
 
 cobertura grafo [] = []
 cobertura grafo ((x,y):xs) = [x,y] ++ (cobertura novo_g nova_a) 
@@ -609,3 +611,4 @@ cobertura grafo ((x,y):xs) = [x,y] ++ (cobertura novo_g nova_a)
 coberturaVértices grafo = (cobertura grafo (arestas grafo))
 
 
+ 

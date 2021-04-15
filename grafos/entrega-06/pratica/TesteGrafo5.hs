@@ -739,3 +739,12 @@ g35 = novoGrafo 8 [(1,2),(1,4),(1,5),(2,3),(2,5),(2,1),(3,2),(3,5),(3,6),(4,1),(
 
 -- > éEmpPerfeito g34 [(1,2),(3,4)]
 --False
+
+-- > éCaminhoAlternante g37 [(2,3),(1,6)] [6,1,2,3,4]
+--True
+
+-- > éCaminhoAlternante g37 [(2,3),(1,6)] [6,1,2,3,8,9]
+--False
+
+-- > éCaminhoAlternante g37 [(2,3),(1,6),(2,1)] [6,1,2,3,4]
+--False
