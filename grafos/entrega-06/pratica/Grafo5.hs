@@ -77,7 +77,10 @@ module Grafo5
         éEmpMaximal,
         éEmpPerfeito,
         éCaminhoAlternante,
-        éCaminhoAumentador
+        éCaminhoAumentador,
+        éDesconectador,
+        éSeparador,
+        coberturaVértices
    ) where
 
 import GrafoListAdj
@@ -174,6 +177,8 @@ fatorialBaixo [x] = fatorial (x-1)
 fatorialBaixo (x:xs) =  (fatorial (x-1)) * (fatorialBaixo xs)
 
 fatorialCima x = fatorial (x-2)
+
+quantidadeDeVerticesEParOuImpar grafo = ((length(vértices grafo)) `div` 2 == 0)
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --Primeira parte:
@@ -592,8 +597,6 @@ numÁrvRotuladas s = div (fatorialCima (length s)) (fatorialBaixo s)
         listaVérticesSaturados = sort((map fst listaArestas) ++ (map snd listaArestas))
         resultado = éEmparelhamento grafo listaArestas && (listaVérticesSaturados == (vértices grafo))
 
-quantidadeDeVerticesEParOuImpar grafo = ((length(vértices grafo)) `div` 2 == 0)
-
 éCaminhoAlternante grafo arestasDoEmparelhamento caminho = resultado
     where
         arestasDoCaminho = constróiArestasAPartirDosVértices caminho
@@ -604,8 +607,30 @@ quantidadeDeVerticesEParOuImpar grafo = ((length(vértices grafo)) `div` 2 == 0)
 
 éCaminhoAumentador grafo arestasDoEmparelhamento caminho = resultado
     where
-        listaVérticesSaturados = sort((map fst arestasDoEmparelhamento) ++ (map snd arestasDoEmparelhamento))
+        listaVérticesSaturados = nub (sort((map fst arestasDoEmparelhamento) ++ (map snd arestasDoEmparelhamento)))
         resultado = (éCaminhoAlternante grafo arestasDoEmparelhamento caminho) && not((head caminho) `elem` listaVérticesSaturados) && not((last caminho) `elem` listaVérticesSaturados)
+
+removeVértices grafo [] = grafo
+removeVértices grafo (x:xs) = resultado
+    where
+        novoGrafo = removeVértice grafo x
+        resultado = removeVértices novoGrafo xs
+
+éDesconectador grafo verticeX verticeW listaArestasDesconectadoras = resultado
+    where
+        éConectadoAntes = if ((verticeX `elem` buscaLargura grafo) &&  (verticeW `elem` buscaLargura grafo)) then True else False
+        arestasDoGrafoSemArestasDesconectadoras = removeRepetidos (arestas grafo) listaArestasDesconectadoras
+        quantidadeVerticesAposRemoçãoArestas = nub (sort((map fst arestasDoGrafoSemArestasDesconectadoras) ++ (map snd arestasDoGrafoSemArestasDesconectadoras)))
+        novoGrafoX = novoGrafo (length(quantidadeVerticesAposRemoçãoArestas)) arestasDoGrafoSemArestasDesconectadoras
+        éConectadoDepois = if ((verticeX `elem` buscaLargura novoGrafoX) && (verticeW `elem` buscaLargura novoGrafoX)) then True else False
+        resultado = if (éConectadoAntes && not(éConectadoDepois)) then True else False
+
+éSeparador grafo verticeX verticeW listaVérticesSeparadores = resultado
+    where
+        éConectadoAntes = if ((verticeX `elem` buscaLargura grafo) &&  (verticeW `elem` buscaLargura grafo)) then True else False
+        novoGrafoX = removeVértices grafo listaVérticesSeparadores
+        éConectadoDepois = if ((verticeX `elem` buscaLargura novoGrafoX) && (verticeW `elem` buscaLargura novoGrafoX)) then True else False
+        resultado = if (éConectadoAntes && not(éConectadoDepois)) then True else False
 
 cobertura grafo [] = []
 cobertura grafo ((x,y):xs) = [x,y] ++ (cobertura novo_g nova_a) 
