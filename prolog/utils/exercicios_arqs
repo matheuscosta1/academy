@@ -1,0 +1,2 @@
+lerArq(Arq):- see(Arq), lidarAqr, seen.
+lidarArq:-
