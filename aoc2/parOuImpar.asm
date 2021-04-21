@@ -33,16 +33,16 @@ str4: .asciiz "E impar\n"
 		addi $s0, $zero, 1 #(0b0000 0000 0000 0000 0000 0000 0000 0000 0001)
 		and $t0, $s7, $s0 #int & 1
 		beq $t0, $zero, PAR
-IMPAR:          la $a0, str4
+IMPAR:  la $a0, str4
 		addi $v0, $zero,4
 		syscall
 		j	SAI
-PAR:          	la $a0, str3
+PAR:    la $a0, str3
 		addi $v0, $zero,4
 		syscall
 	
 		#informar ao usuario a paridade do numero lido
 	
 		#informa ao SO que o programa terminou sem erros (return 0)
-SAI:		addi $v0, $zero, 10
+SAI:	addi $v0, $zero, 10
 		syscall

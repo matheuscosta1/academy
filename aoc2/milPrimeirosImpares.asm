@@ -16,7 +16,6 @@
 	li	$v0, 4
 	syscall
 	
-	jal 	fazAlgoMaravilhoso
 	add	$s0, $v0, $zero	#retorno da função
 	
 	#la	$t0, retFazAlgoMaravilhoso
