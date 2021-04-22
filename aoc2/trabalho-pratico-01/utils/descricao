@@ -1,8 +1,0 @@
-Escreva em assembly um programa que implementa o algoritmo de ordenação quicksort. O programa deve ler um arquivo texto chamado numeros.csv (nos arquivos do grupo) e ordená-los.  O programa deve ainda possuir uma função que converte uma string de números para um inteiro.
-
-
--> ler arquivo				
--> converter string para inteiro	
--> quicksort				"ok"
-
-
