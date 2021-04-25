@@ -667,3 +667,48 @@ suaviza grafo = resultado
         listaVérticesESeusGraus = zipList(map (grau grafo) (vértices grafo)) (vértices grafo)
         vérticesComGrau2 = map snd (filter ((==2).fst) listaVérticesESeusGraus)
         resultado = contraiListaVértices grafo vérticesComGrau2
+
+criaListaCores grafo = take (grauMax grafo) [1..]
+
+pegaTodosOsVérticesAdjacentesAoVerticeX grafo verticeX [] = []
+pegaTodosOsVérticesAdjacentesAoVerticeX grafo verticeX (x:xs) = resultado
+    where
+        resultado = if adjacente grafo verticeX x then [x] ++ pegaTodosOsVérticesAdjacentesAoVerticeX grafo verticeX xs else (pegaTodosOsVérticesAdjacentesAoVerticeX grafo verticeX xs)
+
+verificaSeOVerticeXPossuiUmaDadaCor verticeX cor listaDeVérticesECoresNormalizada = resultado
+    where
+        corDoVérticeX = map snd (filter ((==verticeX).fst) listaDeVérticesECoresNormalizada)
+        resultado = if cor `elem` corDoVérticeX then True else False
+
+verificaSeOVerticeXEstáColorido verticeX listaDeVérticesECoresNormalizada = resultado
+    where
+        verticeXTemCor = map snd (filter ((==verticeX).fst) listaDeVérticesECoresNormalizada)
+        resultado = if (length(verticeXTemCor) > 0) then True else False
+
+percorreTodosOsVérticesAdjacentesEVerificaSePossuiADadaCor [] cor listaDeVérticesECoresNormalizada = False
+percorreTodosOsVérticesAdjacentesEVerificaSePossuiADadaCor vérticesAdjacentes cor [] = False
+percorreTodosOsVérticesAdjacentesEVerificaSePossuiADadaCor (x:xs) cor listaDeVérticesECoresNormalizada = resultado
+    where 
+        éCorDoVérticeAdjacente = (verificaSeOVerticeXPossuiUmaDadaCor x cor listaDeVérticesECoresNormalizada)
+        resultado = if éCorDoVérticeAdjacente then True else if not(null(xs)) then percorreTodosOsVérticesAdjacentesEVerificaSePossuiADadaCor xs cor listaDeVérticesECoresNormalizada else False
+
+--grafo listaVértices cores listaDeVérticesColoridos
+percorreVértices grafo [] cores listaDeVérticesColoridos = listaDeVérticesColoridos
+percorreVértices grafo (x:xs) cor listaDeVérticesColoridos = resultado
+    where
+        verticeEstáColorido = verificaSeOVerticeXEstáColorido x listaDeVérticesColoridos
+        vérticesAdjacentes = pegaTodosOsVérticesAdjacentesAoVerticeX grafo x (vértices grafo)
+        vérticeXPossuiACor = percorreTodosOsVérticesAdjacentesEVerificaSePossuiADadaCor vérticesAdjacentes cor (listaDeVérticesColoridos)
+        verticesColoridos = if (vérticeXPossuiACor || verticeEstáColorido) then listaDeVérticesColoridos else listaDeVérticesColoridos ++ [(x, cor)]
+        resultado = percorreVértices grafo xs cor verticesColoridos
+
+percorreCores grafo vérticesGrafo [] listaDeVérticesColoridos = listaDeVérticesColoridos
+percorreCores grafo vérticesGrafo (x:xs) listaDeVérticesColoridos = resultado
+    where
+        percorreVérticesX = percorreVértices grafo (vértices grafo) x listaDeVérticesColoridos
+        resultado = percorreCores grafo vérticesGrafo xs percorreVérticesX
+
+coloreVérticesIngênuo grafo = resultado
+    where
+        cores = criaListaCores grafo 
+        resultado = percorreCores grafo (vértices grafo) cores []
