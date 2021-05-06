@@ -668,7 +668,7 @@ suaviza grafo = resultado
         vérticesComGrau2 = map snd (filter ((==2).fst) listaVérticesESeusGraus)
         resultado = contraiListaVértices grafo vérticesComGrau2
 
-criaListaCores grafo = take (grauMax grafo) [1..]
+criaListaCores grafo = take (length(vértices grafo)) [1..]
 
 pegaTodosOsVérticesAdjacentesAoVerticeX grafo verticeX [] = []
 pegaTodosOsVérticesAdjacentesAoVerticeX grafo verticeX (x:xs) = resultado
