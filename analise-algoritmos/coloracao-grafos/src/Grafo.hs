@@ -11,6 +11,8 @@ import Data.List
 import System.Random
 import System.Random.Shuffle 
 import Control.Monad
+import Control.Exception
+import Data.Time
 
 
 --sudo apt-get install cabal-install cabal update
@@ -68,20 +70,28 @@ coloreVérticesIngênuo grafo listaVértices = resultado
         cores = criaListaCores grafo
         resultado = percorreCores grafo listaVértices cores []
 
-g42 = novoGrafo 10 [(1,2),(1,3),(2,4),(3,5),(4,5),(1,6),(2,7),(3,8),(4,9),(5,10),(6,9),(6,10),(7,8),(7,10),(8,9)]
+g42 = novoGrafo 10 [(1,2),(1,5),(5,2),(5,8),(5,6),(5,3),(2,6),(2,3),(5,9),(6,9),(6,7),(6,4),(3,4),(3,7),(6,3),(4,7),(9,7),(9,10)]
+--g42 = novoGrafo 10 [(1,2),(1,3),(2,4),(3,5),(4,5),(1,6),(2,7),(3,8),(4,9),(5,10),(6,9),(6,10),(7,8),(7,10),(8,9)]
 xs = vértices g42
 
 pegaTamanhoCromático x = length(nub(map snd x))
 
 principal :: IO ()
 principal = do
+    start <- getCurrentTime
+
     let verticesGrafo = (vértices g42)
     resultadoVerticesEmbaralhados <- shuffleM verticesGrafo
-    
+        
     let resultadoGrafoColorido = (coloreVérticesIngênuo g42 resultadoVerticesEmbaralhados)
 
     let numeroCromatico = pegaTamanhoCromático resultadoGrafoColorido
 
+    end <- getCurrentTime
+
+    putStrLn("------------------------")
+    putStrLn("Arestas do grafo: ")
+    print $ (arestas g42)
     putStrLn("------------------------")
     putStrLn("Vértices embaralhados: ")
     print $ resultadoVerticesEmbaralhados
@@ -91,4 +101,7 @@ principal = do
     putStrLn("------------------------")
     putStrLn("Número cromático: ")
     print $ numeroCromatico
+    putStrLn("------------------------")
+    putStrLn("Tempo de execução: ")
+    print (diffUTCTime end start)
     putStrLn("------------------------")

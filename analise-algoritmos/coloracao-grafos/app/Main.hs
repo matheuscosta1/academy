@@ -6,4 +6,5 @@ import Grafo
 --stack run (estando no diretório raiz)
 
 main :: IO ()
-main = principal
+main = principal 
+
