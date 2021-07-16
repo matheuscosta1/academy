@@ -1,0 +1,12 @@
+Alunos:
+ *   Rafael Valentim     11711BCC010
+ *   Matheus José        11711BCC008
+ *   Leonardo Essia      11712BCC009
+
+Explicação:
+Fazendo uso de mútliplas características estáticas de uma string, como tamanho e representação decimal de cada caractere, 
+somado a uma operação de dispersão, no caso a mutiplicação, não foi possível gerar uma função hash totalmente aleatória, 
+mas até bem espalhadada, com desvio padrão de aproximadamente 7 elementos por bucket no arquivo de cidades e de aproximadamente 
+206 elementos no arquivo de artigos. Contudo é necessário o uso de buckets de explosão, uma vez que, alguns buckets ficaram sobrecarregados, 
+com cerca de 3000 elementos a mais do que os demais, que guardam em torno de 5000 elementos. Valendo ressaltar que a função de hash
+foi inspirada em um modelo acumulativo já considerado eficiente para distribuição de strings.

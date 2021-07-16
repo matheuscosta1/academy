@@ -32,7 +32,7 @@ INSERT INTO trabalho_sbd.city (id, name, state_id) VALUES (3, 'Campinas', 2);
 
 ## Customer
 INSERT INTO trabalho_sbd.customer (id, email, name, person_identity, type, password) VALUES (1, 'maria@gmail.com', 'Maria Silva', '72113079003', 1, '$2y$12$ojDDqa48iPiTnzyzaOiqDeDH08/NljrjsiRiODk0wUqZKZ84l8MgC');
-INSERT INTO trabalho_sbd.customer (id, email, name, person_identity, type, password) VALUES (2, 'matheus.costa@tutanota.com', 'Matheus José', '12629141675', 1, '$2y$12$cOKTjfwZe39JHGp3tlGYbeiiYB2GZOaNr9nDBDzw0Ku1Umdn.geeu');
+INSERT INTO trabalho_sbd.customer (id, email, name, person_identity, type, password) VALUES (2, 'matheus@tutanota.com', 'Matheus', '61522253025', 1, '$2y$12$cOKTjfwZe39JHGp3tlGYbeiiYB2GZOaNr9nDBDzw0Ku1Umdn.geeu');
 
 ## Phones
 INSERT INTO trabalho_sbd.phone (customer_id, phones) VALUES (1, '998068391');

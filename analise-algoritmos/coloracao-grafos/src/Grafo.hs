@@ -55,7 +55,7 @@ percorreVértices grafo (x:xs) cor listaDeVérticesColoridos = resultado
     where
         verticeEstáColorido = verificaSeOVerticeXEstáColorido x listaDeVérticesColoridos
         vérticesAdjacentes = pegaTodosOsVérticesAdjacentesAoVerticeX grafo x (vértices grafo)
-        vérticeXPossuiACor = percorreTodosOsVérticesAdjacentesEVerificaSePossuiADadaCor vérticesAdjacentes cor (listaDeVérticesColoridos)
+        vérticeXPossuiACor = percorreTodosOsVérticesAdjacentesEVerificaSePossuiADadaCor vérticesAdjacentes cor listaDeVérticesColoridos
         verticesColoridos = if (vérticeXPossuiACor || verticeEstáColorido) then listaDeVérticesColoridos else listaDeVérticesColoridos ++ [(x, cor)]
         resultado = percorreVértices grafo xs cor verticesColoridos
 
@@ -71,7 +71,7 @@ coloreVérticesIngênuo grafo listaVértices = resultado
         resultado = percorreCores grafo listaVértices cores []
 
 g42 = novoGrafo 10 [(1,2),(1,5),(5,2),(5,8),(5,6),(5,3),(2,6),(2,3),(5,9),(6,9),(6,7),(6,4),(3,4),(3,7),(6,3),(4,7),(9,7),(9,10)]
---g42 = novoGrafo 10 [(1,2),(1,3),(2,4),(3,5),(4,5),(1,6),(2,7),(3,8),(4,9),(5,10),(6,9),(6,10),(7,8),(7,10),(8,9)]
+--g42 = novoGrafo 10 [(1,2),(1,3),(2,4),(3,5),(4,5),(1,6),(2,7),(3,8),(4,9),(5,10),(6,9),(6,10),(7,8),(7,10),(8,9)] -- Grafo de Petersen
 xs = vértices g42
 
 pegaTamanhoCromático x = length(nub(map snd x))
