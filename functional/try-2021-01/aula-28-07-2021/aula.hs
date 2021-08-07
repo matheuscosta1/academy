@@ -73,7 +73,8 @@ cartaMediana carta1 carta2 carta3
   | maiorCarta carta1 carta2 carta3 == carta2 && menorCarta carta1 carta2 carta3 == carta1 = carta3
   | maiorCarta carta1 carta2 carta3 == carta2 && menorCarta carta1 carta2 carta3 == carta3 = carta1
   | maiorCarta carta1 carta2 carta3 == carta3 && menorCarta carta1 carta2 carta3 == carta1 = carta2
-  | maiorCarta carta1 carta2 carta3 == carta3 && menorCarta carta1 carta2 carta3 == carta2 = carta1
+  | maiorCarta carta1 carta2 carta3 == carta3 && menorCarta carta1 carta2 carta3 == carta2 = carta1 
+  | otherwise = (99, "error")
 
 verificaSeONaipeÉIgual:: Carta -> Carta -> Carta -> Bool
 verificaSeONaipeÉIgual carta1 carta2 carta3 =
@@ -105,8 +106,8 @@ verificaSeOValorÉIgual carta1 carta2 carta3 =
 
 {--
 
->>>verificaSeONaipeÉIgual (1,"ouro") (1,"paus") (1,"copas")
-False
+>>>verificaSeONaipeÉIgual (1,"ouro") (1,"ouro") (1,"ouro")
+True
 
 >>>verificaSeOValorAcrescentadoÉIgual (1,"ouro") (1,"paus") (1,"copas")
 False
@@ -122,7 +123,6 @@ False
 
 >>>cartaÉMenor (1,"copas") (1,"ouro") 
 True
-
 
 >>>somaTresNumeros 1 2 5
 8
@@ -196,7 +196,7 @@ False
 False
 
 >>>verificaSeOValorÉIgual (1,"ouro") (1,"ouro") (1,"copas")
-/home/matheus/Github/personal/academy/functional/try-2021-01/aula-28-07-2021/aula.hs:(70,1)-(76,99): Non-exhaustive patterns in function cartaMediana
+False
 
 >>>verificaSeONaipeÉDiferente (2, "paus") (3, "ouro") (4, "paus") 
 False
@@ -204,7 +204,7 @@ False
 >>>éJogo (1,"ouro") (2,"ouro") (3,"ouro")
 True
 >>>éJogo (1,"ouro") (1,"ouro") (1,"copas")
-/home/matheus/Github/personal/academy/functional/try-2021-01/aula-28-07-2021/aula.hs:(70,1)-(76,99): Non-exhaustive patterns in function cartaMediana
+False
 
 >>>éJogo (1,"ouro") (1,"paus") (1,"copas")
 True
