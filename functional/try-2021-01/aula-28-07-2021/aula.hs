@@ -9,17 +9,17 @@ areaRetangulo:: Float -> Float -> Float
 areaRetangulo l1 l2 = l1 * l2
 
 maiorDeTres:: Integer -> Integer -> Integer -> Integer
-maiorDeTres a b c
-  | a >= b && a >= c = a
-  | b >= c = b
-  | otherwise = c
+maiorDeTres numero1 numero2 numero3
+  | numero1 >= numero2 && numero1 >= numero3 = numero1
+  | numero2 >= numero3 = numero2
+  | otherwise = numero3
 
 pedraTesouraPapel :: String -> String -> String
-pedraTesouraPapel m1 m2
-  | (m1 == "tesoura" && m2 == "papel") || (m2 == "tesoura" && m1 == "papel")  = "tesoura"
-  | (m1 == "pedra" && m2 == "tesoura") || (m2 == "pedra" && m1 == "tesoura") = "pedra"
-  | (m1 == "papel" && m2 == "pedra") || (m2 == "papel" && m1 == "pedra") = "papel"
-  | m1 == m2 = "empate"
+pedraTesouraPapel objeto1 objeto2
+  | (objeto1 == "tesoura" && objeto2 == "papel") || (objeto2 == "tesoura" && objeto1 == "papel")  = "tesoura"
+  | (objeto1 == "pedra" && objeto2 == "tesoura") || (objeto2 == "pedra" && objeto1 == "tesoura") = "pedra"
+  | (objeto1 == "papel" && objeto2 == "pedra") || (objeto2 == "papel" && objeto1 == "pedra") = "papel"
+  | objeto1 == objeto2 = "empate"
   | otherwise = "opcao invalida"
 
 eLógico :: Bool -> Bool -> Bool
@@ -73,7 +73,7 @@ cartaMediana carta1 carta2 carta3
   | maiorCarta carta1 carta2 carta3 == carta2 && menorCarta carta1 carta2 carta3 == carta1 = carta3
   | maiorCarta carta1 carta2 carta3 == carta2 && menorCarta carta1 carta2 carta3 == carta3 = carta1
   | maiorCarta carta1 carta2 carta3 == carta3 && menorCarta carta1 carta2 carta3 == carta1 = carta2
-  | maiorCarta carta1 carta2 carta3 == carta3 && menorCarta carta1 carta2 carta3 == carta2 = carta1 
+  | maiorCarta carta1 carta2 carta3 == carta3 && menorCarta carta1 carta2 carta3 == carta2 = carta1
   | otherwise = (99, "error")
 
 verificaSeONaipeÉIgual:: Carta -> Carta -> Carta -> Bool
@@ -99,10 +99,25 @@ verificaSeOValorÉIgual carta1 carta2 carta3 =
 
 éJogo:: Carta -> Carta -> Carta -> Bool
 éJogo carta1 carta2 carta3 =
-  verificaSeONaipeÉIgual carta1 carta2 carta3 &&  verificaSeOValorAcrescentadoÉIgual carta1 carta2 carta3
+  verificaSeONaipeÉIgual carta1 carta2 carta3 && verificaSeOValorAcrescentadoÉIgual carta1 carta2 carta3
   || verificaSeONaipeÉDiferente carta1 carta2 carta3 && verificaSeOValorÉIgual carta1 carta2 carta3
 
 
+maiorMão:: (Carta, Carta, Carta) -> (Carta, Carta, Carta) -> (Carta, Carta, Carta)
+maiorMão (carta1, carta2, carta3) (carta4, carta5, carta6)
+  | cartaÉMenor carta1 carta4 = (carta4, carta5, carta6)
+  | cartaÉIgual carta1 carta4 && cartaÉMenor carta2 carta5 = (carta4, carta5, carta6)
+  | cartaÉIgual carta1 carta4 && cartaÉIgual carta2 carta5 && cartaÉMenor carta3 carta6 = (carta4, carta5, carta6)
+  | otherwise = (carta1, carta2, carta3)
+
+mãoGanhadora:: (Carta, Carta, Carta) -> (Carta, Carta, Carta) -> (Carta, Carta, Carta)
+mãoGanhadora (carta1, carta2, carta3) (carta4, carta5, carta6)
+  | éJogo carta1 carta2 carta3 && éJogo carta4 carta5 carta6 && cartaÉIgual carta1 carta4 && cartaÉIgual carta2 carta5 && cartaÉIgual carta3 carta6 = ((0,""),(0,""),(0,""))
+  | not(éJogo carta1 carta2 carta3) && not(éJogo carta4 carta5 carta6) && cartaÉIgual carta1 carta4 && cartaÉIgual carta2 carta5 && cartaÉIgual carta3 carta6 = ((0,""),(0,""),(0,""))
+  | éJogo carta1 carta2 carta3 && not(éJogo carta4 carta5 carta6) = (carta1, carta2, carta3)
+  | éJogo carta1 carta2 carta3 && éJogo carta4 carta5 carta6 && maiorMão (carta1, carta2, carta3) (carta4, carta5, carta6) == (carta1, carta2, carta3) = (carta1, carta2, carta3)
+  | not(éJogo carta1 carta2 carta3) && not(éJogo carta4 carta5 carta6) && maiorMão (carta1, carta2, carta3) (carta4, carta5, carta6) == (carta1, carta2, carta3) = (carta1, carta2, carta3)
+  | otherwise = (carta4, carta5, carta6)
 
 {--
 
@@ -208,5 +223,38 @@ False
 
 >>>éJogo (1,"ouro") (1,"paus") (1,"copas")
 True
+
+>>>maiorMão ((5,"paus"),(4,"ouro"),(3,"copas")) ((5,"paus"),(4,"ouro"),(3,"copas"))
+((5,"paus"),(4,"ouro"),(3,"copas"))
+
+>>>maiorMão ((5,"paus"),(4,"ouro"),(3,"copas")) ((5,"paus"),(4,"ouro"),(2,"copas"))
+((5,"paus"),(4,"ouro"),(3,"copas"))
+
+>>>maiorMão ((5,"paus"),(4,"ouro"),(3,"copas")) ((5,"paus"),(4,"copas"),(3,"copas"))
+((5,"paus"),(4,"ouro"),(3,"copas"))
+
+>>>éJogo (5,"paus") (4,"ouro") (3,"copas")
+False
+
+>>>cartaÉIgual (3,"copas") (3,"copas")
+True
+
+>>> maiorMão ((5,"paus"),(4,"ouro"),(3,"copas")) ((5,"paus"),(4,"ouro"),(3,"copas"))
+((5,"paus"),(4,"ouro"),(3,"copas"))
+
+>>>maiorMão ((4,"paus"),(4,"ouro"),(3,"copas")) ((5,"paus"),(4,"ouro"),(2,"copas"))
+((5,"paus"),(4,"ouro"),(2,"copas"))
+
+>>>mãoGanhadora ((5,"paus"),(4,"ouro"),(3,"copas")) ((5,"paus"),(4,"ouro"),(3,"copas"))
+((0,""),(0,""),(0,""))
+
+>>>mãoGanhadora ((5,"paus"),(4,"ouro"),(3,"copas")) ((5,"paus"),(4,"ouro"),(2,"copas"))
+((5,"paus"),(4,"ouro"),(3,"copas"))
+
+>>>mãoGanhadora ((6,"paus"),(4,"ouro"),(3,"copas")) ((3,"paus"),(3,"ouro"),(3,"copas"))
+((3,"paus"),(3,"ouro"),(3,"copas"))
+
+>>>mãoGanhadora ((4,"paus"),(4,"ouro"),(3,"copas")) ((5,"paus"),(4,"ouro"),(2,"copas"))
+((5,"paus"),(4,"ouro"),(2,"copas"))
 
 --}
