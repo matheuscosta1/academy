@@ -397,7 +397,7 @@ divideListaPI (x:xs)
 
 
 uniaoListasOrden :: [Int] -> [Int] -> [Int]
-uniaoListasOrden [][] = []
+uniaoListasOrden [] [] = []
 uniaoListasOrden lista1 lista2 = lista1 ++ lista2
 
 --Construir uma função que receba uma lista de objetos e um valor inteiro n e devolva todas as 
