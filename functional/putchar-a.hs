@@ -9,8 +9,8 @@ main = do
         putStrLn "Digite uma sequencia de numeros"
         putStrLn "Para terminar digite o valor zero" 
         lista <- lerLista []
-		putStr "A soma dos numeros digitados é"
-		putStrLn(show((sum lista)`div`length lista))
+		    putStr "A soma dos numeros digitados é"
+		    putStrLn(show((sum lista)`div`length lista))
 
 
 lerLista xs = do x <- readLn
