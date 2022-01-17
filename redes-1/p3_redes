@@ -1,0 +1,100 @@
+1-
+Verdadeiras:
+- A distinção entre camada de transporte e de rede se faz necessaria, embora is seus serviços sejam muito semelhantes, basicamente porque a camada de transporte funciona integralmente nos “hosts”, enquanto a callllllll l
+ada de rede funciona principalmente na sub-rede de comunicação
+
+-A existencia das camadas de transporte e de redes se faz necessaria pois embora ofereçam a mesma classe de serviço, a 1ª funciona no “host” e a 2ª funciona nos roteadores, ou seja, a responsabilidade de operação está sob entidades (p. ex. Rede local,concessionaria de comunicações) diferentes.
+
+-Processos na camada de transporte se comunicam atravez do T-SAP “transport-service-access point”, ou seja, estes pontos funcionam endereços de transporte que os processos podem ouvir para receber solicitações de conexão, p.ex., Portas de rede internet
+
+-Há 3 maneiras basicas para encerrar uma conexão: i) um dos “hosts” envia um T-DISCONNECT request; ii)02 “hosts” enviam T-DISCONNECT request simultaneamente; ou iii) própria camada de transporte gera T-DISCONNECT  indication como sinal que não suporta a conexão
+
+-A opção de colocar “buffers” na origem ou no destino depende do tipo de trafego , ou seja, para tráfego que exige alta largura de banda , a melhor opção é manter no receptor, enquanto que para tráfego de baixa largura de banda a opção é manter “buffers” no transmissor.
+
+-A semelhança básica entre o controle de Fluxo na camada de transporte e de enlace é que utilizam uma janela deslizante para impedir que um transmissor rápido sobrecarregue um receptor lento, mas por outro lado, a diferença entre nro de linhas nos computadores e nro de conexões nos “hosts” exige uma implementação mais complexa do uso de “buffers” na camada de transporte.
+
+Ordem:
+a(f)
+b(v)
+c(v)
+d(f)
+e(f)
+f(v)
+g(f)
+h(v)
+i(f)
+j(v)
+k(v)
+l(f)
+
+2-
+Ordem:
+a(F)
+b(F)
+c(V)
+d(V)
+e(F)
+f(F)
+g(V)
+h(F)
+i(V)
+j(V)
+
+Verdadeiras:
+-A principal diferença no encerramento de conexão da camada de sessão e de transporte é que na 1ª a liberação da conexão é disciplinada enquanto na 2ª é abrupta
+
+-Assim como no estabelecimento de uma conexão de transporte,  o estabelecimento de uma sessão involve negociação entre as partes (usuarios) de modo que parâMETOS podem ser negociados, p. ex., parâmetros de qualidade de serviço.
+
+-Em princípio, toddas as conexões OSI são “full-duplex”, ou seja, PDUs podem mover simutaneamente em ambos as sentidos na mesma conexão, no entanto, há situações em que a comunicação é estruturada para ser “half-duplex” como na camada de sessão, p.ex., S-token-give.request e S-token-Give.indication – não há o correspondente para “response” e “confirm”.
+
+-Uma caracteristica marcante na camada de sessão, refere-se a variedade de versões para uma mesma primitiva , ou seja, “request”, “indication”, “response” e “confirm”, no entanto, nem todas as combinações são validas pela simples razão de que nem todos os serviços são potencialmente disponíveis.
+
+-A ARPAnet não contempla camada de sessão, ou seja, é de responsabilidade das aplicações contemplarem  os serviços da camada de sessão ou o gerenciamento de suas sessões.
+
+3-
+Ordem:
+a(V)
+b(V)
+c(F)
+d(V)
+e(F)
+f(V)
+g(F)
+h(F)
+i(V)
+j(V)
+k(F)
+l(V)
+
+VERDADEIRAS:
+- As 4 principais funções dea camada de apresentação são: disponibilizar os serviços da camada de sessão aos usuarios, prover mecanismos para especificar estruturas de dados complexas, gerenciar o conjunto de estruturas de dados, e tratar da conversão entre representação interna e externa.
+
+- Camada de apresentação é responsavel pela comunicação entre “hosts” que utilizam diferentes representações internas de dados, por isso tem como função preservar a sintaxe e semântica das informações trocadas (significado das informações).
+
+- Abstract Sintax Notation (ASN-1) constitui-se na chave para o problema de representação, codificação, transmissão, e decodificação de estrutura de dados, de modo que tais estruturas sejam flexiveis o bastante para serem uteis em uma ampla variedade de aplicações.
+
+-Cifras de Transposição apenas reordenam os simbolos encolhendo-se como chave uma palavra ou uma frase que não contenha nenhuma letra repetida , na sequencia as solunas são numeradas e o texto simples é escrito horizontalmente, permitindo que o texto cifrado seja lido verticalmente
+
+-A codificação de Huffman determina a codificação para cada simbolo tendo por base a frequencia de ocorrencia e depois, transmite de forma independente os simbolos codificados, um após o outro.
+
+-Diffie e Hellman propuseram 02 algoritmos, um para encriptação “E” e outro para a decriptação “D”, de modo que ao escolher “E” e “D”, a derivação de “D” a partir de “E” seja impossivel, o que permite que o algoritmo “E” seja publico enquanto o “D” seja privado.
+
+-Seja “Ea” a chave Publica de “A” e “Eb” a chave Publica de “B”, enquanto “Da” a chave secreta de “A”, “Db” a chave secreta de “B”, então para “B” encaminhar para “A” uma mensagem assinada de modo que apenas “A” seja capaz de decriptar, basta gerar uma Ea(Db(P))
+
+4-
+ORDEM:
+a(F)b(V)c(F)d(V)e(F)f(V)g(V)h(F)i(V)j(V)
+
+verdadeiras:
+B -Na camada de aplicação contempla-se os programas do usuario (tambem conhecidos como aplicação ou aplicativos) e designa a 7ª camada no modelo de referencia OSI.
+
+D - Manipulação de Arquivos constitui um dos principais serviços em redes de computadores ou em sist. distribuídos e contempla 03 propriedades : Estrutura de arquivo; atributos de arquivo e operações de arquivos, não IMPORTANTO o modelo conceitual de arquivo que é variavel de servidor para servidor.
+
+F - Os aspectos Básicos principais de um sistema de Email são: criação de mensagens; transferência de mensagens; resposta do servidor; conversão de dados como imagens; padronização e formatos das mensagens e operações como ler, excluir e remover mensagens.
+
+G-Terminal Virtual são pontos normalmente constituidos de monitor e teclado que não dispõem de capacidade para o processamento de dados, por isso, estão ligados diretamente a um servidor de modo que pedidos são encaminhados para o servidor e a resposta é retomada para o terminal.
+
+I – Terminais “modo Formulario” são os mais sofisticados, pois contemplam microprocessadores que possibilitam algum nivel de processamento local, diferentemente dos terminais “modo rolagem”
+
+J – O serviço de diretório do OSI permite aos usuarios pesquisarem nomes com base em atributos onde cada atributo possui quatro propriedades: Tipo, Interpretação, qualificador  e valor.
+
