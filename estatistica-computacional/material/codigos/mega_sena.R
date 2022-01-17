@@ -1,4 +1,4 @@
-mega <- read.csv("mega.csv", header = TRUE)
+mega <- read.csv("mega_sena.csv", header = TRUE)
 head(mega)
 str(mega)
 somas <- c()
