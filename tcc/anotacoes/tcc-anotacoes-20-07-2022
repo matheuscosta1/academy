@@ -1,0 +1,43 @@
+cadastro usuario
+
+nome
+cpf
+telefone
+e-mail
+senha
+
+
+cadastro de disciplinas
+
+
+faculdade
+codigo disciplina
+curso
+nome disciplina
+carga horaria disciplina
+ementa
+programa disciplina
+
+
+Coleção de quais disciplinas já deram equivalências
+
+código da disciplina origem
+código disciplina em que pediu equivalência
+
+
+https://kroki.io/
+
+seqdiag {
+  front  -> backend [label = "POST /cadastro-disciplinas"];
+  backend  -> mongo [label = "Adiciona disciplinas na base de dados"];
+  backend <-- mongo [label = "Retorna 1 que o registro foi inserido"];
+  front <-- backend [label = "Notifica que a disciplina foi inserida com sucesso"];
+}
+
+
+seqdiag {
+  front  -> backend [label = "GET /equivalencias/{cod_disciplina_origem}/{cod_disciplina_destino}"];
+  backend  -> mongo [label = "Verifica equivalência de disciplina por código de disciplina"];
+  backend <-- mongo [label = "Retorna que o registro foi encontrado"];
+  front <-- backend [label = "Notifica que a disciplina possui equivalência"];
+}

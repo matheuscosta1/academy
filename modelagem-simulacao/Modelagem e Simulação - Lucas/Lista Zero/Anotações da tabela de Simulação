@@ -1,0 +1,11 @@
+Anotações sobre a tabela de simulação:
+
+A probabilidade do operador estar ocupado é de 16,82%, sendo seu complemento, 83,17% o tempo que ele está ocioso.
+
+O tempo médio na fila é de 1,3 minutos.
+
+O tempo médio de serviço é de 9,93 minutos.
+
+Cada cliente permanece uma média de 11,26 minutos no posto.
+
+

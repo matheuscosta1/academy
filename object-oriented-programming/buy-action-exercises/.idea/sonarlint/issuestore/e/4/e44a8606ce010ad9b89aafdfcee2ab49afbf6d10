@@ -1,0 +1,12 @@
+
+U
+java:S1854'"8Remove this useless assignment to local variable "gain".(­á¢ú8—¶Ž‚Ú/
+?
+java:S1940'")Use the opposite operator (">=") instead.(­á¢ú
+F
+java:S1481'")Remove this unused "gain" local variable.(­á¢ú8›ü’‚Ú/
+>	java:S108*")Either remove or fill this block of code.(ƒ¢•ò
+S	java:S106."9Replace this use of System.out or System.err by a logger.(Æ¶‘Úøÿÿÿÿ
+N	java:S1061"9Replace this use of System.out or System.err by a logger.(æùç•
+Q	java:S1254"<This block of commented-out lines of code should be removed.(·Åï»
+Q	java:S1256"<This block of commented-out lines of code should be removed.(à¬ú³

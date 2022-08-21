@@ -1,0 +1,33 @@
+Prezados Higor, Vinicius Guardieiro, Vinicius Calixto, Matheus e Diogo,
+
+** TEMA / ASSUNTO: APPLICATION LAYER
+** DATA DA APRESENTAÇÃO: 23/03 (4a-feira)
+
+** 9.1 APPLICATON LAYER DESIGN ISSUES .. 9.1.1 File Transfer, Access and Management; 9.1.2 Electronic Mail; 9.1.3 Virtual Terminals; 9.1.4 Other Applications; 9.1.5 OSI Service Elements - ACSE and CCR
+
+** 9.2 FILE TRANSFER, ACCESS AND MANAGEMENT .. 9.2.1 File Servers; 9.2.2 Concurrency Control; 9.2.3 Replicated Files; 9.24 Implementation Issues
+
+** 9.3 ELECTRONIC MAIL .. 9.3.1 Architecture and Services of MOTIS and X.400; 9.3.2 The User Agent
+9.3.3 The Message Transfer Agent;
+
+** 9.5 OTHER APPLICATIONS .. 9.5.1 Directory Service; 9.5.2 Job Transfer and Management; 9.5.3 Picture Storage and Transfer
+
+** 9.6 EXAMPLES of THE APPLICATION LAYER .. 9.6.1 The Application Layer in Public Networks; 9.6.2 The Application Layer in The ARPANET
+
+** Seminário: Preparar uma Apresentação de PowerPoint / LibreOffice acerca do TÓPICO INDICADO ACIMA (Tanenbaum 2a Edição). O material deve ser homogêneo, ou seja, mesmo formato e configuração de slide independente do membro do grupo que o tenha confeccionado. É necessário coletar os slides que cada membro tenha preparado para que o conjunto de slides seja integralmente configurado e formatado.
+
+** 1o Slide - Título do Tema (p.ex., Camada de Aplicação do RM-OSI) e os nomes completos dos integrantes do Grupo com indicação do email na frente no nome.
+
+** 2o Slide - Sumário / Tópicos que serão abordados na Apresentação
+
+** 3o ... No Slide - slides contendo os tópicos a serem abordados na apresentação.
+
+** Bibliografia: Andrew S. Tanenbaum - "Computer Networks", 2nd edition Prentice-Hall, Inc. Upper Saddle River, NJ, USA, 1988, ISBN:0-13-162959-X .. capítulo correpondente ao tema selecionado.
+
+  Material a ser entregue: Apresentação no formato fonte (DOCX, ODT, TEX, etc.) e portável (PDF).
+
+  40% da Nota - Material em (DOCX, ODP, TEX, etc) e (PDF)
+  40% da Nota - Apresentação Individual / Participação do Membro no Grupo
+  20% da Nota - Presença nas Demais Apresentações
+
+  Att, Luís Faina

@@ -1,0 +1,356 @@
+\documentclass[12pt, %
+openright, 
+oneside, %
+%twoside, %TCC: Se seu texto tem mais de 100 páginas, descomente esta linha e comente a anterior
+a4paper,    %
+%english,   %
+brazil]{facom-ufu-abntex2}
+
+\usepackage{graphicx}
+\graphicspath{{figuras/}{pictures/}{images/}{./}} % where to search for the images
+
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+
+
+\autor{Matheus José} %TCC
+\data{2022}
+\orientador{Renato Pimentel} %TCC
+%\coorientador{Algum?} %TCC
+
+% ---
+% Informações de dados para CAPA e FOLHA DE ROSTO
+% ---
+
+\titulo{Dispensa de Disciplinas} %TCC
+
+\hypersetup{pdfkeywords={palavra 1}{palavra 2}{palavra 4}{palavra 4}{palavra 5}} %TCC
+
+\begin{document} 
+\frenchspacing 
+
+% ----------------------------------------------------------
+% ELEMENTOS PRÉ-TEXTUAIS
+% ----------------------------------------------------------
+%\pretextual
+\imprimircapa
+\imprimirfolhaderosto
+
+
+% ---
+% Inserir folha de aprovação
+% ---
+%
+% \includepdf{folhadeaprovacao_final.pdf} %TCC: depois de aprovado o trabalho, descomente esta linha e comente o próximo bloco para incluir scan da folha de aprovação.
+%
+\begin{folhadeaprovacao}
+
+  \begin{center}
+    {\ABNTEXchapterfont\large\imprimirautor}
+
+    \vspace*{\fill}\vspace*{\fill}
+    {\ABNTEXchapterfont\bfseries\Large\imprimirtitulo}
+    \vspace*{\fill}
+    
+    \hspace{.45\textwidth}
+    \begin{minipage}{.5\textwidth}
+        \imprimirpreambulo
+    \end{minipage}%
+    \vspace*{\fill}
+   \end{center}
+    
+   Trabalho em andamento. \imprimirlocal, 22 de junho de 2022: %TCC:
+
+   \assinatura{\textbf{\imprimirorientador} \\ Renato Pimentel}  
+   \assinatura{\textbf{Professor}}% \\ Convidado 1} %TCC:
+   \assinatura{\textbf{Professor}}% \\ Convidado 2} %TCC:
+   %\assinatura{\textbf{Professor} \\ Convidado 3}
+   %\assinatura{\textbf{Professor} \\ Convidado 4}
+      
+   \begin{center}
+    \vspace*{0.5cm}
+    {\large\imprimirlocal}
+    \par
+    {\large\imprimirdata}
+    \vspace*{1cm}
+  \end{center}
+  
+\end{folhadeaprovacao}
+% ---
+
+
+%%As seções dedicatória, agradecimento e epígrafe não são obrigatórias.
+%%Só as mantenha se achar pertinente.
+
+% ---
+% Dedicatória
+% ---
+%\begin{dedicatoria}
+%   \vspace*{\fill}
+%   \centering
+%   \noindent
+%   \textit{Dedico a \lipsum[10]}  %TCC:
+%   \vspace*{\fill}
+%\end{dedicatoria}
+% ---
+
+% ---
+% Agradecimentos
+% ---
+%\begin{agradecimentos}
+%Agradeço a \lipsum[30]. %TCC:
+%\end{agradecimentos}
+% ---
+
+% ---
+% Epígrafe
+% ---
+%\begin{epigrafe}
+%    \vspace*{\fill}
+%	\begin{flushright}
+%		\textit{``Alguma citação que ache conveniente? \lipsum[10]''} %TCC:
+%	\end{flushright}
+%\end{epigrafe}
+% ---
+
+
+
+\begin{resumo} %TCC:
+ Segundo a \citeonline[3.1-3.2]{NBR6028:2003}, o resumo deve ressaltar o
+ objetivo, o método, os resultados e as conclusões do documento. A ordem e a extensão
+ destes itens dependem do tipo de resumo (informativo ou indicativo) e do
+ tratamento que cada item recebe no documento original. O resumo deve ser
+ precedido da referência do documento, com exceção do resumo inserido no
+ próprio documento. (\ldots) As palavras-chave devem figurar logo abaixo do
+ resumo, antecedidas da expressão Palavras-chave:, separadas entre si por
+ ponto e finalizadas também por ponto.
+
+ \vspace{\onelineskip}
+    
+ \noindent
+ \textbf{Palavras-chave}: Até, cinco, palavras-chave, separadas, por, vírgulas. %TCC:
+\end{resumo}
+
+% ---
+% inserir lista de ilustrações
+% ---
+\pdfbookmark[0]{\listfigurename}{lof}
+\listoffigures*
+\cleardoublepage
+% ---
+
+% ---
+% inserir lista de tabelas
+% ---
+\pdfbookmark[0]{\listtablename}{lot}
+\listoftables*
+\cleardoublepage
+% ---
+
+
+
+% ---
+% inserir lista de abreviaturas e siglas
+% ---
+\begin{siglas} %TCC:
+  \item[Fig.] Area of the $i^{th}$ component
+  \item[456] Isto é um número
+  \item[123] Isto é outro número
+  \item[Zézão] este é o meu nome
+\end{siglas}
+% ---
+
+%% ---
+%% inserir lista de símbolos, se for adequado ao trabalho. %TCC:
+%% ---
+%\begin{simbolos}
+%  \item[$ \Gamma $] Letra grega Gama
+%  \item[$ \Lambda $] Lambda
+%  \item[$ \zeta $] Letra grega minúscula zeta
+%  \item[$ \in $] Pertence
+%\end{simbolos}
+%% ---
+
+% ---
+% inserir o sumario
+% ---
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+\cleardoublepage
+% ---
+
+
+
+
+
+% ----------------------------------------------------------
+% ELEMENTOS TEXTUAIS
+% ----------------------------------------------------------
+\textual
+
+
+% ----------------------------------------------------------
+% Introdução
+% ----------------------------------------------------------
+
+\chapter[Introdução]{Introdução}
+%TCC:
+Com a crescente entrada de pessoas à universidade, as coordenações de cursos têm de lidar com as mais diversas situações da vida escolar dos alunos. Pode-se citar, por exemplo, jovens que iniciam em determinado curso, porém não se sentem tão confortáveis e acabam migrando para outro curso ou até mesmo para outra instituição de ensino, e que porventura abrem solicitação para a coordenação para avaliar equivalência de disciplinas.
+
+Essas solicitações que alunos encaminham às coordenações acabam gerando bastante gargalo de processos, justamente porque existem inúmeros cenários distintos na análise de equivalência.
+
+Hoje, na Universidade Federal de Uberlândia, quando um aluno requisita equivalência de disciplinas para a coordenação de curso é passado para um professor que tenha conhecimento da ementa daquela disciplina. Esse compara a ementa que o aluno trouxe – do curso em que ele concluiu aquela matéria – com o curso que ele está. Essa parte é a mais minuciosa, pois ela requer uma análise crítica de cada componente da ementa. E então é dado um parecer da análise. Se aprovado, é emitido uma certidão comprobatória da equivalência. Caso não seja aceito, o aluno então poderá recorrer em um prazo estipulado. 
+
+Essa fase de análise de ementa é a que mais gasta esforço humano, e por essa razão surgiu a implementação de um sistema que seja capaz de analisar se, entre duas ementas de disciplinas, essas sendo da mesma universidade ou não, possuem equivalência.
+
+Para que o sistema funcione, será necessário uma página na internet para cadastro, listagem, deleção e atualização das disciplinas – com suas respectivas ementas –, isso tudo separado por curso e universidade.
+
+Com esses dados, então será possível analisar, com base na ementa, se entre duas disciplinas, essas são equivalentes.
+
+Além disso, outra forma de adicionar dados ao sistema será a partir da leitura de um arquivo PDF e também de imagem. Essa funcionalidade será para diminuir o tempo de inserção de dados manuais.
+
+Dessa forma a análise da equivalência de disciplinas se tornará algo menos custoso operacionalmente, pois a pessoa que está analisando receberá uma resposta sistêmica que servirá como uma pré-aprovação da equivalência. 
+\cite{ibge1993}
+
+\chapter{Revisão Bibliográfica}
+%TCC:
+Um ou mais capítulos (por exemplo, se há duas linhas de trabalhos relacionados).
+
+
+\chapter{Desenvolvimento}
+%TCC:
+Um ou mais capítulos (por exemplo um para testes)
+
+
+\begin{figure}[!ht]
+    \centering
+	\includegraphics[width=0.55\linewidth]{imagemExemplo.pdf}
+	\caption[Isso é o que aparece no sumário]{Imagem de exemplo.}
+	\label{fig:graficosVariandoTamanhoRede}
+\end{figure}
+
+
+%TCC:
+%TCC:
+%TCC:
+%TCC:
+
+% ---
+% Conclusão
+% ---
+\chapter[Conclusão]{Conclusão}
+%TCC:
+E daí?
+
+
+\chapter[Cronograma]{Cronograma}
+  \begin{table}[htbp]
+    \centering
+    \resizebox{\textwidth}{!}{
+    \begin{tabular}{c|c|c|c|c|c|c|c|c|c|c|}
+    \hline
+    ~ & Junho & Julho & Agosto & Setembro & Outubro & Novembro & Dezembro & Dezembro & Janeiro & Fevereiro\\
+    \hline
+    \hline
+    Levantamento de requisitos & X & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ \\
+    Definição de tecnologias  & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ \\
+    Acompanhamento de disciplina PG1 & X & X & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ \\
+    Desenvolvimento banco de dados & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ \\
+    Backend:Desenvolvimento cadastro de disciplinas & ~ & X & X & X & ~ & ~ & ~ & ~ & ~ & ~ \\
+    Backend:Avaliar equivalência entre duas disciplinas & ~ & X & X & X & ~ & ~ & ~ & ~ & ~ & ~ \\
+    Backend:Cadastro de equivalências  & ~ & ~ & X & X & ~ & ~ & ~ & ~ & ~ & ~ \\
+    Backend:Desenvolvimento de cadastro de disciplinas por leitura de PDF/imagem & ~ & ~ & ~ & X & X & ~ & ~ & ~ & ~ & ~ \\
+    Frontend:Desenvolvimento da tela de cadastro & ~ & ~ & ~ & X & X & X & ~ & ~ & ~ & ~ \\
+    Frontend:Desenvolvimento da tela de verificacao se dá equivalencia ou não & ~ & ~ & ~ & X & X & X & ~ & ~ & ~ & ~ \\
+    Frontend:Desenvolvimento da tela com retorno se deu equivalencia ou não & ~ & ~ & ~ & X & X & X & ~ & ~ & ~ & ~ \\
+    Testes unitários / Funcionais & ~ & ~ & X & X & X & ~ & ~ & ~ & ~ & ~ \\
+    Escrita texto & ~ & ~ & ~ & X & X & X & X & ~ & ~ & ~ \\
+    Revisão texto & ~ & ~ & ~ & ~ & ~ & X & X & X & X & ~ \\
+    Defesa & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X \\
+
+    \end{tabular}
+    }
+    \caption{Cronograma}
+    \label{tab:my_label}
+  \end{table}
+
+
+% ----------------------------------------------------------
+% ELEMENTOS PÓS-TEXTUAIS
+% ----------------------------------------------------------
+\postextual
+
+
+% ----------------------------------------------------------
+% Referências bibliográficas
+% ----------------------------------------------------------
+\bibliography{abntex2-modelo-references}
+
+
+%% ----------------------------------------------------------
+%% Apêndices TCC: só mantenha se for pertinente.
+%% ----------------------------------------------------------
+
+% ---
+% Inicia os apêndices
+% ---
+\begin{apendicesenv}
+
+% Imprime uma página indicando o início dos apêndices
+\partapendices
+
+% ----------------------------------------------------------
+\chapter{Quisque libero justo}
+% ----------------------------------------------------------
+
+\lipsum[50]
+
+% ----------------------------------------------------------
+\chapter{Coisas que fiz e que achei interessante mas não tanto para entrar no corpo do texto}
+% ----------------------------------------------------------
+\lipsum[55-57]
+
+\end{apendicesenv}
+% ---
+
+
+% ----------------------------------------------------------
+% Anexos %TCC: so mantenha se pertinente.
+% ----------------------------------------------------------
+
+% ---
+% Inicia os anexos
+% ---
+\begin{anexosenv}
+
+% Imprime uma página indicando o início dos anexos
+\partanexos
+
+% ---
+\chapter{Eu sempre quis aprender latim}
+% ---
+\lipsum[30]
+
+% ---
+\chapter{Coisas que eu não fiz mas que achei interessante o suficiente para colocar aqui}
+% ---
+
+\lipsum[31]
+
+% ---
+\chapter{Fusce facilisis lacinia dui}
+% ---
+
+\lipsum[32]
+
+\end{anexosenv}
+
+%---------------------------------------------------------------------
+% INDICE REMISSIVO
+%---------------------------------------------------------------------
+
+\printindex
+
+
+
+\end{document}

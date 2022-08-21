@@ -1,0 +1,8 @@
+Ex1:
+Contratação de um reparador: Uma empresa deseja contratar um reparador para efetuar manutenção em suas máquinas que estragam a um ritmo de 3 falhas por hora. Para tal possui 2 opções: um reparador lento que é capaz de consertar a um ritmo de 4 falhas por hora, ou um reparador rápido que é capaz de consertar a um ritmo médio de 6 falhas por hora. O salário/hora do reparador lento é de R$3,00 e o do reparador rápido é de R$5,00. Qual contratação deve ser efetuada para que o custo total (reparador + máquinas paradas) seja mínimo. Sabe-se que uma máquina parada implica um custo horário de R$5,00.
+
+
+
+Ex2:
+
+A gente considera um sistema do tipo M/M/1 ; um cliente chega em média a cada 12 minutos e a duração média de um serviço é de 8 minutos. Qual é a probabilidade que pelo menos 2 clientes esperam antes de serem atendidos?

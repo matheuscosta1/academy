@@ -1,0 +1,27 @@
+openssl enc -aes256 -K  -iv E3017202FA6E2CEC54DE791284D6FBCC -in  -out   1,24s user 0,82s system 99% cpu 2,063 total
+tail -n 0  0,00s user 0,00s system 74% cpu 0,004 total
+openssl enc -aes256 -K  -iv E3017202FA6E2CEC54DE791284D6FBCC -in  -out   1,48s user 1,45s system 68% cpu 4,262 total
+tail -n 0  0,00s user 0,00s system 10% cpu 0,009 total
+openssl enc -aes256 -K  -iv E3017202FA6E2CEC54DE791284D6FBCC -in  -out   1,62s user 1,32s system 68% cpu 4,254 total
+tail -n 0  0,00s user 0,00s system 7% cpu 0,039 total
+openssl enc -aes256 -K  -iv E3017202FA6E2CEC54DE791284D6FBCC -in  -out   1,50s user 1,21s system 69% cpu 3,922 total
+tail -n 0  0,00s user 0,00s system 75% cpu 0,002 total
+openssl enc -aes256 -K  -iv E3017202FA6E2CEC54DE791284D6FBCC -in  -out   1,37s user 1,17s system 66% cpu 3,832 total
+tail -n 0  0,00s user 0,00s system 81% cpu 0,002 total
+openssl enc -aes256 -K  -iv E3017202FA6E2CEC54DE791284D6FBCC -in  -out   1,45s user 1,42s system 66% cpu 4,300 total
+tail -n 0  0,00s user 0,00s system 74% cpu 0,004 total
+openssl enc -aes256 -K  -iv E3017202FA6E2CEC54DE791284D6FBCC -in  -out   1,42s user 1,14s system 66% cpu 3,823 total
+tail -n 0  0,00s user 0,00s system 75% cpu 0,004 total
+openssl enc -aes256 -K  -iv E3017202FA6E2CEC54DE791284D6FBCC -in  -out   1,38s user 1,29s system 68% cpu 3,923 total
+tail -n 0  0,00s user 0,00s system 72% cpu 0,004 total
+openssl enc -aes256 -K  -iv E3017202FA6E2CEC54DE791284D6FBCC -in  -out   1,64s user 1,19s system 68% cpu 4,141 total
+tail -n 0  0,00s user 0,00s system 67% cpu 0,003 total
+openssl enc -aes256 -K  -iv E3017202FA6E2CEC54DE791284D6FBCC -in  -out   1,45s user 1,30s system 68% cpu 4,044 total
+tail -n 0  0,00s user 0,00s system 80% cpu 0,003 total
+
+
+
+
+		
+
+
